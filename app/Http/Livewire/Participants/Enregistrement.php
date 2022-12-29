@@ -9,6 +9,8 @@ use App\Models\Hackaton;
 use App\Models\Niveau;
 use App\Models\Participant;
 use App\Models\User;
+use App\Models\Qsession;
+use App\Models\Quiz;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
@@ -16,9 +18,11 @@ class Enregistrement extends Component
 {
     // variables de groupe
 
-    public $niveau = "1";
+    public $niveau = 1;
     public $nom_groupe;
-    public $photo_groupe ;
+    public $photo_groupe;
+
+    public $ion = 0;
 
     // variables relative au chef
 
@@ -28,7 +32,7 @@ class Enregistrement extends Component
     public $classe_chef;
     public $email_chef;
     public $genre_chef = "Masculin";
-    
+
 
     // variables relatives au membre 2
 
@@ -45,93 +49,128 @@ class Enregistrement extends Component
     public $prenom_m3;
     public $classe_m3;
     public $email_m3;
-    public $genre_m3= "Masculin" ;
+    public $genre_m3 = "Masculin";
 
-    public $errorEmail =false ;
-    public $errorMatricule =false ;
+    public $errorEmail = false;
+    public $errorMatricule = false;
 
+    public $isEsatic = 1;
+    public $isNotEsatic = 0;
 
 
     public function render()
     {
         return view('livewire.participants.enregistrement', [
-            'niveaux' => Niveau::all(),
-            'classes' => Classe::where('niveau_id', $this->niveau)->get() 
-            
+            'niveaux' => $this->ion == 0 ? Niveau::all() : Niveau::where('id', '>=', 3)->get(),
+            'classes' => Classe::where('niveau_id', $this->niveau)->get()
         ]);
     }
 
     public function VerifEmail()
     {
-        if(
-            $this->email_chef == $this->email_m2 or 
+        if (
+            $this->email_chef == $this->email_m2 or
             $this->email_chef == $this->email_m3 or
             $this->email_m2 == $this->email_m3
-             )
-            {
-                $this->errorEmail = true ;
-            }
+        ) {
+            $this->errorEmail = true;
+        }
     }
 
     public function VerifMatricule()
     {
-        if(
-            $this->matricule_chef == $this->matricule_m2 or 
+        if (
+            $this->matricule_chef == $this->matricule_m2 or
             $this->matricule_chef == $this->matricule_m3 or
             $this->matricule_m2 == $this->matricule_m3
-             )
-            {
-                $this->errorMatricule = true ;
-            }
-
-            
+        ) {
+            $this->errorMatricule = true;
+        }
     }
 
     public function updatedNiveau()
     {
-        
-        $this->classes = Classe::where('niveau_id', $this->niveau)->get() ;
+
+        $this->classes = Classe::where('niveau_id', $this->niveau)->get();
+    }
+
+    public function getRandomInt($n)
+    {
+        $characters = '0123456789';
+        $randomString = '';
+
+        for ($i = 0; $i < $n; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
+        }
+
+        return $randomString;
+    }
+
+    public function getRandomString($n)
+    {
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = '';
+
+        for ($i = 0; $i < $n; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
+        }
+
+        return $randomString;
+    }
+
+
+    public function setMAtricule()
+    {
+        if ($this->ion == 1) {
+            $this->matricule_chef = $this->getRandomInt(2) . "-EXTERNE" . $this->getRandomInt(4) . $this->getRandomString(2);
+            $this->matricule_m2 = $this->getRandomInt(2) . "-EXTERNE" . $this->getRandomInt(4) . $this->getRandomString(2);
+            $this->matricule_m3 = $this->getRandomInt(2) . "-EXTERNE" . $this->getRandomInt(4) . $this->getRandomString(2);
+        }
     }
 
     public function resetInput()
     {
-        $this->niveau = "1" ;
-        $this->nom_groupe = "" ;
-        $this->photo_groupe  = "" ;
+        $this->niveau = "1";
+        $this->nom_groupe = "";
+        $this->photo_groupe  = "";
 
         // variables relative au chef
 
-        $this->matricule_chef = "" ;
-        $this->nom_chef = "" ;
-        $this->prenom_chef = "" ;
-        $this->classe_chef = "" ;
-        $this->email_chef = "" ;
+        $this->matricule_chef = "";
+        $this->nom_chef = "";
+        $this->prenom_chef = "";
+        $this->classe_chef = "";
+        $this->email_chef = "";
 
-        $this->genre_chef = "" ;
-        $this->genre_m3 = "" ;
-        $this->genre_m2 = "" ;
-        
+        $this->genre_chef = "";
+        $this->genre_m3 = "";
+        $this->genre_m2 = "";
+
 
         // variables relatives au membre 2
 
-        $this->matricule_m2 = "" ;
-        $this->nom_m2 = "" ;
-        $this->prenom_m2 = "" ;
-        $this->classe_m2 = "" ;
-        $this->email_m2 = "" ;
+        $this->matricule_m2 = "";
+        $this->nom_m2 = "";
+        $this->prenom_m2 = "";
+        $this->classe_m2 = "";
+        $this->email_m2 = "";
 
         // variables relatives au membre 3
 
-        $this->matricule_m3 = "" ;
-        $this->nom_m3 = "" ;
-        $this->prenom_m3 = "" ;
-        $this->classe_m3 = "" ;
-        $this->email_m3 = "" ;
+        $this->matricule_m3 = "";
+        $this->nom_m3 = "";
+        $this->prenom_m3 = "";
+        $this->classe_m3 = "";
+        $this->email_m3 = "";
     }
 
     public function createEquipe()
     {
-        
+
+        $this->setMAtricule();
+
         $validate = $this->validate([
             'niveau' => 'required',
             'nom_groupe' => 'required',
@@ -161,27 +200,32 @@ class Enregistrement extends Component
 
         ]);
 
-       // dd($validate);
+        // dd($validate);
 
-        $this->errorEmail = false ;
+        $this->errorEmail = false;
 
         $this->VerifEmail();
-        $this->VerifMatricule() ;
+        $this->VerifMatricule();
 
 
-        if(!$this->errorEmail and !$this->errorMatricule)
-        {
+        if (!$this->errorEmail and !$this->errorMatricule) {
 
             // recuperation de l'hackaton
 
             $hackaton = Hackaton::latest()->first();
-            
+
             // creation de l'équipe
-            $equipe = Equipe::create([ 
+            $equipe = Equipe::create([
                 'nom' => $this->nom_groupe,
                 'logo' => $this->photo_groupe,
                 'niveau_id' => $this->niveau,
                 'hackaton_id' => $hackaton->id
+            ]);
+
+
+            Qsession::create([
+                'quiz_id' => Quiz::where('niveau_id', $this->niveau)->first()->id,
+                'equipe_id' => $equipe->id
             ]);
 
             // creation du participant 1 
@@ -191,6 +235,7 @@ class Enregistrement extends Component
                 'email' => $this->email_chef,
                 'password' => Hash::make("TH@123456789")
             ]);
+
 
             $etudiant1 = Etudiant::create([
                 'nom' => $this->nom_chef,
@@ -258,15 +303,9 @@ class Enregistrement extends Component
 
             //  $this->resetInput();
 
-            
-            
+
+
             return redirect()->to('/inscription-terminer');
-
         }
-
-
-        
-
     }
-
 }

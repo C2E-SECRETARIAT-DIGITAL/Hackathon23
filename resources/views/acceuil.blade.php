@@ -29,7 +29,7 @@
                     
                         @auth
 
-                            @if($statut))
+                            @if($statut)
                                 <div class="b1">
                                     <a href="{{route('Participants.inscription',  null, false)}}"><button type="button">  INSCRIPTION</button></a>
                                 </div> 
@@ -45,7 +45,7 @@
                             
                         @else
                             
-                            @if($statut))
+                            @if($statut)
                                 <div class="b1">
                                     <a href="{{route('Participants.inscription',  null, false)}}"><button type="button">  INSCRIPTION</button></a>
                                 </div>

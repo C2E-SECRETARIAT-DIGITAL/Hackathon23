@@ -20,4 +20,8 @@ class Niveau extends Model
     {
     	return $this->hasMany(Equipe::class);
     }
+
+    public function quiz(){
+        return $this->hasOne(Quiz::class);
+    }
 }

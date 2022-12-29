@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Hackaton;
 use App\Models\User;
 use App\Models\Niveau;
+use App\Models\Quiz;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
@@ -22,20 +23,29 @@ class AdminSeeder extends Seeder
 
         // Creation des differents Niveaux
 
-        Niveau::create([
+        $n1 = Niveau::create([
             'libelle' => 'Niveau 1',
         ]);
 
-        Niveau::create([
+        $n2 = Niveau::create([
             'libelle' => 'Niveau 2',
         ]);
 
-        Niveau::create([
-            'libelle' => 'Niveau 3',
+        $n3 = Niveau::create([
+            'libelle' => 'Niveau 3 Télécom',
         ]);
 
-        $role = Role::create(['name'=> 'Super@Administrateur']);
-    
+        $n4 = Niveau::create([
+            'libelle' => 'Niveau 3 Info',
+        ]);
+
+        $n5 = Niveau::create([
+            'libelle' => 'Niveau 3 Sécurité',
+        ]);
+
+
+
+        Role::create(['name'=> 'Super@Administrateur']);
         Role::create(['name'=> 'Administrateur']);
         Role::create(['name'=> 'participant']);
 
@@ -47,20 +57,54 @@ class AdminSeeder extends Seeder
         $user = User::create([
             'name' => 'Administrateur',
             'email' => 'adminHackaton@C2E.com',
-            'password' => Hash::make("@Hackaton@2k22@")
+            'password' => Hash::make("11111111")
         ]);
 
-        $hack = Hackaton::create([
+        Hackaton::create([
             'pco_1' => 'N\'DA Regis Richmond',
             'pco_2' => 'DJE BI Mointi Jean Patrice',
             'annee' => '2022'
         ]);
 
-        
-        
+        $h = Hackaton::create([
+            'pco_1' => 'BLE Yatana',
+            'pco_2' => 'PRESIDENT Daniel',
+            'annee' => '2023',
+            'inscription' => 1
+        ]);
+
+        Quiz::create([
+            'title' => 'Quiz Niveau 1',
+            'niveau_id' => $n1->id,
+            'hackaton_id' => $h->id
+        ]);
+
+        Quiz::create([
+            'title' => 'Quiz Niveau 2',
+            'niveau_id' => $n2->id,
+            'hackaton_id' => $h->id
+        ]);
+
+        Quiz::create([
+            'title' => 'Quiz Niveau 3 Telecom',
+            'niveau_id' => $n3->id,
+            'hackaton_id' => $h->id
+        ]);
+
+        Quiz::create([
+            'title' => 'Quiz Niveau 3 Info',
+            'niveau_id' => $n4->id,
+            'hackaton_id' => $h->id
+        ]);
+
+        Quiz::create([
+            'title' => 'Quiz Niveau 3 Sécurité',
+            'niveau_id' => $n5->id,
+            'hackaton_id' => $h->id
+        ]);
+
+                
         $user->assignRole('Super@Administrateur') ;
-
-
         
     }
 }

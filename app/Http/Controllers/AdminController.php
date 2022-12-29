@@ -23,12 +23,12 @@ class AdminController extends Controller
 
     public function welcome()
     {
-        $hackaton = Hackaton::latest()->first() ;
-        $statut =  Hackaton::latest()->first()->CanRecord() ;
+        $hackaton = Hackaton::latest()->first();
+        $statut =  Hackaton::latest()->first()->CanRecord();
 
         if($hackaton->inscription)
         {
-            return view('acceuil', compact('statut')) ;
+            return view('acceuil', compact('statut'));
         }
         else
         {
@@ -39,17 +39,17 @@ class AdminController extends Controller
 
     public function inscription()
     {
-        $hackaton = Hackaton::latest()->first() ;
-        $statut =  Hackaton::latest()->first()->CanRecord() ;
+        $hackaton = Hackaton::latest()->first();
+        $statut =  Hackaton::latest()->first()->CanRecord();
 
         if($hackaton->inscription and $statut)
         {
            
-            return view('participants.inscription') ;
+            return view('participants.inscription');
         }
         else
         {
-            return redirect()->route('welcome') ;
+            return redirect()->route('welcome');
             
         }
     } 
@@ -227,9 +227,7 @@ class AdminController extends Controller
 
         $equipe = Equipe::find($request->id);
 
-        $chef_id = $equipe->participants()->first()->etudiant_id ;
-
-
+        $chef_id = $equipe->participants()->first()->etudiant_id;
 
         if($chef_id)
         {

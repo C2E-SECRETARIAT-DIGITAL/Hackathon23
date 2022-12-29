@@ -30,7 +30,7 @@
         </div>
         <div class="content">
             
-            <div x-data="Tabsetup()"  >
+            <div x-data="Tabsetup()">
                         
                 @livewire('participants.enregistrement')
                 
