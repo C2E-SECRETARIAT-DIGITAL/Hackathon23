@@ -16,13 +16,14 @@
                         <h1 class="tchamp"> Êtes vous de l'ESATIC ?</h1>
                         <div class="gr" style="display: flex; justify-content: space-between">
                             <label for="yes">Oui</label>
-                            <input type="radio" name="choix" id="yes" value="0" wire:model="ion" checked/>
+                            <input type="radio" name="choix" id="yes" value="0" wire:model="ion" checked />
                             <label for="no">Non</label>
-                            <input type="radio" name="choix" id="no" value="1" wire:model="ion"/>
+                            <input type="radio" name="choix" id="no" value="1" wire:model="ion" />
                         </div>
 
                         <p>
                         </p>
+
                     </div>
                 </div>
 
