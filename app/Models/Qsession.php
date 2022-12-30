@@ -15,4 +15,12 @@ class Qsession extends Model
         'quiz_id',
         'equipe_id'
     ];
+
+    public function equipe(){
+        return $this->belongsTo(Equipe::class);
+    }
+
+    public function quiz(){
+        return $this->belongsTo(Quiz::class);
+    }
 }

@@ -75,8 +75,16 @@
                     <span class="text-xl font-bold text-green-600"> Felicitation Vôtre Equipe est sélectionnée</span>
 
                 @else
+                    <!-- <img src=" {{asset('images/app/lose.svg')}} " class="loseLogo"> -->
+                    
+                    @if(Auth::user()->etudiant->getEquipe()->qsession->state == 1)
+                    <span class="text-xl font-bold text-orange">Les préselections ont commencées !</span>
+                    @elseif(Auth::user()->etudiant->getEquipe()->qsession->state == 0 && Auth::user()->etudiant->getEquipe()->qsession->score == 0)
+                    <span class="text-xl font-bold text-red-600">Les préselections commencent bientôt, tenez vous prêt(e) !</span>
+                    @else
                     <img src=" {{asset('images/app/lose.svg')}} " class="loseLogo">
                     <span class="text-xl font-bold text-red-600"> Dommage La prochaine fois sera la bonne</span>
+                    @endif
                 @endif
             </div>
         

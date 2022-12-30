@@ -13,4 +13,12 @@ class Question extends Model
         'content',
         'quiz_id'
     ];
+
+    public function quiz(){
+        return $this->belongsTo(Quiz::class);
+    }
+
+    public function responses(){
+        return $this->hasMany(Response::class);
+    }
 }

@@ -20,4 +20,12 @@ class Quiz extends Model
     public function niveau(){
         return $this->belongsTo(Niveau::class);
     }
+
+    public function questions(){
+        return $this->hasMany(Question::class);
+    }
+
+    public function qsession(){
+        return $this->hasOne(QSession::class);
+    }
 }

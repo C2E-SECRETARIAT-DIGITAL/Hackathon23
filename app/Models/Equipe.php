@@ -17,11 +17,13 @@ class Equipe extends Model
     	return $this->hasMany(Participant::class);
     }
 
-
-
     public function niveau()
     {
     	return $this->belongsTo(Niveau::class);
+    }
+
+    public function qsession(){
+        return $this->hasOne(Qsession::class);
     }
 
     public function currentSalle()

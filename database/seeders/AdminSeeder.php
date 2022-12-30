@@ -73,37 +73,15 @@ class AdminSeeder extends Seeder
             'inscription' => 1
         ]);
 
-        Quiz::create([
-            'title' => 'Quiz Niveau 1',
-            'niveau_id' => $n1->id,
-            'hackaton_id' => $h->id
-        ]);
+        foreach(Niveau::all() as $niv){
+            Quiz::create([
+                'title' => 'Quiz ' . $niv->libelle,
+                'niveau_id' => $niv->id,
+                'hackaton_id' => $h->id
+            ]);
+        }
 
-        Quiz::create([
-            'title' => 'Quiz Niveau 2',
-            'niveau_id' => $n2->id,
-            'hackaton_id' => $h->id
-        ]);
-
-        Quiz::create([
-            'title' => 'Quiz Niveau 3 Telecom',
-            'niveau_id' => $n3->id,
-            'hackaton_id' => $h->id
-        ]);
-
-        Quiz::create([
-            'title' => 'Quiz Niveau 3 Info',
-            'niveau_id' => $n4->id,
-            'hackaton_id' => $h->id
-        ]);
-
-        Quiz::create([
-            'title' => 'Quiz Niveau 3 Sécurité',
-            'niveau_id' => $n5->id,
-            'hackaton_id' => $h->id
-        ]);
-
-                
+       
         $user->assignRole('Super@Administrateur') ;
         
     }

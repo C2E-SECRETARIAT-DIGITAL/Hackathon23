@@ -28,6 +28,9 @@ Route::get('/', 'App\Http\Controllers\AdminController@welcome')->name('welcome')
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('/preselection', function () {
+    return view('participants.preselection');
+})->name('preselection');
 
 
 // Les routes relatives à la partie de l'administration

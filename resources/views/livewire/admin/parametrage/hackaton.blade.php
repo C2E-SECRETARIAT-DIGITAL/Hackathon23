@@ -6,7 +6,7 @@
 
             <div class="col-span-2 ">
                 
-                <div class="text-md  font-bold text-center">
+                <div class="text-md font-bold text-center">
                     Creer un Hackaton
                 </div>
 
@@ -74,7 +74,6 @@
                                     <th scope="col-span-2" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                         
                                     </th>
-
                                 </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
