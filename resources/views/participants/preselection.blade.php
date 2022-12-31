@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            {{ __('Espace SDI') }}
+            {{ __('Espace SDI: Test de présélection') }}
         </h2>
     </x-slot>
 
@@ -34,7 +34,20 @@
                         </div>
                         @if(Auth::user()->etudiant->getEquipe()->qsession->state == 1)
                         <div x-show="start" class="w-full h-full ">
-                            @livewire('participants.quiz')
+
+                            <div class="px-4 py-5 ">
+
+                                <div class="justify-content-between text-center">
+                                    <p id="countm" style="display: none;">{{Auth::user()->etudiant->getEquipe()->qsession->quiz->time}}</p>
+                                    <span id="counts" style="display: none;">1</span>
+                                    <div class="text-md font-bold">
+                                        Temps restant: <span id="minutes">00</span>:<span id="seconds">00</span>
+                                    </div>
+                                </div>
+
+                                @livewire('participants.quiz')
+                            </div>
+
                         </div>
                         @endif
                     </div>
@@ -50,7 +63,7 @@
         <script>
             function data() {
                 return {
-                    start: true,
+                    start: false,
                 }
             }
         </script>
