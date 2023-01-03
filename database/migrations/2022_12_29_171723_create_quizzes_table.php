@@ -17,8 +17,7 @@ class CreateQuizzesTable extends Migration
 
             $table->id();
             $table->string('title');
-            $table->unsignedMediumInteger('time')->default(0);
-            $table->unsignedMediumInteger('score')->default(0);
+            $table->mediumInteger('score')->default(0);
 
             $table->unsignedBigInteger('niveau_id');
             $table->foreign('niveau_id')->references('id')->on('niveaux')->onDelete('cascade');

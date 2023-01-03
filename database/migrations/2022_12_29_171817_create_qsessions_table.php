@@ -17,7 +17,7 @@ class CreateQsessionsTable extends Migration
 
             $table->id();
             $table->unsignedInteger('state')->default(0);
-            $table->unsignedMediumInteger('score')->default(0);
+            $table->mediumInteger('score')->default(0);
 
             $table->unsignedBigInteger('quiz_id');
             $table->foreign('quiz_id')->references('id')->on('quizzes')->onDelete('cascade');

@@ -13,7 +13,9 @@
                     <div class="bg-white">
 
                         <div>
-                            @if(Auth::user()->etudiant->getEquipe()->qsession->state == 1)
+                            @if(Auth::user()->etudiant->getEquipe()->statut == 0)
+
+                            @if(Auth::user()->etudiant->getEquipe()->qsession->state == 1 && Auth::user()->etudiant->getEquipe()->qsession->score == 0)
                             <p x-show="!start" class="font-bold text-center text-md">
                                 Les préselections ont commencées !
                             </p>
@@ -22,13 +24,23 @@
                                     Commencer le test
                                 </button>
                             </div>
+                            @elseif(Auth::user()->etudiant->getEquipe()->qsession->state == 1 && Auth::user()->etudiant->getEquipe()->qsession->score > 0)
+                            <p x-show="!start" class="font-bold text-center text-md">
+                                Les résultats des préselections sont pour bientôt, veillez patienter !
+                            </p>
                             @elseif(Auth::user()->etudiant->getEquipe()->qsession->state == 0 && Auth::user()->etudiant->getEquipe()->qsession->score == 0)
                             <p class="font-bold text-center text-orange text-md">
                                 Les préselections commencent bientôt, tenez vous prêt(e) !
                             </p>
                             @else
                             <p class="font-bold text-center text-red-600 text-md">
-                                Dommage La prochaine fois sera la bonne
+                                Dommage La prochaine fois sera la bonne !
+                            </p>
+                            @endif
+
+                            @else
+                            <p class="font-bold text-center text-red-600 text-md">
+                                Félicitations votre équipe est séléctionnez !!
                             </p>
                             @endif
                         </div>
@@ -36,15 +48,6 @@
                         <div x-show="start" class="w-full h-full ">
 
                             <div class="px-4 py-5 ">
-
-                                <div class="justify-content-between text-center">
-                                    <p id="countm" style="display: none;">{{Auth::user()->etudiant->getEquipe()->qsession->quiz->time}}</p>
-                                    <span id="counts" style="display: none;">1</span>
-                                    <div class="text-md font-bold">
-                                        Temps restant: <span id="minutes">00</span>:<span id="seconds">00</span>
-                                    </div>
-                                </div>
-
                                 @livewire('participants.quiz')
                             </div>
 

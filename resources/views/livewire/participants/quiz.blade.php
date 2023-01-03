@@ -1,5 +1,7 @@
 <div>
-
+    <!-- <p id="countm" style="display: none;">{{Auth::user()->etudiant->getEquipe()->qsession->quiz->time}}</p>
+    <input wire:model="count_down" type="text" style="display: none;"/>
+    <span id="counts" style="display: none;">1</span> -->
     <div class="col-span-6" style="margin: 30px 0;">
 
         <div class="col-span-6 w-full">
@@ -15,7 +17,7 @@
                                         <thead class="bg-gray-50">
                                             <tr>
                                                 <th scope="col" class="text-center px-6 py-3 text-xs font-bold tracking-wider text-left text-gray-500 uppercase">
-                                                    {{$quiz->questions[$current_index]->content}}
+                                                    {{$quiz->questions[$current_index]->content}} {{$count_down}}
                                                 </th>
                                             </tr>
 
@@ -68,13 +70,13 @@
         @if($next)
         <button class="px-4 py-2 text-sm font-bold uppercase border rounded-md cursor-pointer border-orange text-orange hover:bg-orange hover:text-white hover:shadow" wire:click="storeAndMove(1)">Suivant</button>
         @else
-        <button class="px-4 py-2 text-sm font-bold uppercase border rounded-md cursor-pointer bg-red-600 text-white hover:shadow" wire:click="storeAnswers()">Terminer</button>
+        <button class="px-4 py-2 text-sm font-bold uppercase border rounded-md cursor-pointer bg-red-600 text-white hover:shadow" wire:click="storeAndExit()">Terminer</button>
         @endif
     </div>
 
 
 
-    <script>
+    <!-- <script>
         var count = setInterval(function() {
 
             var min = parseInt(document.getElementById('countm').innerText)
@@ -86,7 +88,7 @@
             }
 
             sec -= 1
-            if(sec < 10)
+            if (sec < 10)
                 sec = "0" + String(sec)
 
             document.getElementById('minutes').innerText = min
@@ -96,7 +98,7 @@
             document.getElementById('counts').innerText = sec
 
         }, 1000)
-    </script>
+    </script> -->
 
 
 </div>

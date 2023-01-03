@@ -2,11 +2,14 @@
 
 namespace App\Http\Livewire\Participants;
 
+use App\Models\QsessionResponse;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
 class Quiz extends Component
 {
+
+    public $count_down;
 
     public $current_index = 0;
 
@@ -20,13 +23,18 @@ class Quiz extends Component
 
     public function render()
     {
-        $ss = Auth::user()->etudiant->getEquipe()->qsession;
-        $ss->state = 0;
-        $ss->save();
 
+        // $this->closeSession();
         return view('livewire.participants.quiz', [
             'quiz' => Auth::user()->etudiant->getEquipe()->qsession->quiz
         ]);
+    }
+
+    public function closeSession()
+    {
+        $ss = Auth::user()->etudiant->getEquipe()->qsession;
+        $ss->state = 0;
+        $ss->save();
     }
 
     public function moveQuestion($n)
@@ -50,20 +58,22 @@ class Quiz extends Component
 
     public function storeAnswers()
     {
-        $qq = Auth::user()->etudiant->getEquipe()->qsession->quiz->questions[$this->current_index];
         $ss = Auth::user()->etudiant->getEquipe()->qsession;
+        $st = Auth::user()->etudiant->getEquipe()->qsession->quiz->questions[$this->current_index];
+        $responses = QsessionResponse::where('qsession_id', $ss->id)->where('question_id', $st->id)->get();
+
         $sc = 0;
 
-        foreach ($qq->responses as $response) {
+        foreach ($responses as $response) {
 
             if ($this->sponses) {
-                if (array_key_exists($response->id, $this->sponses)) {
+                if (array_key_exists($response->response_id, $this->sponses)) {
 
-                    if ($this->sponses[$response->id] == true) {
+                    if ($this->sponses[$response->response_id] == true) {
                         $response->state = 1;
                         $response->save();
                         $sc += $response->score;
-                    } else{
+                    } else {
                         $response->state = 0;
                         $response->save();
                     }
@@ -75,15 +85,25 @@ class Quiz extends Component
         }
 
         $this->score += $sc;
-        $ss->score = $this->sc;
+        $ss->score = $this->score;
+        if ($ss->score == 0)
+            $ss->score = 1;
+
         $ss->save();
+
     }
 
-    public function storeAndMove($n){
+    public function storeAndMove($n)
+    {
 
         $this->storeAnswers();
         $this->moveQuestion($n);
+    }
 
+    public function storeAndExit()
+    {
+        $this->storeAnswers();
+        return redirect()->to('/preselection');
     }
 
 

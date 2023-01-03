@@ -25,7 +25,7 @@ class Quiz extends Model
         return $this->hasMany(Question::class);
     }
 
-    public function qsession(){
-        return $this->hasOne(QSession::class);
+    public function qsessions(){
+        return $this->hasMany(Qsession::class);
     }
 }

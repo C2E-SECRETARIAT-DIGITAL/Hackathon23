@@ -6,6 +6,7 @@ use Livewire\Component;
 
 use App\Models\Quiz;
 use App\Models\Question;
+use App\Models\QsessionResponse;
 use App\Models\Response;
 
 class Preselection extends Component
@@ -20,7 +21,6 @@ class Preselection extends Component
     public $resp_id;
     public $que_id;
     public $quiz_score;
-    public $quiz_time;
 
 
     public function render()
@@ -36,7 +36,6 @@ class Preselection extends Component
         $qi = Quiz::find($qid);
 
         $qi->score = $this->quiz_score;
-        $qi->time = $this->quiz_time;
         $qi->save();
 
         $this->resetVars();
@@ -81,11 +80,22 @@ class Preselection extends Component
 
     public function storeNewResponse($qid)
     {
-        Response::create([
+        $r = Response::create([
             'content' => $this->newResponseC[$qid],
             'score' => $this->newResponseS[$qid],
             'question_id' => $qid
         ]);
+
+        foreach(Quiz::where('niveau_id', $this->niveau)->first()->qsessions as $qs){
+            QsessionResponse::create([
+                'score' => $r->score,
+                'state' => 0,
+                'qsession_id' => $qs->id,
+                'response_id' => $r->id,
+                'question_id' => $r->question_id
+            ]);
+        }
+
 
         $this->resetVars();
     }
@@ -107,6 +117,12 @@ class Preselection extends Component
         $res->score = $this->newResponseS[$qid];
         $res->save();
 
+        foreach(Quiz::where('niveau_id', $this->niveau)->first()->qsessions as $qs){
+            $qsres = QsessionResponse::where('qsession_id', $qs->id)->where('response_id', $this->resp_id)->where('question_id', $res->question_id)->first();
+            $qsres->score = $res->score;
+            $qsres->save();
+        }
+
         $this->resetVars();
     }
 
@@ -126,6 +142,5 @@ class Preselection extends Component
         $this->editModeQ = false;
         $this->resp_id = 0;
         $this->quiz_score = "";
-        $this->quiz_time = "";
     }
 }

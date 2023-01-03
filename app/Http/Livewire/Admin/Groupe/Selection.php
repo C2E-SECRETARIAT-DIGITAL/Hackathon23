@@ -20,7 +20,7 @@ class Selection extends Component
     public function render()
     {
         
-        $hackaton = Hackaton::latest()->first();
+        $hackaton = Hackaton::where('inscription', 1)->first();
         
         return view('livewire.admin.groupe.selection', [
             'equipes' => Equipe::where('hackaton_id', $hackaton->id)

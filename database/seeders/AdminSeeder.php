@@ -22,28 +22,14 @@ class AdminSeeder extends Seeder
     {
 
         // Creation des differents Niveaux
+        $nvx = ['Niveau 1', 'Niveau 2', 'Niveau 3 Télécom', 'Niveau 3 Info', 'Niveau 3 S"curité'];
 
-        $n1 = Niveau::create([
-            'libelle' => 'Niveau 1',
-        ]);
-
-        $n2 = Niveau::create([
-            'libelle' => 'Niveau 2',
-        ]);
-
-        $n3 = Niveau::create([
-            'libelle' => 'Niveau 3 Télécom',
-        ]);
-
-        $n4 = Niveau::create([
-            'libelle' => 'Niveau 3 Info',
-        ]);
-
-        $n5 = Niveau::create([
-            'libelle' => 'Niveau 3 Sécurité',
-        ]);
-
-
+        foreach($nvx as $nv)
+        {
+            Niveau::create([
+                'libelle' => $nv
+            ]);
+        }
 
         Role::create(['name'=> 'Super@Administrateur']);
         Role::create(['name'=> 'Administrateur']);

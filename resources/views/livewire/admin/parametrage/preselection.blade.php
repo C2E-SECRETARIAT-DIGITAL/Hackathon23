@@ -2,7 +2,7 @@
 
     <div class="px-4 py-5 ">
 
-    <div class="text-md font-bold text-center">Score: {{$quiz->score}} pts Durée: {{$quiz->time}} minutes</div>
+    <div class="text-md font-bold text-center">Score: {{$quiz->score}} pts</div>
     
         <div class="col-span-6" style="margin-bottom: 30px;">
             <div class="flex flex-col">
@@ -16,9 +16,6 @@
                                         <option value="{{$qui->niveau->id}}">{{$qui->title}}</option>
                                         @endforeach
                                     </select>
-                                </th>
-                                <th scope="col-span-2" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    <input type="number" wire:model="quiz_time" min=0 placeholder="Durée(en minute)..." required class="relative w-full px-3 py-2 ext-sm text-gray-600 placeholder-gray-400 bg-white border-gray-400 rounded outline-none focus:border-coolGray-400 focus:outline-none focus:ring-coolGray-100" />
                                 </th>
                                 <th scope="col-span-2" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                     <input type="number" wire:model="quiz_score" min=0 placeholder="Score..." required class="relative w-full px-3 py-2 ext-sm text-gray-600 placeholder-gray-400 bg-white border-gray-400 rounded outline-none focus:border-coolGray-400 focus:outline-none focus:ring-coolGray-100" />
