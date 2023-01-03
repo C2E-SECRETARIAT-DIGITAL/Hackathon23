@@ -23,6 +23,8 @@ class AdminSeeder extends Seeder
 
         // Creation des differents Niveaux
         $nvx = ['Niveau 1', 'Niveau 2', 'Niveau 3 Télécom', 'Niveau 3 Info', 'Niveau 3 S"curité'];
+        $rls = ['Super@Administrateur', 'Administrateur', 'participant'];
+        $pms = ['restaurant', 'comite nuit', 'hackaton'];
 
         foreach($nvx as $nv)
         {
@@ -31,13 +33,19 @@ class AdminSeeder extends Seeder
             ]);
         }
 
-        Role::create(['name'=> 'Super@Administrateur']);
-        Role::create(['name'=> 'Administrateur']);
-        Role::create(['name'=> 'participant']);
+        foreach($rls as $r)
+        {
+            Role::create([
+                'name' => $r
+            ]);
+        }
 
-        Permission::create(['name' => 'restaurant']);
-        Permission::create(['name' => 'comite nuit']);
-        Permission::create(['name' => 'hackaton']);
+        foreach($pms as $p)
+        {
+            Role::create([
+                'name' => $p
+            ]);
+        }
 
 
         $user = User::create([
