@@ -212,7 +212,7 @@ class Enregistrement extends Component
 
             // recuperation de l'hackaton
 
-            $hackaton = Hackaton::where('inscription', 1)->first();
+            $hackaton = Hackaton::latest()->first();
 
             // creation de l'équipe
             $equipe = Equipe::create([
@@ -223,11 +223,12 @@ class Enregistrement extends Component
             ]);
 
 
-            Qsession::create([
-                'quiz_id' => Quiz::where('niveau_id', $this->niveau)->first()->id,
-                'equipe_id' => $equipe->id
-            ]);
-
+            if (Niveau::find($this->niveau)->quiz_available == 1) {
+                Qsession::create([
+                    'quiz_id' => Quiz::where('niveau_id', $this->niveau)->first()->id,
+                    'equipe_id' => $equipe->id
+                ]);
+            }
             // creation du participant 1 
 
             $user1 = User::create([

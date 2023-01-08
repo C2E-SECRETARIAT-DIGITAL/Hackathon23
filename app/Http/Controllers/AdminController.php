@@ -23,8 +23,8 @@ class AdminController extends Controller
 
     public function welcome()
     {
-        $hackaton = Hackaton::where('inscription', 1)->first();
-        $statut =  Hackaton::where('inscription', 1)->first()->CanRecord();
+        $hackaton = Hackaton::latest()->first();
+        $statut =  Hackaton::latest()->first()->CanRecord();
 
         if($hackaton->inscription)
         {
@@ -39,8 +39,8 @@ class AdminController extends Controller
 
     public function inscription()
     {
-        $hackaton = Hackaton::where('inscription', 1)->first();
-        $statut =  Hackaton::where('inscription', 1)->first()->CanRecord();
+        $hackaton = Hackaton::latest()->first();
+        $statut =  Hackaton::latest()->first()->CanRecord();
 
         if($hackaton->inscription and $statut)
         {
@@ -56,7 +56,7 @@ class AdminController extends Controller
 
     public function finPreselection()
     {
-        $hackaton = Hackaton::where('inscription', 1)->first() ;
+        $hackaton = Hackaton::latest()->first() ;
 
         if($hackaton->inscription)
         {
@@ -72,7 +72,7 @@ class AdminController extends Controller
 
     public function inscriptionterminer()
     {
-        $hackaton = Hackaton::where('inscription', 1)->first() ;
+        $hackaton = Hackaton::latest()->first() ;
 
         if($hackaton->inscription)
         {
@@ -156,7 +156,7 @@ class AdminController extends Controller
     {
         $repas = Repa::orderBy('created_at', 'DESC')->paginate(8);
 
-        $hackaton = Hackaton::where('inscription', 1)->first() ;
+        $hackaton = Hackaton::latest()->first() ;
 
         $nb_participants = DB::table('participants')
                     ->join('equipes', 'equipes.id', '=', 'participants.equipe_id' )
@@ -180,7 +180,7 @@ class AdminController extends Controller
 
             $statut = Restauration::where('etudiant_id', $etudiant->id)
                                 ->where('repa_id', Repa::latest()->first()->id )
-                                ->where( 'hackaton_id' , Hackaton::where('inscription', 1)->first()->id)
+                                ->where( 'hackaton_id' , Hackaton::latest()->first()->id)
                                 ->first() ;
             
             if(!$statut)
@@ -188,7 +188,7 @@ class AdminController extends Controller
                 Restauration::create([
                     'etudiant_id' => $etudiant->id,
                     'repa_id' => Repa::latest()->first()->id,
-                    'hackaton_id' => Hackaton::where('inscription', 1)->first()->id
+                    'hackaton_id' => Hackaton::latest()->first()->id
                 ]);
 
                 $request->session()->flash('success', 'Bon appetit');

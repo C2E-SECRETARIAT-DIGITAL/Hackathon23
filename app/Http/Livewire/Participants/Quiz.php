@@ -9,17 +9,21 @@ use Illuminate\Support\Facades\Auth;
 class Quiz extends Component
 {
 
-    public $count_down;
+    public $count_down = 31;
 
     public $current_index = 0;
 
     public $next = true;
 
-    public $pre = false;
-
     public $sponses;
 
     public $score = 0;
+
+    protected $listeners = [
+        'storeAndMove',
+        'storeAndExit',
+        'openSession'
+    ];
 
     public function render()
     {
@@ -30,10 +34,10 @@ class Quiz extends Component
         ]);
     }
 
-    public function closeSession()
+    public function openSession()
     {
         $ss = Auth::user()->etudiant->getEquipe()->qsession;
-        $ss->state = 0;
+        $ss->state = 1;
         $ss->save();
     }
 
@@ -41,16 +45,14 @@ class Quiz extends Component
     {
         $qq = Auth::user()->etudiant->getEquipe()->qsession->quiz->questions;
 
-        if ($this->current_index + $n == sizeof($qq) - 1) {
+        if($this->current_index + $n == sizeof($qq) -1){
             $this->next = false;
-        } else {
+        }else{
             $this->next = true;
         }
 
-        if ($this->current_index + $n == 0) {
-            $this->pre = false;
-        } else {
-            $this->pre = true;
+        if ($this->current_index + $n == sizeof($qq)) {
+            return redirect()->to('/preselection');
         }
 
         $this->current_index += $n;
@@ -84,18 +86,19 @@ class Quiz extends Component
             }
         }
 
+        if ($sc < 0)
+            $sc = 0;
+
         $this->score += $sc;
         $ss->score = $this->score;
         if ($ss->score == 0)
             $ss->score = 1;
 
         $ss->save();
-
     }
 
     public function storeAndMove($n)
     {
-
         $this->storeAnswers();
         $this->moveQuestion($n);
     }
@@ -105,7 +108,6 @@ class Quiz extends Component
         $this->storeAnswers();
         return redirect()->to('/preselection');
     }
-
 
     public function see()
     {

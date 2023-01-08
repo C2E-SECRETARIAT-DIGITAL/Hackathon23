@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire\Admin\Parametrage;
 
+use App\Models\Qsession;
 use Livewire\Component;
 
+use App\Models\Niveau;
 use App\Models\Quiz;
 use App\Models\Question;
 use App\Models\QsessionResponse;
@@ -28,18 +30,20 @@ class Preselection extends Component
 
         return view('livewire.admin.parametrage.preselection', [
             'quiz' => Quiz::where('niveau_id', $this->niveau)->first(),
+            '_niveau' => Niveau::find($this->niveau),
             'quizzes' => Quiz::all(),
+            'niveaux' => Niveau::all()
         ]);
     }
 
-    public function updateQuiz($qid){
+    public function updateQuiz($qid)
+    {
         $qi = Quiz::find($qid);
 
         $qi->score = $this->quiz_score;
         $qi->save();
 
         $this->resetVars();
-
     }
 
     public function storeNewQuestion()
@@ -86,7 +90,7 @@ class Preselection extends Component
             'question_id' => $qid
         ]);
 
-        foreach(Quiz::where('niveau_id', $this->niveau)->first()->qsessions as $qs){
+        foreach (Quiz::where('niveau_id', $this->niveau)->first()->qsessions as $qs) {
             QsessionResponse::create([
                 'score' => $r->score,
                 'state' => 0,
@@ -117,7 +121,7 @@ class Preselection extends Component
         $res->score = $this->newResponseS[$qid];
         $res->save();
 
-        foreach(Quiz::where('niveau_id', $this->niveau)->first()->qsessions as $qs){
+        foreach (Quiz::where('niveau_id', $this->niveau)->first()->qsessions as $qs) {
             $qsres = QsessionResponse::where('qsession_id', $qs->id)->where('response_id', $this->resp_id)->where('question_id', $res->question_id)->first();
             $qsres->score = $res->score;
             $qsres->save();
@@ -130,6 +134,18 @@ class Preselection extends Component
     {
         $res = Response::find($rid);
         $res->delete();
+    }
+
+    public function openCloseQuiz($qid)
+    {
+        $q = Quiz::find($qid);
+        
+        if ($q->state == 1)
+            $q->state = 0;
+        else
+            $q->state = 1;
+
+        $q->save();
     }
 
     public function resetVars()

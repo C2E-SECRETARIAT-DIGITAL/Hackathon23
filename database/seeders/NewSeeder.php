@@ -20,16 +20,11 @@ class NewSeeder extends Seeder
      */
     public function run()
     {
-        Niveau::create([
-            'libelle' => 'Niveau 3 Télécom',
-        ]);
-
-        Niveau::create([
-            'libelle' => 'Niveau 3 Info',
-        ]);
-
-        Niveau::create([
-            'libelle' => 'Niveau 3 Sécurité',
+        Hackaton::create([
+            'pco_1' => 'BLE Yatana',
+            'pco_2' => 'PRESIDENT Daniel',
+            'annee' => '2023',
+            'inscription' => 1
         ]);
     }
 }

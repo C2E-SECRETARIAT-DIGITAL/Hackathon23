@@ -21,7 +21,7 @@ class Repartition extends Component
 
     public function render()
     {
-        $hackaton = Hackaton::where('inscription', 1)->first() ;
+        $hackaton = Hackaton::latest()->first() ;
         
         return view('livewire.admin.parametrage.repartition',[
             'equipes' => Equipe::where('statut',1 )
@@ -38,7 +38,7 @@ class Repartition extends Component
 
     public function linkRepartition(int $id)
     {
-        $hackaton = Hackaton::where('inscription', 1)->first() ;
+        $hackaton = Hackaton::latest()->first() ;
 
         if($this->salle_id != '')
         {
@@ -58,7 +58,7 @@ class Repartition extends Component
     {
         if($id)
         {
-            $hackaton = Hackaton::where('inscription', 1)->first() ;
+            $hackaton = Hackaton::latest()->first() ;
             $classe = RepSalle::where('equipe_id', $id)
                                 ->where('hackaton_id', $hackaton->id)
                                 ->first();

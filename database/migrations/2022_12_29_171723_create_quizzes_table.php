@@ -18,12 +18,10 @@ class CreateQuizzesTable extends Migration
             $table->id();
             $table->string('title');
             $table->mediumInteger('score')->default(0);
+            $table->unsignedInteger('state')->default(0);
 
             $table->unsignedBigInteger('niveau_id');
             $table->foreign('niveau_id')->references('id')->on('niveaux')->onDelete('cascade');
-
-            $table->unsignedBigInteger('hackaton_id');
-            $table->foreign('hackaton_id')->references('id')->on('hackatons')->onDelete('cascade');
 
             $table->timestamps();
         });

@@ -52,11 +52,12 @@ class Hackaton extends Component
     }
 
 
-    public function activation(int $id)
+    public function activation($id)
     {
+        // dd($id);
         if($id)
         {
-            $hackaton = ModelsHackaton::find($id)->first() ;
+            $hackaton = ModelsHackaton::find($id);
 
             $hackaton->inscription = !$hackaton->inscription ;
 

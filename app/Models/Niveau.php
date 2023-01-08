@@ -11,6 +11,12 @@ class Niveau extends Model
 
     public $guarded = [] ;
 
+    protected $fillable = [
+        'libelle',
+        'quiz_available',
+        'video_url'
+    ];
+
     public function classes()
     {
     	return $this->hasMany(Classe::class);
@@ -23,5 +29,9 @@ class Niveau extends Model
 
     public function quiz(){
         return $this->hasOne(Quiz::class);
+    }
+
+    public function qvideo(){
+        return $this->hasOne(Qvideo::class);
     }
 }
