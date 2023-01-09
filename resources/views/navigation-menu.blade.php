@@ -18,9 +18,11 @@
 
                     @if (Auth::user()->etudiant)
 
+                    @if(Auth::user()->etudiant->getEquipe()->niveau->quiz_available)
                     <x-jet-nav-link href="{{ route('preselection', null, false) }}" :active="request()->routeIs('preselection')">
                         {{ __('Présélection') }}
                     </x-jet-nav-link>
+                    @endif
 
                     @if (Auth::user()->etudiant->currentEquipe()->statut)
 

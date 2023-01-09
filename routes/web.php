@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,9 +29,13 @@ Route::get('/', 'App\Http\Controllers\AdminController@welcome')->name('welcome')
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/preselection', function () {
     return view('participants.preselection');
 })->name('preselection');
+
+Route::middleware(['auth:sanctum', 'verified'])->post('/dashboard/up', [VideoController::class, 'uploadVideo'])->name('uploadvideo');
+
 
 
 // Les routes relatives à la partie de l'administration
@@ -48,6 +53,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/preselection', function (
             
             Route::get('/admin/parametres',  'App\Http\Controllers\AdminController@index')->name('Admin.parametres.index');
             Route::get('/admin/groupes',  'App\Http\Controllers\AdminController@selectionGroupe')->name('Admin.groupe.selection');
+            Route::get('/admin/groupes/down', [VideoController::class, 'downloadVideo'])->name('Admin.groupe.downloadvideo');
             Route::get('/admin/impression',  'App\Http\Controllers\AdminController@impression')->name('Admin.groupe.impression');
             Route::get('/admin/restauration',  'App\Http\Controllers\AdminController@gestionRestaurant')->name('Admin.restauration');
     

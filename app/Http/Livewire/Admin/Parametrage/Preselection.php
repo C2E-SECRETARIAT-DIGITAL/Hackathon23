@@ -11,6 +11,8 @@ use App\Models\Question;
 use App\Models\QsessionResponse;
 use App\Models\Response;
 
+use Livewire\WithPagination;
+
 class Preselection extends Component
 {
 
@@ -32,6 +34,7 @@ class Preselection extends Component
             'quiz' => Quiz::where('niveau_id', $this->niveau)->first(),
             '_niveau' => Niveau::find($this->niveau),
             'quizzes' => Quiz::all(),
+            'questions' => Question::where('quiz_id', Quiz::where('niveau_id', $this->niveau)->first()->id)->orderBy('created_at', 'desc')->get(),
             'niveaux' => Niveau::all()
         ]);
     }

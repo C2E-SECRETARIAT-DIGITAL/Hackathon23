@@ -18,7 +18,7 @@
 
         <div class="col-span-2 ">
 
-            <div class="px-4 py-6 text-xl bg-white shadow-xl sm:rounded-lg">
+            <div class="px-4 py-6 text-md bg-white shadow-xl sm:rounded-lg">
                 @if(Auth::user()->etudiant)
                 <p class="text-xl font-bold text-center ">
                     EQUIPE:
@@ -90,7 +90,7 @@
                     <span class="text-red-600">>Le quiz débute une fois que vous cliquez sur le bouton "COMMENCER LE TEST"</span> <br>
                 </p>
                 <div class="text-center mt-5">
-                    <button @click="start = true" onclick="begin()" class="px-6 py-3 mb-1 mr-1 text-sm font-bold text-white uppercase transition-all duration-150 rounded shadow outline-none ease-linearbg-emerald-500 bg-myblue hover:shadow-lg focus:outline-none">
+                    <button class="px-6 py-3 mb-1 mr-1 text-sm font-bold text-white uppercase transition-all duration-150 rounded shadow outline-none ease-linearbg-emerald-500 bg-myblue hover:shadow-lg focus:outline-none">
                         Commencer le test
                     </button>
                 </div>
@@ -129,19 +129,23 @@
                     @else
 
                     <!-- debut -->
-                    @if(Auth::user()->etudiant->getEquipe()->video_url) 
+                    @if(Auth::user()->etudiant->getEquipe()->video_url)
 
-                        <p>Vous avez une video</p>
+                    <video controls>
+                        <source src="{{ Storage::url(Auth::user()->etudiant->getEquipe()->video_url) }}" type="video/mp4" autoplay loop>
+                        Your browser does not support the video tag.
+                    </video>
 
                     @else
 
                     <p class="font-bold text-center text-md">Vous n'avez pas de video</p>
-                    <form class="mt-5" method="POST">
-
-                        <input class="mb-5" type="file" type="video/mp4"  required/>
+                    <form class="mt-5" method="POST" action="{{ route('uploadvideo') }}" enctype="multipart/form-data">
+                        @csrf
+                        <input type="number" name="equipe_id" value="{{Auth::user()->etudiant->getEquipe()->id}}" style="display:none;" />
+                        <input class="mb-5" type="file" name="video" accept="video/mp4" required />
 
                         <div class="text-center mt-5">
-                            <button class="px-6 py-3 mb-1 mr-1 text-sm font-bold text-white uppercase transition-all duration-150 rounded shadow outline-none ease-linearbg-emerald-500 bg-myblue hover:shadow-lg focus:outline-none">
+                            <button type="submit" class="px-6 py-3 mb-1 mr-1 text-sm font-bold text-white uppercase transition-all duration-150 rounded shadow outline-none ease-linearbg-emerald-500 bg-myblue hover:shadow-lg focus:outline-none">
                                 Importer
                             </button>
                         </div>
@@ -175,25 +179,25 @@
 
             <div class="px-4 py-6 bg-white shadow-xl sm:rounded-lg">
 
-                <p class="font-bold text-center text-md">
-                    Bienvenu {{Auth::user()->etudiant->nom ?? Auth::user()->name }} sur ton espace SDI
+                <p class="font-bold text-center text-xl">
+                    Bienvenu(e) {{Auth::user()->etudiant->nom ?? Auth::user()->name }} sur ton espace SDI
                 </p>
-                <p class="pt-2">
-                    cet espace te permettra de consulter les résultats et de consulter les informations relative à ton groupe.
+                <p class="pt-2 text-xl">
+                    Cet espace te permettra de consulter les résultats et de consulter les informations relatives à ton groupe.
                 </p>
-                <p class="pt-4">
-                    <span class="font-bold text-orange"> HackEat >> </span> est l'espace te permettant d'avoir access à la restauration de l'hackathon
-                    il faut noter que pour toutes personnes sélèctionnée la restauration sera assurée les :
-                <ul class="font-bold text-gray-500">
+                <p class="pt-4 text-xl">
+                    <span class="font-bold text-orange"> HackEat >> </span> est l'espace te permettant d'avoir accès à la restauration de l'hackathon.
+                    Il faut noter que pour toute personne sélèctionnée la restauration sera assurée les :
+                <ul class="font-bold text-gray-500 text-xl">
                     <li> Vendredi et Samedi | matin, midi et soir </li>
                     <li> Dimanche | matin et midi </li>
                 </ul>
                 </p>
 
 
-                <p class="pt-4">
-                    <span class="font-bold text-orange"> HackNight >> </span> est l'espace te permettant d'avoir access aux collations relative à l'hackaton
-                    il est bon de noter que pour toutes personnes sélèctionnées les collations seront mise a votre disposition le vendredi et le samedi aux heures suivantes
+                <p class="pt-4 text-xl">
+                    <span class="font-bold text-orange"> HackNight >> </span> est l'espace te permettant d'avoir accès aux collations relatives à l'hackaton.
+                    Il est bon de noter que pour toute personne sélèctionnée les collations seront mise a votre disposition le vendredi et le samedi aux heures suivantes
                     <span class="font-bold text-gray-500">
                         22h30 | 00h30 | 03h30
                     </span>

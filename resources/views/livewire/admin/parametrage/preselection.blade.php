@@ -64,7 +64,7 @@
                 </div>
             </div>
 
-            @foreach($quiz->questions as $question)
+            @foreach($questions as $question)
             <div class="col-span-6">
                 <div class="md:grid md:grid-cols-6">
                     <div class="col-span-6">
@@ -185,7 +185,6 @@
                 </div>
             </div>
             @endforeach
-
         </div>
 
         @else

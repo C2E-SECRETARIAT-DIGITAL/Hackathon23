@@ -64,10 +64,10 @@
                                 <thead class="bg-gray-50">
                                 <tr>
                                     <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                        Niveau
+                                        Classe
                                     </th>
                                     <th scope="col-span-2" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                        Classe
+                                        Niveau
                                     </th>
                                     <th scope="" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                         

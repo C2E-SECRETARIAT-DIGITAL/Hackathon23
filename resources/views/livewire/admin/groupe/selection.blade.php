@@ -27,7 +27,7 @@
 
         @if($niveau->quiz_available == 1)
         <form method="POST">
-            <input type="number" wire:mpdel="nb_team" class="px-4 py-2 rounded" placeholder="Nombre d'équipes (1 par défaut)" min=1/>
+            <input type="number" wire:mpdel="nb_team" class="px-4 py-2 rounded" placeholder="Nombre d'équipes (1 par défaut)" min=1 />
             <button wire:click.prevent="autoSelct()" class="px-4 py-2 mt-5 mr-1 text-sm font-bold uppercase border rounded-md cursor-pointer border-orange text-orange hover:bg-orange hover:text-white hover:shadow" type="submit">
                 Selection automatique
             </button>
@@ -58,6 +58,9 @@
                                 </th>
                                 <th scope="col-span-2" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                     Nom et premons des membres
+                                </th>
+                                <th>
+                                    Score / Video
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
 
@@ -137,6 +140,28 @@
 
                                     @endforeach
 
+                                </td>
+
+                                <td>
+                                    @if($equipe->niveau->quiz_available)
+                                    {{$equipe->qsession->score}} / {{$equipe->qsession->quiz->score}}
+                                    @else
+
+                                    @if($equipe->video_url)
+                                    <form method="GET" action="{{ route('Admin.groupe.downloadvideo') }}">
+                                        @csrf
+                                        <input type="text" name="url" value="{{ 'public/' . $equipe->video_url }}" style="display:none;" />
+                                        <button type="submit" class="px-6 py-3 mb-1 mr-1 text-sm font-bold text-white uppercase transition-all duration-150 rounded shadow outline-none ease-linearbg-emerald-500 bg-myblue hover:shadow-lg focus:outline-none">
+                                            Télécharger
+                                        </button>
+                                    </form>
+                                    @else
+                                    <p>
+                                        Pas de vidéo ajoutée
+                                    </p>
+                                    @endif
+
+                                    @endif
                                 </td>
 
                                 <td>
