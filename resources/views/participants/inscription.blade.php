@@ -11,11 +11,11 @@
         <!-- <link rel="stylesheet" href="{{asset('css/inscription.css')}}" /> -->
         <link rel="stylesheet" href="https://hackathon23.herokuapp.com/css/inscription.css" />
 
-        <!-- <link rel="stylesheet" href="{{ mix('css/app.css') }}"> -->
+        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         
         @livewireStyles
         <!-- Scripts -->
-        <!-- <script src="{{ mix('js/app.js') }}" defer></script> -->
+        <script src="{{ mix('js/app.js') }}" defer></script>
 
     </head>
     <body >
