@@ -142,7 +142,7 @@
                     <form class="mt-5" method="POST" action="{{ route('uploadvideo') }}" enctype="multipart/form-data">
                         @csrf
                         <input type="number" name="equipe_id" value="{{Auth::user()->etudiant->getEquipe()->id}}" style="display:none;" />
-                        <input class="mb-5" type="file" name="video" accept="video/mp4" required />
+                        <input class="mb-5" type="file" name="video" accept="video/*" required />
 
                         <div class="text-center mt-5">
                             <button type="submit" class="px-6 py-3 mb-1 mr-1 text-sm font-bold text-white uppercase transition-all duration-150 rounded shadow outline-none ease-linearbg-emerald-500 bg-myblue hover:shadow-lg focus:outline-none">
