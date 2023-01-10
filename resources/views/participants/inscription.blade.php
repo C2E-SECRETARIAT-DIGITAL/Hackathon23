@@ -5,14 +5,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Hackaton 2022</title>
-        <link rel="icon" href="{{asset('images/app/logoSDI-PhotoRoom.png')}}" type="image/icon type">
+        <!-- <link rel="icon" href="{{asset('images/app/logoSDI-PhotoRoom.png')}}" type="image/icon type"> -->
+        <link rel="icon" href="https://hackathon23.herokuapp.com/images/app/logoSDI-PhotoRoom.png" type="image/icon type">
         
-        <link rel="stylesheet" href="{{asset('css/inscription.css')}}" />
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <!-- <link rel="stylesheet" href="{{asset('css/inscription.css')}}" /> -->
+        <link rel="stylesheet" href="https://hackathon23.herokuapp.com/css/inscription.css" />
+
+        <!-- <link rel="stylesheet" href="{{ mix('css/app.css') }}"> -->
         
         @livewireStyles
         <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}" defer></script>
+        <!-- <script src="{{ mix('js/app.js') }}" defer></script> -->
 
     </head>
     <body >
