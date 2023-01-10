@@ -14,9 +14,6 @@ class VideoController extends Controller
     public function uploadVideo(Request $request)
     {
 
-        // $ext = '.' .$request->file('video')->getClientOriginalExtension();
-        // $filename = str_replace(' ', '', Equipe::where('id', $request->equipe_id)->first()->nom) . $ext;
-        // $path = Storage::putFileAs('videos', $request->video, $filename);
         $path = Storage::disk('public')->put('videos', $request->video);
 
         $team = Equipe::find($request->equipe_id);
