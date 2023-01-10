@@ -5,8 +5,13 @@
   <title>C2E | HACKATHON</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" media="screen" href="{{asset('css/particles1.css')}}">
-  <link rel="icon" href="{{asset('images/app/logoSDI-PhotoRoom.png')}}" type="image/icon type">
-  <link rel="stylesheet" href="{{asset('css/acceuil.css')}}" />
+  <!-- <link rel="icon" href="{{asset('images/app/logoSDI-PhotoRoom.png')}}" type="image/icon type"> -->
+
+  <!-- <link rel="icon" href="http://127.0.0.1:8000/images/app/logoSDI-PhotoRoom.png" type="image/icon type">
+  <link rel="stylesheet" href="http://127.0.0.1:8000/css/acceuil.css" /> -->
+
+  <link rel="icon" href="https://hackathon23.herokuapp.com/images/app/logoSDI-PhotoRoom.png" type="image/icon type">
+  <link rel="stylesheet" href="https://hackathon23.herokuapp.com/css/acceuil.css" />
 
   
 </head>
@@ -75,8 +80,11 @@
 </div>
 
 <!-- scripts -->
-<script src="{{asset('js/particles.js')}}" ></script>
-<script src="{{asset('js/app-particles1.js')}}"></script>
+<script src="https://hackathon23.herokuapp.com/js/particles.js" ></script>
+<script src="https://hackathon23.herokuapp.com/js/app-particles1.js"></script>
+
+<!-- <script src="http://127.0.0.1:8000/js/particles.js" ></script>
+<script src="http://127.0.0.1:8000/js/app-particles1.js"></script> -->
 
 
 </body>
