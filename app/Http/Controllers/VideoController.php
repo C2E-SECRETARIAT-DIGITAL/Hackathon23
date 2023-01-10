@@ -11,9 +11,9 @@ use Svg\Gradient\Stop;
 
 class VideoController extends Controller
 {
-    public function uploadVideo(Request $request){
+    public function uploadVideo(Request $request)
+    {
 
-        
         // $ext = '.' .$request->file('video')->getClientOriginalExtension();
         // $filename = str_replace(' ', '', Equipe::where('id', $request->equipe_id)->first()->nom) . $ext;
         // $path = Storage::putFileAs('videos', $request->video, $filename);
@@ -26,8 +26,10 @@ class VideoController extends Controller
         return view('dashboard');
     }
 
-    public function downloadVideo(Request $request){
-            return Storage::download($request->url);
-
+    public function downloadVideo(Request $request)
+    {
+        $ext = '.' . substr(strrchr($request->url, '.'), 1);
+        $filename = str_replace(' ', '', Equipe::where('id', $request->equipe_id)->first()->nom) . $ext;
+        return Storage::download($request->url, $filename);
     }
 }
