@@ -13,6 +13,8 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
+        <script src="https://app.simplefileupload.com/buckets/a6fe78e3fd96f7012306cafa52dbd4b9.js"></script>
+
         @livewireStyles
 
         <!-- Scripts -->

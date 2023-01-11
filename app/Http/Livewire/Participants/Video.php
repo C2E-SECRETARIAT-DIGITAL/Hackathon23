@@ -13,23 +13,24 @@ class Video extends Component
 
     use WithFileUploads;
     public $video;
+    public $video_url;
+
+    protected $listeners = [
+        'addVideo'
+    ];
 
     public function render()
     {
         return view('livewire.participants.video');
     }
 
-    public function addVideo()
+    public function addVideo($url)
     {
-        $this->validate([
-            'video' => 'required'
-        ]);
 
         $equipe_id = Auth::user()->etudiant->getEquipe()->id;
-        $path = Storage::disk('public')->put('videos', $this->video);
 
         $team = Equipe::find($equipe_id);
-        $team->video_url = $path;
+        $team->video_url = $url;
         $team->save();
 
         return redirect()->route('dashboard');

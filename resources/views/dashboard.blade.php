@@ -132,13 +132,13 @@
                     @if(Auth::user()->etudiant->getEquipe()->video_url)
 
                     <video controls autoplay loop>
-                        <source src="{{ Storage::url(Auth::user()->etudiant->getEquipe()->video_url) }}" type="video/mp4">
+                        <source src="{{ Auth::user()->etudiant->getEquipe()->video_url }}" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
 
                     @else
 
-                    livewire('participants.video')
+                    @livewire('participants.video')
                     
                     @endif
                     <!-- fin -->
