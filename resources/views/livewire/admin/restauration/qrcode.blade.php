@@ -68,7 +68,7 @@
        
 
         <qrcode-stream @decode="onDecode"></qrcode-stream>
-        <!-- <qrcode-drop-zone></qrcode-drop-zone> -->
+        <qrcode-drop-zone></qrcode-drop-zone>
 
         <div class="flex items-center justify-center h-32 py-4">
             <form action="{{route('qrcode.Soumission',null,false)}}" method="POST">
