@@ -7,8 +7,7 @@
         <title>C2E | HACKATON</title>
 
         
-        <!-- <link rel="stylesheet" href="{{asset('css/acceuil.css')}}" /> -->
-        <link rel="stylesheet" href="https://hackathon23.herokuapp.com/css/acceuil.css" />
+        <link rel="stylesheet" href="{{asset('css/acceuil.css')}}" />
 
 
     </head>
