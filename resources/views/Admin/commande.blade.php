@@ -135,10 +135,10 @@
 
     <x-slot name="scripts">
 
-        <script src="{{ mix('js/vue.js') }}"></script>
-        <script src="{{ mix('js/vueQrCode.js') }}"></script>
+    <script src="{{ mix('js/vue.js') }}"></script>
+    <script src="{{ mix('js/vueQrCode.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
         <script>
-
             
             var app = new Vue({
                 el: '#app',
@@ -155,6 +155,7 @@
                 }
             })
         </script>
+
 
         <script>
             function Tabsetup() {
