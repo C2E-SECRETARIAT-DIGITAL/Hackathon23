@@ -3,7 +3,7 @@
 
     <form class="mt-5">
 
-        <input class="simple-file-upload" type="hidden" name="video_url" id="video_url">
+        <input class="simple-file-upload" type="hidden" name="video_url" id="video_url" data-accepted="video/*" data-maxFileSize="50">
 
     </form>
 </div>

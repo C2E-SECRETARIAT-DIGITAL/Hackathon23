@@ -29,9 +29,9 @@ class Enregistrement extends Component
     public $matricule_chef;
     public $nom_chef;
     public $prenom_chef;
-    public $classe_chef;
+    public $classe_chef = "c";
     public $email_chef;
-    public $genre_chef = "Masculin";
+    public $genre_chef = "g";
 
 
     // variables relatives au membre 2
@@ -39,17 +39,17 @@ class Enregistrement extends Component
     public $matricule_m2;
     public $nom_m2;
     public $prenom_m2;
-    public $classe_m2;
+    public $classe_m2 = "c";
     public $email_m2;
-    public $genre_m2 = "Masculin";
+    public $genre_m2 = "g";
     // variables relatives au membre 3
 
     public $matricule_m3;
     public $nom_m3;
     public $prenom_m3;
-    public $classe_m3;
+    public $classe_m3 = "c";
     public $email_m3;
-    public $genre_m3 = "Masculin";
+    public $genre_m3 = "g";
 
     public $errorEmail = false;
     public $errorMatricule = false;
@@ -141,12 +141,12 @@ class Enregistrement extends Component
         $this->matricule_chef = "";
         $this->nom_chef = "";
         $this->prenom_chef = "";
-        $this->classe_chef = "";
+        $this->classe_chef = "c";
         $this->email_chef = "";
 
-        $this->genre_chef = "";
-        $this->genre_m3 = "";
-        $this->genre_m2 = "";
+        $this->genre_chef = "g";
+        $this->genre_m3 = "g";
+        $this->genre_m2 = "g";
 
 
         // variables relatives au membre 2
@@ -154,7 +154,7 @@ class Enregistrement extends Component
         $this->matricule_m2 = "";
         $this->nom_m2 = "";
         $this->prenom_m2 = "";
-        $this->classe_m2 = "";
+        $this->classe_m2 = "c";
         $this->email_m2 = "";
 
         // variables relatives au membre 3
@@ -162,7 +162,7 @@ class Enregistrement extends Component
         $this->matricule_m3 = "";
         $this->nom_m3 = "";
         $this->prenom_m3 = "";
-        $this->classe_m3 = "";
+        $this->classe_m3 = "c";
         $this->email_m3 = "";
     }
 

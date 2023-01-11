@@ -68,23 +68,24 @@
                             <input type="text" id="NumMat" class="NumMat @error('matricule_chef')  border border-red-500 @enderror" wire:model.defer='matricule_chef' value="{{old("matricule_chef")}}" placeholder="00-ESATIC0000AB" min="16" maxlength="16">
                             @endif
 
-                            <label for="">Nom * </label>
-                            <input type="text" class="nom @error('nom_chef')  border border-red-500 @enderror" wire:model.defer='nom_chef' value="{{old("nom_chef")}}" placeholder="Nom">
+                            <!-- <label for="">Nom * </label> -->
+                            <input type="text" class="nom @error('nom_chef')  border border-red-500 @enderror" wire:model.defer='nom_chef' value="{{old("nom_chef")}}" placeholder="Nom*">
 
-                            <label for=""> Prénoms * </label>
-                            <input type="text" class="Pr  @error('prenom_chef')  border border-red-500 @enderror" wire:model.defer='prenom_chef' value="{{old("prenom_chef")}}" placeholder="Prenom">
+                            <!-- <label for=""> Prénoms * </label> -->
+                            <input type="text" class="Pr  @error('prenom_chef')  border border-red-500 @enderror" wire:model.defer='prenom_chef' value="{{old("prenom_chef")}}" placeholder="Prenom*">
 
                             <br>
 
-                            <label for="">Genre</label>
+                            <!-- <label for="">Genre</label> -->
                             <select class="genre" name="Genre @error('genre_chef')  border border-red-500 @enderror" wire:model.defer='genre_chef' value="{{old("genre_chef")}}">
+                                <option value="g">----Genre----</option>
                                 <option value="Masculin">Masculin</option>
                                 <option value="Feminin">Féminin</option>
                             </select>
 
-                            <label for="">Classe </label>
+                            <!-- <label for="">Classe </label> -->
                             <select class="clax" name="Classe @error('classe_chef')  border border-red-500 @enderror" wire:model.defer='classe_chef' value="{{old("classe_chef")}}">
-                                <option value="">---------</option>
+                                <option value="c">----Classe----</option>
                                 @foreach ($classes as $classe)
                                 <option value="{{$classe->id}}">{{ $classe->libelle}}</option>
                                 @endforeach
@@ -122,25 +123,26 @@
                             <input type="text" id="NumMat_m1" class="NumMat_m @error('matricule_m2')  border border-red-500 @enderror" wire:model.defer='matricule_m2' value="{{old("matricule_m2")}}" placeholder="00-ESATIC0000AB" min="16" maxlength="16">
                             @endif
 
-                            <label for="">Nom * </label>
-                            <input type="text" class="nom_m @error('nom_m2')  border border-red-500 @enderror" wire:model.defer='nom_m2' value="{{old("nom_m2")}}" placeholder="Nom">
+                            <!-- <label for="">Nom * </label> -->
+                            <input type="text" class="nom_m @error('nom_m2')  border border-red-500 @enderror" wire:model.defer='nom_m2' value="{{old("nom_m2")}}" placeholder="Nom*">
 
 
-                            <label for=""> Prénoms* </label>
-                            <input type="text" class="Pr_m @error('prenom_m2')  border border-red-500 @enderror" wire:model.defer='prenom_m2' value="{{old("prenom_m2")}}" placeholder="Prenom">
+                            <!-- <label for=""> Prénoms* </label> -->
+                            <input type="text" class="Pr_m @error('prenom_m2')  border border-red-500 @enderror" wire:model.defer='prenom_m2' value="{{old("prenom_m2")}}" placeholder="Prenom*">
 
                             <br>
 
-                            <label for="">Genre</label>
+                            <!-- <label for="">Genre</label> -->
                             <select class="genre_m @error('genre_m2')  border border-red-500 @enderror" wire:model.defer='genre_m2' value="{{old("genre_m2")}}">
+                                <option value="g">----Genre----</option>
                                 <option value="Masculin">Masculin</option>
                                 <option value="Feminin">Féminin</option>
                             </select>
 
 
-                            <label for="">Classe </label>
+                            <!-- <label for="">Classe </label> -->
                             <select class="clax_m  @error('classe_m2')  border border-red-500 @enderror" wire:model.defer='classe_m2' value="{{old("classe_m2")}}">
-                                <option>---------</option>
+                                <option vlaue="c">----Classe----</option>
                                 @foreach ($classes as $classe)
                                 <option value="{{ $classe->id}}">{{ $classe->libelle}}</option>
                                 @endforeach
@@ -167,25 +169,26 @@
                             <input type="text" id="NumMat_m2" class="NumMat_m @error('matricule_m3')  border border-red-500 @enderror" wire:model.defer='matricule_m3' value="{{old("matricule_m3")}}" placeholder="00-ESATIC0000AB" min="16" maxlength="16">
                             @endif
 
-                            <label for="">Nom * </label>
-                            <input type="text" class="nom_m @error('nom_m3')  border border-red-500 @enderror" wire:model.defer='nom_m3' value="{{old("nom_m3")}}" placeholder="Nom">
+                            <!-- <label for="">Nom * </label> -->
+                            <input type="text" class="nom_m @error('nom_m3')  border border-red-500 @enderror" wire:model.defer='nom_m3' value="{{old("nom_m3")}}" placeholder="Nom*">
 
 
-                            <label for=""> Prénoms* </label>
-                            <input type="text" class="Pr_m @error('prenom_m3')  border border-red-500 @enderror" wire:model.defer='prenom_m3' value="{{old("prenom_m3")}}" placeholder="Prenom">
+                            <!-- <label for=""> Prénoms* </label> -->
+                            <input type="text" class="Pr_m @error('prenom_m3')  border border-red-500 @enderror" wire:model.defer='prenom_m3' value="{{old("prenom_m3")}}" placeholder="Prenom*">
 
                             <br>
 
-                            <label for="">Genre</label>
+                            <!-- <label for="">Genre</label> -->
                             <select class="genre_m @error('genre_m3')  border border-red-500 @enderror" wire:model.defer='genre_m3' value="{{old("genre_m3")}}">
+                                <option value="g">----Genre----</option>
                                 <option value="Masculin">Masculin</option>
                                 <option value="Feminin">Féminin</option>
                             </select>
 
 
-                            <label for="">Classe </label>
+                            <!-- <label for="">Classe </label> -->
                             <select class="clax_m  @error('classe_m3')  border border-red-500 @enderror" wire:model.defer='classe_m3' value="{{old("classe_m3")}}">
-                                <option>---------</option>
+                                <option vlaue="c">----Classe----</option>
                                 @foreach ($classes as $classe)
                                 <option value="{{ $classe->id}}">{{ $classe->libelle}}</option>
                                 @endforeach

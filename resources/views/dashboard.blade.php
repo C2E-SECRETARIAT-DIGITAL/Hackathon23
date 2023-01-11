@@ -131,11 +131,10 @@
                     <!-- debut -->
                     @if(Auth::user()->etudiant->getEquipe()->video_url)
 
-                    <!-- <video controls autoplay loop>
-                        <source src="{{ Auth::user()->etudiant->getEquipe()->video_url }}" type="video/mp4">
+                    <video controls autoplay loop>
+                        <source src="{{ Auth::user()->etudiant->getEquipe()->video_url }}">
                         Your browser does not support the video tag.
-                    </video> -->
-                    <img src="{{Auth::user()->etudiant->getEquipe()->video_url}}"  />
+                    </video>
 
                     @else
 
