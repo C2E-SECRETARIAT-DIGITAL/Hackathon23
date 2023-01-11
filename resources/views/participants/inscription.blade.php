@@ -7,7 +7,7 @@
         <title>Hackaton 2022</title>
         <link rel="icon" href="{{asset('images/app/logoSDI-PhotoRoom.png')}}" type="image/icon type">
         
-        <link rel="stylesheet" href="{{asset('css/inscription.css')}}" />
+        <link rel="stylesheet" href="{{mix('css/inscription.css')}}" />
 
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         

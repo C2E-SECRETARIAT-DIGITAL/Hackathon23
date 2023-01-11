@@ -5,8 +5,8 @@
   <title>C2E | HACKATHON</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   
-  <link rel="stylesheet" media="screen" href="{{asset('css/particles1.css')}}">
-  <link rel="stylesheet" media="screen" href="{{asset('css/acceuil.css')}}">
+  <link rel="stylesheet" media="screen" href="{{mix('css/particles1.css')}}">
+  <link rel="stylesheet" media="screen" href="{{mix('css/acceuil.css')}}">
   <link rel="icon" href="{{asset('images/app/logoSDI-PhotoRoom.png')}}" type="image/icon type">
   
 </head>

@@ -7,7 +7,7 @@
         <title>C2E | HACKATON</title>
 
         
-        <link rel="stylesheet" href="{{asset('css/acceuil.css')}}" />
+        <link rel="stylesheet" href="{{mix('css/acceuil.css')}}" />
 
 
     </head>
