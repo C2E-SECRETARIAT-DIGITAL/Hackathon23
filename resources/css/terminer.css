@@ -15,7 +15,6 @@ body
     text-align: center;
     justify-content:space-between;
     max-height: 140px;
-    position: -webkit-sticky;
     position: sticky;
 }
 .logoH
@@ -91,6 +90,9 @@ button
     overflow:hidden;
     margin-top: 2%;
 }
+
+
+
 @media screen and (max-width:600px)
 {
     .logoH
@@ -159,4 +161,3 @@ button
     }
 
 }
-

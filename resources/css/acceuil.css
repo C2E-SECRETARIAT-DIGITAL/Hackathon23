@@ -60,6 +60,7 @@ body
     margin: auto;
    
 }
+
 .champs
 {
    text-align: center; 
@@ -96,6 +97,8 @@ button:hover
     background-color: rgb(199, 101, 9);
     color: aliceblue;
 }
+
+
 @media screen and (max-width:1400px)
 {
     .imag
@@ -135,6 +138,7 @@ button:hover
 
     
 }
+
 @media screen and (max-width:600px)
 {
     .imag

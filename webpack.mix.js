@@ -20,7 +20,32 @@ mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),
         require('tailwindcss'),
+    ])
+    .postCss('resources/css/acceuil.css', 'public/css', [
+        require('postcss-import'),
+        require('tailwindcss'),
+    ])
+    .postCss('resources/css/acceuil1.css', 'public/css', [
+        require('postcss-import'),
+        require('tailwindcss'),
+    ])
+    .postCss('resources/css/inscription.css', 'public/css', [
+        require('postcss-import'),
+        require('tailwindcss'),
+    ])
+    .postCss('resources/css/particles.css', 'public/css', [
+        require('postcss-import'),
+        require('tailwindcss'),
+    ])
+    .postCss('resources/css/particles1.css', 'public/css', [
+        require('postcss-import'),
+        require('tailwindcss'),
+    ])
+    .postCss('resources/css/terminer.css', 'public/css', [
+        require('postcss-import'),
+        require('tailwindcss'),
     ]);
+    
 
 if (mix.inProduction()) {
     mix.version();

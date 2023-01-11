@@ -20,6 +20,7 @@ body
     width: 100%;
     background-color: white;
 }
+
 .logoH
 {
     max-width: 200px;
@@ -122,6 +123,8 @@ input [type = text], select
     font-size: 18px;
     padding-left: 2%;
 }
+
+
 #nomE
 {
     width: 100%;
@@ -142,6 +145,7 @@ input [type = text], select
     margin-bottom: 4%;
     font-size: 18px;
 }
+
 .tchamp
 {
     font-size: 25px;
@@ -155,6 +159,7 @@ input [type = text], select
     font-size: 25px;
     margin-top: 0;
 }
+
 input
 {
     font-size: 18px;
@@ -249,7 +254,9 @@ input
     font-size: 16px; 
     padding-left: 2%;
 }
+
 /* ajout pour la partie des membres */
+
 .NumMat_m
 {
     width: 78%;
@@ -330,6 +337,8 @@ input
     font-size: 16px; 
     padding-left: 2%;
 }
+
+
 #lchf
 {
     width: 50%;
@@ -386,6 +395,7 @@ input
     opacity: 1;
     right: 0;
 }
+
 @media screen and (max-width:992px)
 {
     .champs
