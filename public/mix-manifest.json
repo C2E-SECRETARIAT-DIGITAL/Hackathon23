@@ -1,4 +1,9 @@
 {
-    "/js/app.js": "/js/app.js?id=0364cbbd5daf50748d93298885d3d987",
-    "/css/app.css": "/css/app.css?id=60ce37050820b90fc1201583067f73a8"
+    "/js/app.js": "/js/app.js",
+    "/js/app-particles.js": "/js/app-particles.js",
+    "/js/app-particles1.js": "/js/app-particles1.js",
+    "/js/particles.js": "/js/particles.js",
+    "/js/vue.js": "/js/vue.js",
+    "/js/vueQrCode.js": "/js/vueQrCode.js",
+    "/css/app.css": "/css/app.css"
 }

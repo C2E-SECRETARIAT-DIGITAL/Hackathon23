@@ -36,8 +36,8 @@
 </div>
 
 <!-- scripts -->
-<script src="{{asset('js/particles.js')}}" ></script>
-<script src="{{asset('js/app-particles.js')}}"></script>
+<script src="{{mix('js/particles.js')}}" ></script>
+<script src="{{mix('js/app-particles.js')}}"></script>
 
 
 </body>

@@ -76,8 +76,8 @@
 
 <!-- scripts -->
 
-<script src="{{ asset('js/particles.js') }}" ></script>
-<script src="{{ asset('js/app-particles1.js') }}" ></script>
+<script src="{{ mix('js/particles.js') }}" ></script>
+<script src="{{ mix('js/app-particles1.js') }}" ></script>
 
 
 </body>

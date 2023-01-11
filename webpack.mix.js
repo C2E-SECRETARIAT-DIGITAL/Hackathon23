@@ -12,6 +12,11 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
+    .js('resources/js/app-particles.js', 'public/js')
+    .js('resources/js/app-particles1.js', 'public/js')
+    .js('resources/js/particles.js', 'public/js')
+    .js('resources/js/vue.js', 'public/js')
+    .js('resources/js/vueQrCode.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),
         require('tailwindcss'),

@@ -135,8 +135,8 @@
 
     <x-slot name="scripts">
 
-        <script src="{{ asset('js/vue.js') }}"></script>
-        <script src="{{ asset('js/vueQrCode.js') }}"></script>
+        <script src="{{ mix('js/vue.js') }}"></script>
+        <script src="{{ mix('js/vueQrCode.js') }}"></script>
         <script>
 
             
