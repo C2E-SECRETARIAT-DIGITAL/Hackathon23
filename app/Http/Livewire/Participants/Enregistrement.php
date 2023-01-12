@@ -60,7 +60,7 @@ class Enregistrement extends Component
     {
         return view('livewire.participants.enregistrement', [
             'niveaux' => $this->esatic == 1 ? Niveau::all() : Niveau::where('id', '>=', 3)->get(),
-            'classes' => Classe::where('niveau_id', $this->niveau)->where('esatic', $this->esatic)->get()
+            'classes' => Classe::where('niveau_id', $this->niveau)->get()
         ]);
     }
 
