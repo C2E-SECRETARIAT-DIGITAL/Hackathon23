@@ -25,7 +25,7 @@
     <div class="content">
             <h1>Votre inscription est validée</h1>
             <p>Votre mot de passe par défaut est:</p>
-            <h2>TH@123456789</h2>
+            <h2>sdi23@TH12345</h2>
             <h4>Merci et bonne chance !</h4> <br>
             <a href="{{route('welcome',  null, false)}}"><button type="button"> Quitter</button></a>
             

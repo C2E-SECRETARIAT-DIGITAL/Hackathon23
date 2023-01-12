@@ -122,9 +122,9 @@ class Enregistrement extends Component
     public function setMAtricule()
     {
         if ($this->esatic == 0) {
-            $this->matricule_chef = $this->getRandomInt(2) . "-EXTERNE" . $this->getRandomInt(4) . $this->getRandomString(2);
-            $this->matricule_m2 = $this->getRandomInt(2) . "-EXTERNE" . $this->getRandomInt(4) . $this->getRandomString(2);
-            $this->matricule_m3 = $this->getRandomInt(2) . "-EXTERNE" . $this->getRandomInt(4) . $this->getRandomString(2);
+            $this->matricule_chef = $this->getRandomInt(2) . "-" . $this->classe_chef . $this->getRandomInt(4) . $this->getRandomString(2);
+            $this->matricule_m2 = $this->getRandomInt(2) . "-" . $this->classe_m2 . $this->getRandomInt(4) . $this->getRandomString(2);
+            $this->matricule_m3 = $this->getRandomInt(2) . "-" . $this->classe_m3 . $this->getRandomInt(4) . $this->getRandomString(2);
         }
     }
 
@@ -232,7 +232,7 @@ class Enregistrement extends Component
             $user1 = User::create([
                 'name' => trim($this->matricule_chef),
                 'email' => $this->email_chef,
-                'password' => Hash::make("TH@123456789")
+                'password' => Hash::make("sdi23@TH12345")
             ]);
 
 
@@ -241,6 +241,7 @@ class Enregistrement extends Component
                 'prenom' => $this->prenom_chef,
                 'matricule' => trim($this->matricule_chef),
                 'genre' => $this->genre_chef,
+                'classe' => $this->esatic == 1 ? Classe::find($this->classe_chef)->libelle : $this->classe_chef,
                 'user_id' => $user1->id
             ]);
 
@@ -250,7 +251,7 @@ class Enregistrement extends Component
             $user2 = User::create([
                 'name' => trim($this->matricule_m2),
                 'email' => $this->email_m2,
-                'password' => Hash::make("TH@123456789")
+                'password' => Hash::make("sdi23@TH12345")
             ]);
 
             $etudiant2 = Etudiant::create([
@@ -258,6 +259,7 @@ class Enregistrement extends Component
                 'prenom' => $this->prenom_m2,
                 'matricule' => trim($this->matricule_m2),
                 'genre' => $this->genre_m2,
+                'classe' => $this->esatic == 1 ? Classe::find($this->classe_m2)->libelle : $this->classe_m2,
                 'user_id' => $user2->id
             ]);
 
@@ -267,7 +269,7 @@ class Enregistrement extends Component
             $user3 = User::create([
                 'name' => trim($this->matricule_m3),
                 'email' => $this->email_m3,
-                'password' => Hash::make("TH@123456789")
+                'password' => Hash::make("sdi23@TH12345")
             ]);
 
             $etudiant3 = Etudiant::create([
@@ -275,6 +277,7 @@ class Enregistrement extends Component
                 'prenom' => $this->prenom_m3,
                 'matricule' => trim($this->matricule_m3),
                 'genre' => $this->genre_m3,
+                'classe' => $this->esatic == 1 ? Classe::find($this->classe_m3)->libelle : $this->classe_m3,
                 'user_id' => $user3->id
             ]);
 

@@ -88,7 +88,7 @@
                             <select class="clax" name="Classe @error('classe_chef')  border border-red-500 @enderror" wire:model.defer='classe_chef' value="{{old("classe_chef")}}">
                                 <option value="c">----@if($esatic == 1) Classe @else Ecole @endif----</option>
                                 @foreach ($classes as $classe)
-                                <option value="{{$classe->id}}">{{ $classe->libelle}}</option>
+                                <option value="{{$esatic == 1 ? $classe->id : $classe->libelle}}">{{ $classe->libelle}}</option>
                                 @endforeach
 
                             </select>
@@ -146,7 +146,7 @@
                             <select class="clax_m  @error('classe_m2')  border border-red-500 @enderror" wire:model.defer='classe_m2' value="{{old("classe_m2")}}">
                                 <option vlaue="c">----@if($esatic == 1) Classe @else Ecole @endif----</option>
                                 @foreach ($classes as $classe)
-                                <option value="{{ $classe->id}}">{{ $classe->libelle}}</option>
+                                <option value="{{$esatic == 1 ? $classe->id : $classe->libelle}}">{{ $classe->libelle}}</option>
                                 @endforeach
 
                             </select>
@@ -192,7 +192,7 @@
                             <select class="clax_m  @error('classe_m3')  border border-red-500 @enderror" wire:model.defer='classe_m3' value="{{old("classe_m3")}}">
                                 <option vlaue="c">----@if($esatic == 1) Classe @else Ecole @endif----</option>
                                 @foreach ($classes as $classe)
-                                <option value="{{ $classe->id}}">{{ $classe->libelle}}</option>
+                                <option value="{{$esatic == 1 ? $classe->id : $classe->libelle}}">{{ $classe->libelle}}</option>
                                 @endforeach
 
                             </select>

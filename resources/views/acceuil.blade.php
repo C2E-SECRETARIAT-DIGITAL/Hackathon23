@@ -7,7 +7,7 @@
   
   <link rel="stylesheet" media="screen" href="{{mix('css/particles1.css')}}">
   <link rel="stylesheet" media="screen" href="{{mix('css/acceuil.css')}}">
-  <link rel="icon" href="{{asset('images/logoSDI-PhotoRoom.png')}}" type="image/icon type">
+  <link rel="icon" href="{{asset('images/logoSDI-PhotoRoom.png')}}" type="image/icon">
   
 </head>
 <body>

@@ -109,7 +109,7 @@
                 @elseif(Auth::user()->etudiant->getEquipe()->qsession->score < 0)
                     <img src=" {{asset('images/app/lose.svg')}} " class="loseLogo">
                     <p class="font-bold text-center text-red-600 text-md">
-                        Dommange, la prochaine fois sera la bonne !
+                        Dommage, la prochaine fois sera la bonne !
                     </p>
 
                     @endif
@@ -123,7 +123,8 @@
                     </p>
                     <p class="font-bold text-xl text-center text-green-600">
                         +225 0102030405
-                    </p>                    
+                    </p>   
+                    <p class="text-red-600 font-bold">Date limite de soumission: Mardi 24 Janvier 2023</p>                 
 
                     @endif
 

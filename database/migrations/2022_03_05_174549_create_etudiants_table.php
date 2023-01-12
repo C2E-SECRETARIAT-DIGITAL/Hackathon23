@@ -18,6 +18,7 @@ class CreateEtudiantsTable extends Migration
             $table->string("nom");
             $table->string("prenom");
             $table->string("matricule");
+            $table->string("classe");
             $table->string('genre');
 
             $table->unsignedBigInteger('user_id');

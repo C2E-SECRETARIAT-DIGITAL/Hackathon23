@@ -59,7 +59,6 @@ class AdminSeeder extends Seeder
             'IIT',
             'Miage',
             'Université Virtuelle',
-            'Autre'
         ];
 
         foreach ($nvx_q as $nv) {
@@ -90,8 +89,8 @@ class AdminSeeder extends Seeder
 
         $user = User::create([
             'name' => 'Administrateur',
-            'email' => 'adminHackaton@C2E.com',
-            'password' => Hash::make("11111111")
+            'email' => 'adminHackathon@C2E.com',
+            'password' => Hash::make("@dminH@ck@thon23P@ssword")
         ]);
 
         Hackaton::create([

@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Hackathon 2023</title>
-        <link rel="icon" href="{{asset('images/logoSDI-PhotoRoom.png')}}" type="image/icon type">
+        <link rel="icon" href="{{asset('images/logoSDI-PhotoRoom.png')}}" type="image/icon">
         
         <link rel="stylesheet" href="{{mix('css/inscription.css')}}" />
 
@@ -24,8 +24,8 @@
             </div>
             <div class="nav">
                 <ul>
-                    <li><a href="{{route('welcome',  null, false)}}">acceuil</a></li>
-                    <li><a href="{{route('login',  null, false)}}">connexion</a></li>
+                    <li><a href="{{route('welcome',  null, false)}}">Acceuil</a></li>
+                    <li><a href="{{route('login',  null, false)}}">Connexion</a></li>
                 </ul>
             </div>
         </div>

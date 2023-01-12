@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" media="screen" href="{{mix('css/particles.css')}}">
 
-  <link rel="icon" href="{{asset('images/logoSDI-PhotoRoom.png')}}" type="image/icon type">
+  <link rel="icon" href="{{asset('images/logoSDI-PhotoRoom.png')}}" type="image/icon">
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
   <!-- Scripts -->
   <script src="{{ mix('js/app.js') }}" defer></script>
@@ -19,7 +19,7 @@
     <div class="flex flex-col items-center justify-center w-full min-h-screen font-bold text-center " style="position:fixed">
         
         <span class="text-white text-7xl" style="font-size:33px">
-            Technovore Hackathon 2022
+            Technovore Hackathon 2023
         </span>   
         <span class="text-2xl text-black " >
             Les Inscriptions pour cette édition sont achevées

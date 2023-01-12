@@ -68,7 +68,7 @@
 
                                     <img src=" {{asset('images/app/lose.svg')}} " class="loseLogo">
                                     <p class="font-bold text-center text-red-600 text-md">
-                                        Dommange, la prochaine fois sera la bonne !
+                                        Dommage, la prochaine fois sera la bonne !
                                     </p>
 
                                 @endif
