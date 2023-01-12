@@ -81,7 +81,7 @@
                     Le quiz des préselections est ouvert !
                 </p>
                 <p class="text-center mt-4">
-                    Allez dans la partie <span class="font-bold text-orange">Présélection</span> pour commencer le test.
+                    Allez dans l'espace <span class="font-bold text-orange">Présélection</span> de votre chef d'équipe pour commencer le test.
                 </p>
 
                 @elseif(Auth::user()->etudiant->getEquipe()->qsession->state == 1 && Auth::user()->etudiant->getEquipe()->qsession->score > 0)

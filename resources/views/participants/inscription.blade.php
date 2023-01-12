@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Hackaton 2022</title>
+        <title>Hackathon 2023</title>
         <link rel="icon" href="{{asset('images/logoSDI-PhotoRoom.png')}}" type="image/icon type">
         
         <link rel="stylesheet" href="{{mix('css/inscription.css')}}" />
