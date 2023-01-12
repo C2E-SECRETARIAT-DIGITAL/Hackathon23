@@ -106,8 +106,7 @@
                     Vous avez terminé le quiz. <br> Les résultats seront bientôt disponibles, veillez patienter !
                 </p>
 
-                @elseif(Auth::user()->etudiant->getEquipe()->qsession->score < 0)
-                    <img src=" {{asset('images/app/lose.svg')}} " class="loseLogo">
+                @elseif(Auth::user()->etudiant->getEquipe()->qsession->score < 0) <img src=" {{asset('images/app/lose.svg')}} " class="loseLogo">
                     <p class="font-bold text-center text-red-600 text-md">
                         Dommange, la prochaine fois sera la bonne !
                     </p>
@@ -118,7 +117,6 @@
 
                     @else
 
-                    @if(Auth::user()->etudiant->getEquipe()->niveau->qvideo->state == 1)
 
                     <p class="font-bold text-center">
                         Vous devez soumettre votre video via <span class="text-green-600">WhatsApp</span> au numero suivant:
@@ -127,22 +125,6 @@
                         +225 0102030405
                     </p>
 
-                    @elseif(Auth::user()->etudiant->getEquipe()->niveau->qvideo->state == 0 && Auth::user()->etudiant->getEquipe()->video_url == "disq")
-
-                    <img src=" {{asset('images/app/lose.svg')}} " class="loseLogo">
-                    <p class="font-bold text-center text-red-600 text-md">
-                        Dommage, la prochaine fois sera la bonne !
-                    </p>
-
-                    @elseif(Auth::user()->etudiant->getEquipe()->niveau->qvideo->state == 0 && Auth::user()->etudiant->getEquipe()->video_url != "disq")
-
-                    <p class="font-bold text-center">
-                        Vous ne pouvez plus soumettre de video, les présélectons sont terminées.
-                    </p>
-
-                    @endif
-
-                    @endif
 
                     @else
 
