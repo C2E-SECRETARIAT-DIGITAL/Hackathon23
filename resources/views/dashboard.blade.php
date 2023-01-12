@@ -106,7 +106,8 @@
                     Vous avez terminé le quiz. <br> Les résultats seront bientôt disponibles, veillez patienter !
                 </p>
 
-                @elseif(Auth::user()->etudiant->getEquipe()->qsession->score < 0) <img src=" {{asset('images/app/lose.svg')}} " class="loseLogo">
+                @elseif(Auth::user()->etudiant->getEquipe()->qsession->score < 0)
+                    <img src=" {{asset('images/app/lose.svg')}} " class="loseLogo">
                     <p class="font-bold text-center text-red-600 text-md">
                         Dommange, la prochaine fois sera la bonne !
                     </p>
@@ -117,14 +118,14 @@
 
                     @else
 
-
                     <p class="font-bold text-center">
                         Vous devez soumettre votre video via <span class="text-green-600">WhatsApp</span> au numero suivant:
                     </p>
                     <p class="font-bold text-xl text-center text-green-600">
                         +225 0102030405
-                    </p>
+                    </p>                    
 
+                    @endif
 
                     @else
 
