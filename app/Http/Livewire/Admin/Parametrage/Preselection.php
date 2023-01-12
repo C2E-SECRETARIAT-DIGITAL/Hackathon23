@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\Parametrage;
 
 use App\Models\Qsession;
+use App\Models\Qvideo;
 use Livewire\Component;
 
 use App\Models\Niveau;
@@ -32,9 +33,10 @@ class Preselection extends Component
 
         return view('livewire.admin.parametrage.preselection', [
             'quiz' => Quiz::where('niveau_id', $this->niveau)->first(),
+            'qvideo' => Qvideo::where('niveau_id', $this->niveau)->first(),
             '_niveau' => Niveau::find($this->niveau),
             'quizzes' => Quiz::all(),
-            'questions' => Question::where('quiz_id', Quiz::where('niveau_id', $this->niveau)->first()->id)->orderBy('created_at', 'desc')->get(),
+            'questions' => Quiz::where('niveau_id', $this->niveau)->first() != null ? Question::where('quiz_id', Quiz::where('niveau_id', $this->niveau)->first()->id)->orderBy('created_at', 'desc')->get() :  [],
             'niveaux' => Niveau::all()
         ]);
     }
@@ -142,7 +144,19 @@ class Preselection extends Component
     public function openCloseQuiz($qid)
     {
         $q = Quiz::find($qid);
-        
+
+        if ($q->state == 1)
+            $q->state = 0;
+        else
+            $q->state = 1;
+
+        $q->save();
+    }
+
+    public function openCloseQvideo($qid)
+    {
+        $q = Qvideo::find($qid);
+
         if ($q->state == 1)
             $q->state = 0;
         else

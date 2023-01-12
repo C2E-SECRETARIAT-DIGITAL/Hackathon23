@@ -22,7 +22,7 @@ class Enregistrement extends Component
     public $nom_groupe;
     public $photo_groupe;
 
-    public $ion = 0;
+    public $esatic = 1;
 
     // variables relative au chef
 
@@ -54,15 +54,13 @@ class Enregistrement extends Component
     public $errorEmail = false;
     public $errorMatricule = false;
 
-    public $isEsatic = 1;
-    public $isNotEsatic = 0;
 
 
     public function render()
     {
         return view('livewire.participants.enregistrement', [
-            'niveaux' => $this->ion == 0 ? Niveau::all() : Niveau::where('id', '>=', 3)->get(),
-            'classes' => Classe::where('niveau_id', $this->niveau)->get()
+            'niveaux' => $this->esatic == 1 ? Niveau::all() : Niveau::where('id', '>=', 3)->get(),
+            'classes' => Classe::where('niveau_id', $this->niveau)->where('esatic', $this->esatic)->get()
         ]);
     }
 
@@ -123,7 +121,7 @@ class Enregistrement extends Component
 
     public function setMAtricule()
     {
-        if ($this->ion == 1) {
+        if ($this->esatic == 0) {
             $this->matricule_chef = $this->getRandomInt(2) . "-EXTERNE" . $this->getRandomInt(4) . $this->getRandomString(2);
             $this->matricule_m2 = $this->getRandomInt(2) . "-EXTERNE" . $this->getRandomInt(4) . $this->getRandomString(2);
             $this->matricule_m3 = $this->getRandomInt(2) . "-EXTERNE" . $this->getRandomInt(4) . $this->getRandomString(2);

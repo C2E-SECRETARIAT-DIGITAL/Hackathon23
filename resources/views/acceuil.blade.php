@@ -7,9 +7,7 @@
   
   <link rel="stylesheet" media="screen" href="{{mix('css/particles1.css')}}">
   <link rel="stylesheet" media="screen" href="{{mix('css/acceuil.css')}}">
-  <link rel="icon" href="{{asset('images/app/logoSDI-PhotoRoom.png')}}" type="image/icon type">
-
-  <script src="https://app.simplefileupload.com/buckets/a6fe78e3fd96f7012306cafa52dbd4b9.js"></script>
+  <link rel="icon" href="{{asset('images/logoSDI-PhotoRoom.png')}}" type="image/icon type">
   
 </head>
 <body>

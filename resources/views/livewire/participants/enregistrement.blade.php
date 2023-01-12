@@ -16,9 +16,9 @@
                         <h1 class="tchamp"> Êtes vous de l'ESATIC ?</h1>
                         <div class="gr" style="display: flex; justify-content: space-between">
                             <label for="yes">Oui</label>
-                            <input type="radio" name="choix" id="yes" value="0" wire:model="ion" checked />
+                            <input type="radio" name="choix" id="yes" value=1 wire:model="esatic" />
                             <label for="no">Non</label>
-                            <input type="radio" name="choix" id="no" value="1" wire:model="ion" />
+                            <input type="radio" name="choix" id="no" value=0 wire:model="esatic" />
                         </div>
 
                         <p>
@@ -63,7 +63,7 @@
                         <h1 class="tchef">Chef de l'Equipe</h1>
                         <div class="info_chef">
 
-                            @if ($ion == 0)
+                            @if ($esatic == 1)
                             <label for="NumMat" class="Matr">Numéro Matricule</label>
                             <input type="text" id="NumMat" class="NumMat @error('matricule_chef')  border border-red-500 @enderror" wire:model.defer='matricule_chef' value="{{old("matricule_chef")}}" placeholder="00-ESATIC0000AB" min="16" maxlength="16">
                             @endif
@@ -118,7 +118,7 @@
                         <h1 class="tchef">Membre 2</h1>
                         <div class="info_chef">
 
-                            @if ($ion == 0)
+                            @if ($esatic == 1)
                             <label for="NumMat_m1" class="Matr">Numéro Matricule</label>
                             <input type="text" id="NumMat_m1" class="NumMat_m @error('matricule_m2')  border border-red-500 @enderror" wire:model.defer='matricule_m2' value="{{old("matricule_m2")}}" placeholder="00-ESATIC0000AB" min="16" maxlength="16">
                             @endif
@@ -164,7 +164,7 @@
                         <h1 class="tchef">Membre 3</h1>
                         <div class="info_chef">
 
-                            @if ($ion == 0)
+                            @if ($esatic == 1)
                             <label for="NumMat_m2" class="Matr">Numéro Matricule</label>
                             <input type="text" id="NumMat_m2" class="NumMat_m @error('matricule_m3')  border border-red-500 @enderror" wire:model.defer='matricule_m3' value="{{old("matricule_m3")}}" placeholder="00-ESATIC0000AB" min="16" maxlength="16">
                             @endif

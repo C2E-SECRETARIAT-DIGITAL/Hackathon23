@@ -16,8 +16,11 @@ class CreateClassesTable extends Migration
         Schema::create('classes', function (Blueprint $table) {
             $table->id();
             $table->string('libelle');
+            $table->boolean('esatic')->default(true);
+
             $table->unsignedBigInteger('niveau_id');
             $table->foreign('niveau_id')->references('id')->on('niveaux')->onDelete('cascade');
+            
             $table->timestamps();
         });
     }

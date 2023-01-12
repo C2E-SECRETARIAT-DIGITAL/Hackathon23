@@ -128,20 +128,28 @@
 
                     @else
 
-                    <!-- debut -->
-                    @if(Auth::user()->etudiant->getEquipe()->video_url)
+                    @if(Auth::user()->etudiant->getEquipe()->niveau->qvideo->state == 1)
 
-                    <video controls autoplay loop>
-                        <source src="{{ Auth::user()->etudiant->getEquipe()->video_url }}">
-                        Your browser does not support the video tag.
-                    </video>
+                    <p class="font-bold text-center">
+                        Vous devez soumettre votre video via <span class="text-green-600">WhatsApp</span> au numero suivant:
+                    </p>
+                    <p class="font-bold text-xl text-center text-green-600">
+                        +225 0102030405
+                    </p>
 
-                    @else
+                    @elseif(Auth::user()->etudiant->getEquipe()->niveau->qvideo->state == 0 && Auth::user()->etudiant->getEquipe()->video_url == "disq")
 
-                    @livewire('participants.video')
-                    
+                    <p class="font-bold text-center text-red-600 text-md">
+                        Dommange, la prochaine fois sera la bonne !
+                    </p>
+
+                    @elseif(Auth::user()->etudiant->getEquipe()->niveau->qvideo->state == 0 && Auth::user()->etudiant->getEquipe()->video_url != "disq")
+
+                    <p class="font-bold text-center">
+                        Vous ne pouvez plus soumettre de video, les présélectons sont terminées.
+                    </p>
+
                     @endif
-                    <!-- fin -->
 
                     @endif
 

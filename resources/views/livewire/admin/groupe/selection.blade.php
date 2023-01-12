@@ -59,9 +59,11 @@
                                 <th scope="col-span-2" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                     Nom et premons des membres
                                 </th>
+                                @if($niveau->quiz_available)
                                 <th>
-                                    Score / Video
+                                    Score
                                 </th>
+                                @endif
                                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
 
                                 </th>
@@ -144,23 +146,8 @@
 
                                 <td>
                                     @if($equipe->niveau->quiz_available)
-                                    {{$equipe->qsession->score}} / {{$equipe->qsession->quiz->score}}
-                                    @else
 
-                                    @if($equipe->video_url)
-                                    <form method="GET" action="{{ route('Admin.groupe.downloadvideo') }}">
-                                        @csrf
-                                        <input type="text" name="url" value="{{ 'public/' . $equipe->video_url }}" style="display:none;" />
-                                        <input type="number" name="equipe_id" value="{{ $equipe->id }}" style="display:none;" />
-                                        <button type="submit" class="px-6 py-3 mb-1 mr-1 text-sm font-bold text-white uppercase transition-all duration-150 rounded shadow outline-none ease-linearbg-emerald-500 bg-myblue hover:shadow-lg focus:outline-none">
-                                            Télécharger
-                                        </button>
-                                    </form>
-                                    @else
-                                    <p>
-                                        Pas de vidéo ajoutée
-                                    </p>
-                                    @endif
+                                    {{$equipe->qsession->score}} / {{$equipe->qsession->quiz->score}}
 
                                     @endif
                                 </td>

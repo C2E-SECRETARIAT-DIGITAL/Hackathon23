@@ -7,7 +7,7 @@
     <title>Merci | C2E</title>
     <link rel="stylesheet" href="{{mix('css/terminer.css')}}">
 
-    <link rel="icon" href="{{asset('images/app/logoSDI-PhotoRoom.png')}}" type="image/icon type">
+    <link rel="icon" href="{{asset('images/logoSDI-PhotoRoom.png')}}" type="image/icon type">
 
 </head>
 <body>

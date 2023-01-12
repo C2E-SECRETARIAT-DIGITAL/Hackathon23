@@ -1,5 +1,7 @@
 const mix = require('laravel-mix');
 
+require('laravel-mix-simple-image-processing')
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -44,7 +46,11 @@ mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/terminer.css', 'public/css', [
         require('postcss-import'),
         require('tailwindcss'),
-    ]);
+    ])
+    .imgs({
+        source: 'resources/images',
+        destination: 'public/images'
+    });
     
 
 if (mix.inProduction()) {

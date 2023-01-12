@@ -203,6 +203,12 @@
                                         @endforeach
                                     </select>
                                 </th>
+                                <th>
+                                    <button wire:click.prevent="openCloseQvideo({{$qvideo->id}})" class="px-6 py-3 mb-1 mr-1 text-sm font-bold uppercase border rounded-md cursor-pointer border-orange text-orange hover:bg-orange hover:text-white hover:shadow" type="submit">
+                                        @if($qvideo->state == 1) Fermer la soumission de video @else Ouvrir la soumission de video @endif
+                                    </button>
+                                    <span id="dNd" style="display:none;">Done</span>
+                                </th>
                             </tr>
                         </thead>
                     </table>

@@ -64,8 +64,8 @@ class Selection extends Component
         $quiz = Quiz::where('niveau_id', $this->niveauselect)->first();
         $score_moyen = intval($quiz->score / 2);
 
-        $qsW = Qsession::where('quiz_id', $quiz->id)->where('score', '>=', $score_moyen)->orderBy('score', 'desc')->get();
-        $qsL = Qsession::where('quiz_id', $quiz->id)->where('score', '<', $score_moyen)->get();
+        $qsW = Qsession::where('quiz_id', $quiz->id)->orderBy('score', 'desc')->get();
+        $qS = Qsession::where('quiz_id', $quiz->id)->get();
 
 
         if ($this->nb_team >= sizeof($qsW)) {
@@ -82,13 +82,12 @@ class Selection extends Component
             }
         }
 
-        foreach ($qsL as $qs) {
+        foreach ($qS as $qs) {
             $e = $qs->equipe;
-            $e->statut = 0;
-            $e->save();
-
-            $qs->score = $qs->score > 0 ? -$qs->score : $qs->score;
-            $qs->save();
+            if ($e->statut == 0) {
+                $qs->score = $qs->score > 0 ? -$qs->score : $qs->score;
+                $qs->save();
+            }
         }
     }
 
