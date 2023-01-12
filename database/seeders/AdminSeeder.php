@@ -53,7 +53,12 @@ class AdminSeeder extends Seeder
             $masters
         ];
 
-        $classes_externes = ['INPHB', 'ISTC', 'Autre'];
+        $classes_externes = [
+            'INPHB',
+            'ISTC',
+            'UPB',
+            'AGITEL FORMATION',
+            'Autre'];
 
         foreach ($nvx_q as $nv) {
             Niveau::create([
