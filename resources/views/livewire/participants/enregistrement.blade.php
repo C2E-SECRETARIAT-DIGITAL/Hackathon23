@@ -6,14 +6,14 @@
 
             <div x-show="activeTab===0">
 
-                <div class="tete">
-                    <h1 class="titre">Inscription :</h1>
-                    <p>Etape 1 </p>
+                <div class="tete" style="margin-top:20%;">
+                    <h1 class="titre">Inscription:</h1>
+                    <p>Etape 1</p>
                 </div>
 
                 <div class="champs">
                     <div class="groupe">
-                        <h1 class="tchamp"> Êtes vous de l'ESATIC ?</h1>
+                        <h1> Êtes vous de l'ESATIC ?</h1>
                         <div class="gr" style="display: flex; justify-content: space-between">
                             <label for="yes">Oui</label>
                             <input type="radio" name="choix" id="yes" value=1 wire:model="esatic" />
@@ -31,18 +31,19 @@
 
             <div x-show="activeTab===1">
 
-                <div class="tete">
+                <div class="tete" style="margin-top:20%;">
                     <h1 class="titre">Inscription :</h1>
-                    <p>Vous devez consigner ici les informations </p>
+                    <p>Etape 2</p>
                 </div>
                 <div class="champs">
-                    <div class="groupe">
+                    <div class="groupe" style="margin-top:0;">
                         <h1 class="tchamp"> Information du groupe</h1>
                         <div class="gr">
 
                             <label for="niveau" id="level">Niveau *</label>
                             <select id="niveau" name="niveau" class="@error('niveau')  border border-red-500 @enderror" wire:model='niveau' value="{{old("niveau")}}">
 
+                                <option value=0>-- Choisir --</option>
                                 @foreach ($niveaux as $niveau)
                                 <option value="{{$niveau->id}}">{{$niveau->libelle}}</option>
                                 @endforeach
@@ -78,14 +79,14 @@
 
                             <!-- <label for="">Genre</label> -->
                             <select class="genre" name="Genre @error('genre_chef')  border border-red-500 @enderror" wire:model.defer='genre_chef' value="{{old("genre_chef")}}">
-                                <option value="g">----Genre----</option>
+                                <option value="g">---- Genre ----</option>
                                 <option value="Masculin">Masculin</option>
                                 <option value="Feminin">Féminin</option>
                             </select>
 
                             <!-- <label for="">Classe </label> -->
                             <select class="clax" name="Classe @error('classe_chef')  border border-red-500 @enderror" wire:model.defer='classe_chef' value="{{old("classe_chef")}}">
-                                <option value="c">----Classe----</option>
+                                <option value="c">----@if($esatic == 1) Classe @else Ecole @endif----</option>
                                 @foreach ($classes as $classe)
                                 <option value="{{$classe->id}}">{{ $classe->libelle}}</option>
                                 @endforeach
@@ -105,9 +106,10 @@
             </div>
             <div x-show="activeTab===2">
 
-                <div class="tete">
+                <div class="tete" style="margin-top:20%;">
                     @if(!$errorEmail and !$errorMatricule )
-                    <p class="titre_m">Vous devez consigner ici les informations </p>
+                    <h1 class="titre">Inscription:</h1>
+                    <p>Etape 3 </p>
                     @else
                     <p class="titre_m" style="color:red; font-weight:bolder">Les emails et les matricules doivent êtres uniques (rafraichissez la page svp!)</p>
                     @endif
@@ -134,7 +136,7 @@
 
                             <!-- <label for="">Genre</label> -->
                             <select class="genre_m @error('genre_m2')  border border-red-500 @enderror" wire:model.defer='genre_m2' value="{{old("genre_m2")}}">
-                                <option value="g">----Genre----</option>
+                                <option value="g">---- Genre ----</option>
                                 <option value="Masculin">Masculin</option>
                                 <option value="Feminin">Féminin</option>
                             </select>
@@ -142,7 +144,7 @@
 
                             <!-- <label for="">Classe </label> -->
                             <select class="clax_m  @error('classe_m2')  border border-red-500 @enderror" wire:model.defer='classe_m2' value="{{old("classe_m2")}}">
-                                <option vlaue="c">----Classe----</option>
+                                <option vlaue="c">----@if($esatic == 1) Classe @else Ecole @endif----</option>
                                 @foreach ($classes as $classe)
                                 <option value="{{ $classe->id}}">{{ $classe->libelle}}</option>
                                 @endforeach
@@ -180,7 +182,7 @@
 
                             <!-- <label for="">Genre</label> -->
                             <select class="genre_m @error('genre_m3')  border border-red-500 @enderror" wire:model.defer='genre_m3' value="{{old("genre_m3")}}">
-                                <option value="g">----Genre----</option>
+                                <option value="g">---- Genre ----</option>
                                 <option value="Masculin">Masculin</option>
                                 <option value="Feminin">Féminin</option>
                             </select>
@@ -188,7 +190,7 @@
 
                             <!-- <label for="">Classe </label> -->
                             <select class="clax_m  @error('classe_m3')  border border-red-500 @enderror" wire:model.defer='classe_m3' value="{{old("classe_m3")}}">
-                                <option vlaue="c">----Classe----</option>
+                                <option vlaue="c">----@if($esatic == 1) Classe @else Ecole @endif----</option>
                                 @foreach ($classes as $classe)
                                 <option value="{{ $classe->id}}">{{ $classe->libelle}}</option>
                                 @endforeach

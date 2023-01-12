@@ -18,7 +18,7 @@ class Enregistrement extends Component
 {
     // variables de groupe
 
-    public $niveau = 1;
+    public $niveau = 0;
     public $nom_groupe;
     public $photo_groupe;
 
@@ -59,8 +59,8 @@ class Enregistrement extends Component
     public function render()
     {
         return view('livewire.participants.enregistrement', [
-            'niveaux' => $this->esatic == 1 ? Niveau::all() : Niveau::where('id', '>=', 3)->get(),
-            'classes' => Classe::where('niveau_id', $this->niveau)->get()
+            'niveaux' => $this->esatic == 1 ? Niveau::all() : Niveau::where('quiz_available', 0)->get(),
+            'classes' => Classe::where('niveau_id', $this->niveau)->where('esatic', $this->esatic)->get()
         ]);
     }
 
@@ -86,11 +86,11 @@ class Enregistrement extends Component
         }
     }
 
-    public function updatedNiveau()
-    {
+    // public function updatedNiveau()
+    // {
 
-        $this->classes = Classe::where('niveau_id', $this->niveau)->get();
-    }
+    //     $this->classes = Classe::where('niveau_id', $this->niveau)->get();
+    // }
 
     public function getRandomInt($n)
     {

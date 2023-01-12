@@ -81,19 +81,8 @@
                     Le quiz des préselections est ouvert !
                 </p>
                 <p class="text-center mt-4">
-                    Ce quiz est composé de {{sizeof(Auth::user()->etudiant->getEquipe()->qsession->quiz->questions)}} questions. <br>
-                    <span class="text-red-600">>Vous disposez de 30 secondes par question</span> <br>
-                    <span class="text-red-600">>Les questions apparaissent une et une seule fois</span> <br>
-                    <span class="text-red-600">>Si vous rafraichissez ou quittez la page durant le test, seules les questions <br>
-                        auquelles vous avez répondues sont prises en compte et votre test prend fin.
-                    </span> <br>
-                    <span class="text-red-600">>Le quiz débute une fois que vous cliquez sur le bouton "COMMENCER LE TEST"</span> <br>
+                    Allez dans la partie <span class="font-bold text-orange">Présélection</span> pour commencer le test.
                 </p>
-                <div class="text-center mt-5">
-                    <button class="px-6 py-3 mb-1 mr-1 text-sm font-bold text-white uppercase transition-all duration-150 rounded shadow outline-none ease-linearbg-emerald-500 bg-myblue hover:shadow-lg focus:outline-none">
-                        Commencer le test
-                    </button>
-                </div>
 
                 @elseif(Auth::user()->etudiant->getEquipe()->qsession->state == 1 && Auth::user()->etudiant->getEquipe()->qsession->score > 0)
 
@@ -117,7 +106,8 @@
                     Vous avez terminé le quiz. <br> Les résultats seront bientôt disponibles, veillez patienter !
                 </p>
 
-                @elseif(Auth::user()->etudiant->getEquipe()->qsession->score < 0) <img src=" {{asset('images/app/lose.svg')}} " class="loseLogo">
+                @elseif(Auth::user()->etudiant->getEquipe()->qsession->score < 0)
+                    <img src=" {{asset('images/app/lose.svg')}} " class="loseLogo">
                     <p class="font-bold text-center text-red-600 text-md">
                         Dommange, la prochaine fois sera la bonne !
                     </p>
@@ -139,8 +129,9 @@
 
                     @elseif(Auth::user()->etudiant->getEquipe()->niveau->qvideo->state == 0 && Auth::user()->etudiant->getEquipe()->video_url == "disq")
 
+                    <img src=" {{asset('images/app/lose.svg')}} " class="loseLogo">
                     <p class="font-bold text-center text-red-600 text-md">
-                        Dommange, la prochaine fois sera la bonne !
+                        Dommage, la prochaine fois sera la bonne !
                     </p>
 
                     @elseif(Auth::user()->etudiant->getEquipe()->niveau->qvideo->state == 0 && Auth::user()->etudiant->getEquipe()->video_url != "disq")
@@ -155,7 +146,7 @@
 
                     @else
 
-                    <img src=" {{asset('images/app/winner.svg')}} " class="loseLogo">
+                    <img src=" {{asset('images/app/winner.svg')}} " class="winLogo">
                     <p class="font-bold text-green-600 text-center text-red-600 text-md">
                         Félicitations votre équipe est séléctionnez !!
                     </p>
