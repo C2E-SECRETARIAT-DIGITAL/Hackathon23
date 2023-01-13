@@ -55,7 +55,6 @@ class Enregistrement extends Component
     public $errorMatricule = false;
 
 
-
     public function render()
     {
         return view('livewire.participants.enregistrement', [
@@ -86,11 +85,6 @@ class Enregistrement extends Component
         }
     }
 
-    // public function updatedNiveau()
-    // {
-
-    //     $this->classes = Classe::where('niveau_id', $this->niveau)->get();
-    // }
 
     public function getRandomInt($n)
     {

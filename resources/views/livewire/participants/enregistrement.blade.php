@@ -90,7 +90,6 @@
                                 @foreach ($classes as $classe)
                                 <option value="{{$esatic == 1 ? $classe->id : $classe->libelle}}">{{ $classe->libelle}}</option>
                                 @endforeach
-
                             </select>
 
                             <br>

@@ -59,6 +59,7 @@ class AdminSeeder extends Seeder
             'IIT',
             'Miage',
             'Université Virtuelle',
+            'Autre'
         ];
 
         foreach ($nvx_q as $nv) {

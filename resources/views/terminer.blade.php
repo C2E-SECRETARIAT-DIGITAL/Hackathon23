@@ -17,8 +17,8 @@
         </div>
         <div class="nav">
             <ul>
-                <li><a href="{{route('welcome',  null, false)}}">acceuil</a></li>
-                <li><a href="{{route('login',  null, false)}}">connexion</a></li>
+                <li><a href="{{route('welcome',  null, false)}}">Acceuil</a></li>
+                <li><a href="{{route('login',  null, false)}}">Connexion</a></li>
             </ul>
         </div>
     </div>
