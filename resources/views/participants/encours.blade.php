@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" media="screen" href="{{mix('css/particles.css')}}">
 
-  <link rel="icon" href="{{asset('images/logoSDI-PhotoRoom.png')}}" type="image/icon type">
+  <link rel="icon" href="https://sdi-hackathon23.c2e.ci/images/logoSDI-PhotoRoom.png" type="image/icon type">
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
   <!-- Scripts -->
   <script src="{{ mix('js/app.js') }}" defer></script>

@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Hackathon 2023</title>
-        <link rel="icon" href="{{asset('images/logoSDI-PhotoRoom.png')}}" type="image/icon">
+        <link rel="icon" href="https://sdi-hackathon23.c2e.ci/images/logoSDI-PhotoRoom.png" type="image/icon">
         
         <link rel="stylesheet" href="{{mix('css/inscription.css')}}" />
 
