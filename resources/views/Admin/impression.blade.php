@@ -22,8 +22,20 @@
                         </div>
 
                         <div class="col-span-2">
-                            <span> Equipes de niveau 3 </span>
-                            <a target="_blank" href="{{route('liste.equipe.select.n3', null, false)}} "
+                            <span> Equipes de niveau 3 Télécom</span>
+                            <a target="_blank" href="{{route('liste.equipe.select.n3t', null, false)}} "
+                            class="px-6 py-3 my-1 mr-1 text-sm font-bold text-white uppercase transition-all duration-150 bg-gray-500 rounded shadow outline-none ease-linearbg-emerald-500 hover:shadow-lg focus:outline-none">Imprimer</a>
+                        </div>
+
+                        <div class="col-span-2">
+                            <span> Equipes de niveau 3 Info</span>
+                            <a target="_blank" href="{{route('liste.equipe.select.n3i', null, false)}} "
+                            class="px-6 py-3 my-1 mr-1 text-sm font-bold text-white uppercase transition-all duration-150 bg-gray-500 rounded shadow outline-none ease-linearbg-emerald-500 hover:shadow-lg focus:outline-none">Imprimer</a>
+                        </div>
+
+                        <div class="col-span-2">
+                            <span> Equipes de niveau 3 Sécurité</span>
+                            <a target="_blank" href="{{route('liste.equipe.select.n3s', null, false)}} "
                             class="px-6 py-3 my-1 mr-1 text-sm font-bold text-white uppercase transition-all duration-150 bg-gray-500 rounded shadow outline-none ease-linearbg-emerald-500 hover:shadow-lg focus:outline-none">Imprimer</a>
                         </div>
                     </div>
@@ -57,8 +69,20 @@
                         </div>
 
                         <div class="col-span-2">
-                            <span> Equipes de niveau 3 </span>
-                            <a target="_blank" href="{{route('liste.equipe.n3', null, false)}} "
+                            <span> Equipes de niveau 3 Télécom</span>
+                            <a target="_blank" href="{{route('liste.equipe.n3t', null, false)}} "
+                            class="px-6 py-3 my-1 mr-1 text-sm font-bold text-white uppercase transition-all duration-150 rounded shadow outline-none bg-myblue ease-linearbg-emerald-500 hover:shadow-lg focus:outline-none">Imprimer</a>
+                        </div>
+
+                        <div class="col-span-2">
+                            <span> Equipes de niveau 3 Info</span>
+                            <a target="_blank" href="{{route('liste.equipe.n3i', null, false)}} "
+                            class="px-6 py-3 my-1 mr-1 text-sm font-bold text-white uppercase transition-all duration-150 rounded shadow outline-none bg-myblue ease-linearbg-emerald-500 hover:shadow-lg focus:outline-none">Imprimer</a>
+                        </div>
+
+                        <div class="col-span-2">
+                            <span> Equipes de niveau 3 Sécurité</span>
+                            <a target="_blank" href="{{route('liste.equipe.n3s', null, false)}} "
                             class="px-6 py-3 my-1 mr-1 text-sm font-bold text-white uppercase transition-all duration-150 rounded shadow outline-none bg-myblue ease-linearbg-emerald-500 hover:shadow-lg focus:outline-none">Imprimer</a>
                         </div>
                     </div>

@@ -64,18 +64,68 @@ class pdfController extends Controller
 
     }
 
-    public function listeEquipeN3(){
+    public function listeEquipeN3T(){
 
 
         $hackaton = Hackaton::all()->last();
-        $niveau1 = Niveau::where('libelle', 'Niveau 3')->first() ;
+        $niveau = Niveau::where('libelle', 'Niveau 3 Télécom')->first() ;
         $equipes = Equipe::where('hackaton_id', $hackaton->id)
-                            ->where('niveau_id', $niveau1->id)->get();
+                            ->where('niveau_id', $niveau->id)->get();
         
         $data = [
             'title' => 'Hackathon',
             'date' => date('d-m-Y à h:i:s A'),
-            'niveau' => ' Niveau 3',
+            'niveau' => $niveau->libelle,
+            'equipes' => $equipes
+            
+        ];
+          
+        $pdf = PDF::loadView('pdf.listeEquipes', $data);
+    
+        // return $pdf->download('listeEquipes.pdf');
+
+        return $pdf->stream('listeEquipes.pdf');
+
+
+    }
+
+    public function listeEquipeN3I(){
+
+
+        $hackaton = Hackaton::all()->last();
+        $niveau = Niveau::where('libelle', 'Niveau 3 Info')->first() ;
+        $equipes = Equipe::where('hackaton_id', $hackaton->id)
+                            ->where('niveau_id', $niveau->id)->get();
+        
+        $data = [
+            'title' => 'Hackathon',
+            'date' => date('d-m-Y à h:i:s A'),
+            'niveau' => $niveau->libelle,
+            'equipes' => $equipes
+            
+        ];
+          
+        $pdf = PDF::loadView('pdf.listeEquipes', $data);
+    
+        // return $pdf->download('listeEquipes.pdf');
+
+        return $pdf->stream('listeEquipes.pdf');
+
+
+    }
+
+    public function listeEquipeN3S(){
+
+
+        $hackaton = Hackaton::all()->last();
+        $niveau = Niveau::where('libelle', 'Niveau 3 Sécurité')->first() ;
+        $equipes = Equipe::where('hackaton_id', $hackaton->id)
+                            ->where('niveau_id', $niveau->id)->get();
+        
+        $data = [
+            'title' => 'Hackathon',
+            'date' => date('d-m-Y à h:i:s A'),
+            'niveau' => $niveau->libelle,
             'equipes' => $equipes
             
         ];
@@ -143,19 +193,19 @@ class pdfController extends Controller
 
     }
 
-    public function listeselectEquipeN3(){
+    public function listeselectEquipeN3T(){
 
 
         $hackaton = Hackaton::all()->last();
-        $niveau1 = Niveau::where('libelle', 'Niveau 3')->first() ;
+        $niveau = Niveau::where('libelle', 'Niveau 3 Télécom')->first() ;
         $equipes = Equipe::where('hackaton_id', $hackaton->id)
                             ->where('statut', 1)
-                            ->where('niveau_id', $niveau1->id)->get();
+                            ->where('niveau_id', $niveau->id)->get();
         
         $data = [
             'title' => 'Hackathon',
             'date' => date('d-m-Y à h:i:s A'),
-            'niveau' => ' Niveau 3',
+            'niveau' => $niveau->libelle,
             'equipes' => $equipes
             
         ];
@@ -166,6 +216,55 @@ class pdfController extends Controller
 
         return $pdf->stream('listeEquipes.pdf');
 
+    }
+
+    public function listeselectEquipeN3I(){
+
+
+        $hackaton = Hackaton::all()->last();
+        $niveau = Niveau::where('libelle', 'Niveau 3 Info')->first() ;
+        $equipes = Equipe::where('hackaton_id', $hackaton->id)
+                            ->where('statut', 1)
+                            ->where('niveau_id', $niveau->id)->get();
+        
+        $data = [
+            'title' => 'Hackathon',
+            'date' => date('d-m-Y à h:i:s A'),
+            'niveau' => $niveau->libelle,
+            'equipes' => $equipes
+            
+        ];
+          
+        $pdf = PDF::loadView('pdf.listeEquipes', $data);
+    
+        // return $pdf->download('listeEquipes.pdf');
+
+        return $pdf->stream('listeEquipes.pdf');
+
+    }
+
+    public function listeselectEquipeN3S(){
+
+
+        $hackaton = Hackaton::all()->last();
+        $niveau = Niveau::where('libelle', 'Niveau 3 Sécurité')->first() ;
+        $equipes = Equipe::where('hackaton_id', $hackaton->id)
+                            ->where('statut', 1)
+                            ->where('niveau_id', $niveau->id)->get();
+        
+        $data = [
+            'title' => 'Hackathon',
+            'date' => date('d-m-Y à h:i:s A'),
+            'niveau' => $niveau->libelle,
+            'equipes' => $equipes
+            
+        ];
+          
+        $pdf = PDF::loadView('pdf.listeEquipes', $data);
+    
+        // return $pdf->download('listeEquipes.pdf');
+
+        return $pdf->stream('listeEquipes.pdf');
 
     }
 

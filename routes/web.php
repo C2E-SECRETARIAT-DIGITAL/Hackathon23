@@ -56,15 +56,19 @@ Route::middleware(['auth:sanctum', 'verified'])->post('/dashboard/up', [VideoCon
             Route::get('/admin/groupes/down', [VideoController::class, 'downloadVideo'])->name('Admin.groupe.downloadvideo');
             Route::get('/admin/impression',  'App\Http\Controllers\AdminController@impression')->name('Admin.groupe.impression');
             Route::get('/admin/restauration',  'App\Http\Controllers\AdminController@gestionRestaurant')->name('Admin.restauration');
-    
-            Route::get('/pdf/listeEquipe/niveau1', 'App\Http\Controllers\pdfController@listeEquipeN1')->name('liste.equipe.n1');
+
+        Route::get('/pdf/listeEquipe/niveau1', 'App\Http\Controllers\pdfController@listeEquipeN1')->name('liste.equipe.n1');
             Route::get('/pdf/listeEquipe/niveau2', 'App\Http\Controllers\pdfController@listeEquipeN2')->name('liste.equipe.n2');
-            Route::get('/pdf/listeEquipe/niveau3', 'App\Http\Controllers\pdfController@listeEquipeN3')->name('liste.equipe.n3');
+            Route::get('/pdf/listeEquipe/niveau3t', 'App\Http\Controllers\pdfController@listeEquipeN3T')->name('liste.equipe.n3t');
+            Route::get('/pdf/listeEquipe/niveau3i', 'App\Http\Controllers\pdfController@listeEquipeN3I')->name('liste.equipe.n3i');
+            Route::get('/pdf/listeEquipe/niveau3s', 'App\Http\Controllers\pdfController@listeEquipeN3S')->name('liste.equipe.n3s');
 
             Route::get('/pdf/listeEquipe/selection/niveau1', 'App\Http\Controllers\pdfController@listeselectEquipeN1')->name('liste.equipe.select.n1');
             Route::get('/pdf/listeEquipe/selection/niveau2', 'App\Http\Controllers\pdfController@listeselectEquipeN2')->name('liste.equipe.select.n2');
-            Route::get('/pdf/listeEquipe/selection/niveau3', 'App\Http\Controllers\pdfController@listeselectEquipeN3')->name('liste.equipe.select.n3');
-            
+            Route::get('/pdf/listeEquipe/selection/niveau3t', 'App\Http\Controllers\pdfController@listeselectEquipeN3T')->name('liste.equipe.select.n3t');
+            Route::get('/pdf/listeEquipe/selection/niveau3i', 'App\Http\Controllers\pdfController@listeselectEquipeN3I')->name('liste.equipe.select.n3i');
+            Route::get('/pdf/listeEquipe/selection/niveau3s', 'App\Http\Controllers\pdfController@listeselectEquipeN3S')->name('liste.equipe.select.n3s');
+           
 
             Route::get('/pdf/repartitions/equipes', 'App\Http\Controllers\pdfController@repartition')->name('pdf.repartition');
             Route::get('/pdf/salles/commandes', 'App\Http\Controllers\pdfController@commandes')->name('pdf.commandes');
