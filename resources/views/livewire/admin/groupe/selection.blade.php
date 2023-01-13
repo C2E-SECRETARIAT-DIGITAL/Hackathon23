@@ -131,7 +131,7 @@
                                     @foreach ($equipe->participants as $participant )
 
                                     <div class="font-semibold text-gray-900 text-md flex">
-                                        {{$participant->etudiant->matricule}} |{{$participant->etudiant->nom}} {{$participant->etudiant->prenom}}
+                                        {{$participant->etudiant->matricule}} | {{$participant->etudiant->classe}} | {{$participant->etudiant->nom}} {{$participant->etudiant->prenom}}
 
                                         @if($participant->chef )
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400 " viewBox="0 0 20 20" fill="currentColor">
