@@ -16,6 +16,7 @@
      --}}
     <div class="gap-4 px-6 py-12 md:grid md:grid-cols-6">
 
+
         <div class="col-span-2 ">
 
             <div class="px-4 py-6 text-md bg-white shadow-xl sm:rounded-lg">
@@ -106,8 +107,7 @@
                     Vous avez terminé le quiz. <br> Les résultats seront bientôt disponibles, veillez patienter !
                 </p>
 
-                @elseif(Auth::user()->etudiant->getEquipe()->qsession->score < 0)
-                    <img src=" {{asset('images/app/lose.svg')}} " class="loseLogo">
+                @elseif(Auth::user()->etudiant->getEquipe()->qsession->score < 0) <img src=" {{asset('images/app/lose.svg')}} " class="loseLogo">
                     <p class="font-bold text-center text-red-600 text-md">
                         Dommage, la prochaine fois sera la bonne !
                     </p>
@@ -118,13 +118,13 @@
 
                     @else
 
-                    <p class="font-bold text-center">
-                        Vous devez soumettre votre video via <span class="text-green-600">WhatsApp</span> au numero suivant:
+                    <p class="text-center">
+
+                        Chèr capitaine, vous devez vous munir avec votre équipe de <span class="text-red-600 font-bold">documents</span> attestants que vous êtes inscrits pour
+                        des cours en Master au cours de cette année scolaire (reçu d'inscription, certificat de
+                        fréquentation, certificat de scolarité, etc...) et éventuellement d'une pièce d'identité. Ils
+                        seront controlés le <span class="text-red-600 font-bold">Jeudi 26 Janvier</span>, jour de lancement du Tecknovore Hackathon.
                     </p>
-                    <p class="font-bold text-xl text-center text-green-600">
-                        +225 0102030405
-                    </p>   
-                    <p class="text-red-600 font-bold">Date limite de soumission: Mardi 24 Janvier 2023</p>                 
 
                     @endif
 
@@ -137,7 +137,6 @@
 
                     @endif
             </div>
-
 
             @else
 

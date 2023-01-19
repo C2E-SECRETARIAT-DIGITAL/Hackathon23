@@ -15,7 +15,7 @@ class CreateMatriculesTable extends Migration
     {
         Schema::create('matricules', function (Blueprint $table) {
             $table->id();
-            $table->string("matricule")->unique();
+            $table->string("matricule");
             $table->boolean("state")->default(false);
             $table->timestamps();
         });

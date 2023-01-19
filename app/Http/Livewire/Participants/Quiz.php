@@ -27,7 +27,6 @@ class Quiz extends Component
 
     public function render()
     {
-
         // $this->closeSession();
         return view('livewire.participants.quiz', [
             'quiz' => Auth::user()->etudiant->getEquipe()->qsession->quiz

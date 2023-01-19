@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\MatriculesImport;
 use Exception;
 use App\Models\Repa;
 use App\Models\Equipe;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Crypt;
+use Maatwebsite\Excel\Facades\Excel;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class AdminController extends Controller
@@ -26,12 +28,9 @@ class AdminController extends Controller
         $hackaton = Hackaton::latest()->first();
         $statut =  Hackaton::latest()->first()->CanRecord();
 
-        if($hackaton->inscription)
-        {
+        if ($hackaton->inscription) {
             return view('acceuil', compact('statut'));
-        }
-        else
-        {
+        } else {
             return view('participants.encours');
         }
     }
@@ -42,84 +41,69 @@ class AdminController extends Controller
         $hackaton = Hackaton::latest()->first();
         $statut =  Hackaton::latest()->first()->CanRecord();
 
-        if($hackaton->inscription and $statut)
-        {
-           
+        if ($hackaton->inscription and $statut) {
+
             return view('participants.inscription');
-        }
-        else
-        {
+        } else {
             return redirect()->route('welcome');
-            
         }
-    } 
+    }
 
     public function finPreselection()
     {
-        $hackaton = Hackaton::latest()->first() ;
+        $hackaton = Hackaton::latest()->first();
 
-        if($hackaton->inscription)
-        {
-           
-            return view('participants.FinInsciption') ;
-        }
-        else
-        {
-            return redirect()->route('welcome') ;
-            
+        if ($hackaton->inscription) {
+
+            return view('participants.FinInsciption');
+        } else {
+            return redirect()->route('welcome');
         }
     }
 
     public function inscriptionterminer()
     {
-        $hackaton = Hackaton::latest()->first() ;
+        $hackaton = Hackaton::latest()->first();
 
-        if($hackaton->inscription)
-        {
-           
-            return view('terminer') ;
-        }
-        else
-        {
-            return redirect()->route('welcome') ;
-            
+        if ($hackaton->inscription) {
+
+            return view('terminer');
+        } else {
+            return redirect()->route('welcome');
         }
     }
 
     public function index()
     {
-        return view('Admin.parametrage') ;
+        return view('Admin.parametrage');
     }
 
     public function selectionGroupe()
     {
-        return view('Admin.selection') ;
+        return view('Admin.selection');
     }
 
     public function impression()
     {
-        return view('Admin.impression') ;
+        return view('Admin.impression');
     }
 
 
-    
+
     public function restauration()
     {
-        if (Auth::user()->etudiant->currentEquipe()->statut)
-        {
-            $etudiant = Etudiant::where('user_id', Auth::user()->id)->first() ;
+        if (Auth::user()->etudiant->currentEquipe()->statut) {
+            $etudiant = Etudiant::where('user_id', Auth::user()->id)->first();
 
             $collations = Collation::all();
-        
+
             $m = Crypt::encryptString($etudiant->matricule);
             $t = Crypt::decryptString($m);
             //$qr = base64_encode(QrCode::format('svg')->size(250)->errorCorrection('H')->generate($m));
-    
+
             $qrcode = QrCode::size(300)->generate($m);
-            return view('participants.restauration', compact('qrcode', 'collations') );
-        }
-        else
-        {
+            return view('participants.restauration', compact('qrcode', 'collations'));
+        } else {
             return redirect()->route('welcome');
         }
     }
@@ -140,15 +124,13 @@ class AdminController extends Controller
             Commande::create([
                 'etudiant_id' => $participant->etudiant_id,
                 'salle_id' => $monequipe->currentSalle()->id,
-                'collation_id' => $request['collation_etu'.$key.'_id']
+                'collation_id' => $request['collation_etu' . $key . '_id']
             ]);
         }
 
-        
+
 
         return redirect()->back();
-
-
     }
 
 
@@ -156,14 +138,14 @@ class AdminController extends Controller
     {
         $repas = Repa::orderBy('created_at', 'DESC')->paginate(8);
 
-        $hackaton = Hackaton::latest()->first() ;
+        $hackaton = Hackaton::latest()->first();
 
         $nb_participants = DB::table('participants')
-                    ->join('equipes', 'equipes.id', '=', 'participants.equipe_id' )
-                    ->where('equipes.hackaton_id', $hackaton->id)
-                    ->where('equipes.statut', 1)
-                    ->get()
-                    ->count() ;
+            ->join('equipes', 'equipes.id', '=', 'participants.equipe_id')
+            ->where('equipes.hackaton_id', $hackaton->id)
+            ->where('equipes.statut', 1)
+            ->get()
+            ->count();
 
         return view('Admin.commande', compact('repas', 'nb_participants'));
     }
@@ -172,19 +154,17 @@ class AdminController extends Controller
     public function Soumission(Request $request)
     {
         $codeDecrypte = Crypt::decryptString($request->qrcodeValue);
-        
+
         $etudiant = Etudiant::where('matricule', $codeDecrypte)->first();
 
-        if(Repa::latest()->first())
-        {
+        if (Repa::latest()->first()) {
 
             $statut = Restauration::where('etudiant_id', $etudiant->id)
-                                ->where('repa_id', Repa::latest()->first()->id )
-                                ->where( 'hackaton_id' , Hackaton::latest()->first()->id)
-                                ->first() ;
-            
-            if(!$statut)
-            {
+                ->where('repa_id', Repa::latest()->first()->id)
+                ->where('hackaton_id', Hackaton::latest()->first()->id)
+                ->first();
+
+            if (!$statut) {
                 Restauration::create([
                     'etudiant_id' => $etudiant->id,
                     'repa_id' => Repa::latest()->first()->id,
@@ -192,19 +172,15 @@ class AdminController extends Controller
                 ]);
 
                 $request->session()->flash('success', 'Bon appetit');
-            }
-            else{
+            } else {
                 $request->session()->flash('error', 'Déjà restauré');
             }
-
-        }
-        else
-        {
+        } else {
             $request->session()->flash('error', 'Veillez enregistrer le repas');
         }
 
-        
-        
+
+
 
         return redirect()->back();
     }
@@ -218,7 +194,6 @@ class AdminController extends Controller
         ];
 
         Mail::to($email)->send(new ResultatEmail($maildata));
-
     }
 
 
@@ -229,35 +204,35 @@ class AdminController extends Controller
 
         $chef_id = $equipe->participants()->first()->etudiant_id;
 
-        if($chef_id)
-        {
-            $chef = Etudiant::find($chef_id) ;
+        if ($chef_id) {
+            $chef = Etudiant::find($chef_id);
 
-            $equipe = $chef->currentEquipe()->libelle ;
-            $nom = $chef->nom.' '.$chef->prenom ;
-            $email = $chef->user->email ;
+            $equipe = $chef->currentEquipe()->libelle;
+            $nom = $chef->nom . ' ' . $chef->prenom;
+            $email = $chef->user->email;
 
             $this->sendEmail($email, $nom, $equipe);
-            
-            try{
+
+            try {
 
                 $this->sendEmail($email, $nom, $equipe);
-
-            } catch(Exception $e){
+            } catch (Exception $e) {
 
                 // En cas d'erreur en local on ne fait rien sauf un flash
 
-                if(env("APP_ENV") == "local"){
+                if (env("APP_ENV") == "local") {
 
                     request()->session()->flash('danger', 'Envoi du mail impossible');
-
                 }
-
             }
         }
-        
-        return redirect()->back() ;
 
+        return redirect()->back();
     }
 
+    public function importMatricule(Request $request)
+    {
+        Excel::import(new MatriculesImport, $request->file('file')->store('files'));
+        return redirect()->back();
+    }
 }
