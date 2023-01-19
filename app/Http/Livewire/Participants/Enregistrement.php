@@ -6,6 +6,7 @@ use App\Models\Classe;
 use App\Models\Equipe;
 use App\Models\Etudiant;
 use App\Models\Hackaton;
+use App\Models\Matricule;
 use App\Models\Niveau;
 use App\Models\Participant;
 use App\Models\User;
@@ -74,6 +75,17 @@ class Enregistrement extends Component
         }
     }
 
+    public function matInDb($mat){
+
+        $mindb = Matricule::where('matricule', $mat)->find();
+        if($mindb){
+            if(!$mindb->state){
+                return true;
+            }
+            return false;
+        }
+    }
+
     public function VerifMatricule()
     {
         if (
@@ -82,6 +94,16 @@ class Enregistrement extends Component
             $this->matricule_m2 == $this->matricule_m3
         ) {
             $this->errorMatricule = true;
+        }
+
+        if($this->esatic == 1){
+            if (
+                !$this->matInDb($this->matricule_chef) or
+                !$this->matInDb($this->matricule_m2) or
+                !$this->matInDb($this->matricule_m3)
+            ) {
+                $this->errorMatricule = true;
+            }
         }
     }
 
@@ -221,7 +243,7 @@ class Enregistrement extends Component
                     'equipe_id' => $equipe->id
                 ]);
             }
-            // creation du participant 1 
+            // creation du participant 1
 
             $user1 = User::create([
                 'name' => trim($this->matricule_chef),
@@ -238,6 +260,9 @@ class Enregistrement extends Component
                 'classe' => $this->esatic == 1 ? Classe::find($this->classe_chef)->libelle : $this->classe_chef,
                 'user_id' => $user1->id
             ]);
+            $mindb = Matricule::where('matricule', $this->matricule_chef)->find();
+            $mindb->state = true;
+            $mindb->save();
 
 
             // creation du participant 2 
@@ -257,6 +282,10 @@ class Enregistrement extends Component
                 'user_id' => $user2->id
             ]);
 
+            $mindb = Matricule::where('matricule', $this->matricule_m2)->find();
+            $mindb->state = true;
+            $mindb->save();
+
 
             // creation du participant 3 
 
@@ -274,6 +303,10 @@ class Enregistrement extends Component
                 'classe' => $this->esatic == 1 ? Classe::find($this->classe_m3)->libelle : $this->classe_m3,
                 'user_id' => $user3->id
             ]);
+
+            $mindb = Matricule::where('matricule', $this->matricule_m3)->find();
+            $mindb->state = true;
+            $mindb->save();
 
             // enregistrement des participants
 
