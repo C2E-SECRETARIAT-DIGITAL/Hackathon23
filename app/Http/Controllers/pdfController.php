@@ -43,7 +43,7 @@ class pdfController extends Controller
 
 
         $hackaton = Hackaton::all()->last();
-        $niveau1 = Niveau::where('libelle', 'Niveau 2')->first() ;
+        $niveau1 = Niveau::where('libelle', 'Niveau 2')->first();
         $equipes = Equipe::where('hackaton_id', $hackaton->id)
                             ->where('niveau_id', $niveau1->id)->get();
         
