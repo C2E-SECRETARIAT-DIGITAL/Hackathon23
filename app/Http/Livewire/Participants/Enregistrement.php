@@ -95,16 +95,6 @@ class Enregistrement extends Component
         ) {
             $this->errorMatricule = true;
         }
-
-        // if($this->esatic == 1){
-        //     if (
-        //         $this->matInDb($this->matricule_chef) or
-        //         $this->matInDb($this->matricule_m2) or
-        //         $this->matInDb($this->matricule_m3)
-        //     ) {
-        //         $this->errorMatricule = true;
-        //     }
-        // }
     }
 
 
@@ -260,10 +250,6 @@ class Enregistrement extends Component
                 'classe' => $this->esatic == 1 ? Classe::find($this->classe_chef)->libelle : $this->classe_chef,
                 'user_id' => $user1->id
             ]);
-            // $mindb = Matricule::where('matricule', $this->matricule_chef)->first();
-            // $mindb->state = true;
-            // $mindb->save();
-
 
             // creation du participant 2 
 
@@ -282,11 +268,6 @@ class Enregistrement extends Component
                 'user_id' => $user2->id
             ]);
 
-            // $mindb = Matricule::where('matricule', $this->matricule_m2)->first();
-            // $mindb->state = true;
-            // $mindb->save();
-
-
             // creation du participant 3 
 
             $user3 = User::create([
@@ -303,10 +284,6 @@ class Enregistrement extends Component
                 'classe' => $this->esatic == 1 ? Classe::find($this->classe_m3)->libelle : $this->classe_m3,
                 'user_id' => $user3->id
             ]);
-
-            // $mindb = Matricule::where('matricule', $this->matricule_m3)->first();
-            // $mindb->state = true;
-            // $mindb->save();
 
             // enregistrement des participants
 
@@ -329,9 +306,7 @@ class Enregistrement extends Component
                 'hackaton_id' => $hackaton->id
             ]);
 
-
             //  $this->resetInput();
-
 
             return redirect()->to('/inscription-terminer');
         }

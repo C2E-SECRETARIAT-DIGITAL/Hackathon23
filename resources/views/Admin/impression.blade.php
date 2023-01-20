@@ -107,30 +107,6 @@
         </div>
     </div>
 
-    <!-- <div class="py-2">
-        <div class="grid-rows-2 gap-4 mx-auto max-w-8xl sm:px-6 lg:px-2">
-            <div class="px-4 py-4 overflow-hidden bg-white shadow-md sm:rounded-lg">
-
-                <div>
-                    <span class="font-bold ">IMPORTER MATRICULES</span>
-
-                    <div class="grid gap-6 py-6 md:grid-cols-6">
-
-                        <div class="col-span-2">
-                            <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <input type="file" name="file" class="form-control" required>
-                                <br>
-                                <button class="px-6 py-3 my-1 mr-1 text-sm font-bold text-white uppercase transition-all duration-150 rounded shadow outline-none bg-orange ease-linearbg-emerald-500 hover:shadow-lg focus:outline-none">
-                                    Importer
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div> -->
+    
 
 </x-app-layout>
