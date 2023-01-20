@@ -150,7 +150,7 @@
  
                     <u><h1 class="font-bold">Thème:</h1></u> <br>
 
-                    @if(Auth::user()->etudiant->getEquipe()->niveau_id == 3)
+                    @if(Auth::user()->etudiant->getEquipe()->niveau_id == 5)
                     <p class="font-bold">
                         DÉTECTION DES VIRUS DANS UN SYSTÈME INFORMATIQUE
                     </p>
