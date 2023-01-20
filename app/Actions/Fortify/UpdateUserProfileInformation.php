@@ -4,6 +4,7 @@ namespace App\Actions\Fortify;
 
 use App\Models\Etudiant;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
@@ -19,20 +20,31 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
      */
     public function update($user, array $input)
     {
-        Validator::make($input, [
-            'nom' => ['required', 'string', 'max:255'],
-            'prenom' => ['required', 'string'],
-            'matricule' => ['required'],
-            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-            'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
-        ])->validateWithBag('updateProfileInformation');
+        if (Auth::user()->etudiant) {
+            Validator::make($input, [
+                'nom' => ['required', 'string', 'max:255'],
+                'prenom' => ['required', 'string'],
+                'matricule' => ['required'],
+                'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+                'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
+            ])->validateWithBag('updateProfileInformation');
+            
+        } else {
+            Validator::make($input, [
+                'matricule' => ['required'],
+                'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+                'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
+            ])->validateWithBag('updateProfileInformation');
+        }
 
         if (isset($input['photo'])) {
             $user->updateProfilePhoto($input['photo']);
         }
 
-        if ($input['email'] !== $user->email &&
-            $user instanceof MustVerifyEmail) {
+        if (
+            $input['email'] !== $user->email &&
+            $user instanceof MustVerifyEmail
+        ) {
             $this->updateVerifiedUser($user, $input);
         } else {
             $user->forceFill([
@@ -40,12 +52,14 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'email' => $input['email'],
             ])->save();
 
-            $etudiant = Etudiant::where('user_id', $user->id)->first();
-            $etudiant->forceFill([
-                'nom' => $input['nom'],
-                'prenom' => $input['prenom'],
-                'matricule' => $input['matricule']
-            ])->save();
+            if (Auth::user()->etudiant) {
+                $etudiant = Etudiant::where('user_id', $user->id)->first();
+                $etudiant->forceFill([
+                    'nom' => $input['nom'],
+                    'prenom' => $input['prenom'],
+                    'matricule' => $input['matricule']
+                ])->save();
+            }
         }
     }
 
