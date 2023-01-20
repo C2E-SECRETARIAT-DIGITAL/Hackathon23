@@ -48,6 +48,8 @@
         </div>
         @endif
 
+
+        @if(Auth::user()->etudiant)
         <!-- Name -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="nom" value="{{ __('Nom') }}" />
@@ -75,6 +77,24 @@
             <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" />
             <x-jet-input-error for="email" class="mt-2" />
         </div>
+
+        @else
+
+        <!-- Matricule -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="matricule" value="{{ __('Name') }}" />
+            <x-jet-input id="matricule" type="text" class="mt-1 block w-full" wire:model.defer="state.matricule" placeholder="{{Auth::user()->name}}" autocomplete="matricule" />
+            <x-jet-input-error for="matricule" class="mt-2" />
+        </div>
+
+        <!-- Email -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="email" value="{{ __('Email') }}" />
+            <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" />
+            <x-jet-input-error for="email" class="mt-2" />
+        </div>
+
+        @endif
     </x-slot>
 
     <x-slot name="actions">
