@@ -29,18 +29,16 @@ class pdfController extends Controller
             'equipes' => $equipes
             
         ];
-          
+
         $pdf = PDF::loadView('pdf.listeEquipes', $data);
     
         // return $pdf->download('listeEquipes.pdf');
 
         return $pdf->stream('listeEquipes.pdf');
 
-
     }
 
     public function listeEquipeN2(){
-
 
         $hackaton = Hackaton::all()->last();
         $niveau1 = Niveau::where('libelle', 'Niveau 2')->first();
@@ -61,11 +59,9 @@ class pdfController extends Controller
 
         return $pdf->stream('listeEquipes.pdf');
 
-
     }
 
     public function listeEquipeN3T(){
-
 
         $hackaton = Hackaton::all()->last();
         $niveau = Niveau::where('libelle', 'Niveau 3 Télécom')->first() ;
@@ -86,11 +82,9 @@ class pdfController extends Controller
 
         return $pdf->stream('listeEquipes.pdf');
 
-
     }
 
     public function listeEquipeN3I(){
-
 
         $hackaton = Hackaton::all()->last();
         $niveau = Niveau::where('libelle', 'Niveau 3 Info')->first() ;
@@ -111,11 +105,9 @@ class pdfController extends Controller
 
         return $pdf->stream('listeEquipes.pdf');
 
-
     }
 
     public function listeEquipeN3S(){
-
 
         $hackaton = Hackaton::all()->last();
         $niveau = Niveau::where('libelle', 'Niveau 3 Sécurité')->first() ;
@@ -136,13 +128,11 @@ class pdfController extends Controller
 
         return $pdf->stream('listeEquipes.pdf');
 
-
     }
 
 
 
     public function listeselectEquipeN1(){
-
 
         $hackaton = Hackaton::all()->last();
         $niveau1 = Niveau::where('libelle', 'Niveau 1')->first() ;
@@ -164,11 +154,9 @@ class pdfController extends Controller
 
         return $pdf->stream('listeEquipes.pdf');
 
-
     }
 
     public function listeselectEquipeN2(){
-
 
         $hackaton = Hackaton::all()->last();
         $niveau1 = Niveau::where('libelle', 'Niveau 2')->first() ;
@@ -190,11 +178,9 @@ class pdfController extends Controller
 
         return $pdf->stream('listeEquipes.pdf');
 
-
     }
 
     public function listeselectEquipeN3T(){
-
 
         $hackaton = Hackaton::all()->last();
         $niveau = Niveau::where('libelle', 'Niveau 3 Télécom')->first() ;
@@ -309,6 +295,5 @@ class pdfController extends Controller
 
         return $pdf->stream('CommandeCollations.pdf');
     }
-
 
 }

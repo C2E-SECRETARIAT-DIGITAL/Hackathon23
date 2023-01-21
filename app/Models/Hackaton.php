@@ -18,7 +18,7 @@ class Hackaton extends Model
 
     public function CanRecord()
     {
-        $nb_equipe_selectionnee = Equipe::where('statut', 1)->get()->count() ;
+        $nb_equipe_selectionnee = Equipe::where('statut', 1)->get()->count();
         
         if($nb_equipe_selectionnee > 0)
         {

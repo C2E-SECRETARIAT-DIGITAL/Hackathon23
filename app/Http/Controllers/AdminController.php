@@ -26,13 +26,15 @@ class AdminController extends Controller
     public function welcome()
     {
         $hackaton = Hackaton::latest()->first();
-        $statut =  Hackaton::latest()->first()->CanRecord();
+        $statut =  $hackaton->inscription;
 
-        if ($hackaton->inscription) {
-            return view('acceuil', compact('statut'));
-        } else {
-            return view('participants.encours');
-        }
+        return view('acceuil', compact('statut'));
+        // if ($hackaton->inscription) {
+        //     return view('acceuil', compact('statut'));
+        // }
+        // else {
+        //     return view('participants.encours');
+        // }
     }
 
 
@@ -51,14 +53,13 @@ class AdminController extends Controller
 
     public function finPreselection()
     {
-        $hackaton = Hackaton::latest()->first();
+        return view('participants.FinInsciption');
+        // if ($hackaton->inscription) {
 
-        if ($hackaton->inscription) {
-
-            return view('participants.FinInsciption');
-        } else {
-            return redirect()->route('welcome');
-        }
+        //     return view('participants.FinInsciption');
+        // } else {
+        //     return redirect()->route('welcome');
+        // }
     }
 
     public function inscriptionterminer()
@@ -234,5 +235,10 @@ class AdminController extends Controller
     {
         Excel::import(new MatriculesImport, $request->file('file')->store('files'));
         return redirect()->back();
+    }
+
+    public function participantAddView(){
+
+        return view('participantAdd');
     }
 }

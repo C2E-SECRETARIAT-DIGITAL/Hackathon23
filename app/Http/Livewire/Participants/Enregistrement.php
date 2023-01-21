@@ -97,7 +97,7 @@ class Enregistrement extends Component
         }
     }
 
-
+  
     public function getRandomInt($n)
     {
         $characters = '0123456789';

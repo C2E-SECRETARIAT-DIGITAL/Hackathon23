@@ -41,7 +41,7 @@
                            
                             <div class="b2">
                                 <a href="{{route('dashboard',  null, false)}}"><button type="button"> <span></span> MON PROFIL</button></a>
-                            </div>
+                            </div> 
                             
                         @else
                             
