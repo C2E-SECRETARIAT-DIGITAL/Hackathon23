@@ -68,10 +68,10 @@
 
 </div>
 
-<span id="counts" style="display: none;">31</span>
+<span id="counts" style="display: none;">18</span>
 
 <script>
     function resetTimer() {
-        document.getElementById("counts").innerText = 31
+        document.getElementById("counts").innerText = 18
     }
 </script>

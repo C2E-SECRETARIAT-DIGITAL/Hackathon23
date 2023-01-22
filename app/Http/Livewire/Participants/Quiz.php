@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class Quiz extends Component
 {
 
-    public $count_down = 31;
+    // public $count_down = 18;
 
     public $current_index = 0;
 

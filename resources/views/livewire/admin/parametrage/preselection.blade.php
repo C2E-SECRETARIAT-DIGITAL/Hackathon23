@@ -6,6 +6,7 @@
         <div>
 
             <div class="text-md font-bold text-center">Score: {{$quiz->score}} pts</div>
+            <div class="text-md font-bold text-center">Questions: {{sizeof($quiz->questions)}}</div>
 
             <div class="col-span-6" style="margin-bottom: 30px;">
                 <div class="flex flex-col">

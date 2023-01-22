@@ -202,7 +202,7 @@
                             else
                                 Livewire.emit('storeAndExit')
 
-                            sec = 31
+                            sec = 18
                         }
 
                         if (sec < 10)

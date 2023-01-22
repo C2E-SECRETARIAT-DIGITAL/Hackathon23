@@ -27,7 +27,7 @@
 
         @if($niveau->quiz_available == 1)
         <form method="POST">
-            <input type="number" wire:mpdel="nb_team" class="px-4 py-2 rounded" placeholder="Nombre d'équipes (1 par défaut)" min=1 />
+            <input type="number" wire:model="nb_team" class="px-4 py-2 rounded" placeholder="Nombre d'équipes (1 par défaut)" min=1 />
             <button wire:click.prevent="autoSelct()" class="px-4 py-2 mt-5 mr-1 text-sm font-bold uppercase border rounded-md cursor-pointer border-orange text-orange hover:bg-orange hover:text-white hover:shadow" type="submit">
                 Selection automatique
             </button>
@@ -147,7 +147,7 @@
                                 <td>
                                     @if($equipe->niveau->quiz_available)
 
-                                    {{$equipe->qsession->score}} / {{$equipe->qsession->quiz->score}}
+                                    {{$equipe->qsession->score < 0 ? -$equipe->qsession->score : $equipe->qsession->score}} / {{$equipe->qsession->quiz->score}}
 
                                     @endif
                                 </td>

@@ -19,7 +19,7 @@ class Selection extends Component
     public $statut;
     public $afficher = '';
 
-    public $nb_team = 10;
+    public $nb_team = 1;
 
     public function render()
     {
@@ -62,7 +62,6 @@ class Selection extends Component
     public function autoSelct()
     {
         $quiz = Quiz::where('niveau_id', $this->niveauselect)->first();
-        $score_moyen = intval($quiz->score / 2);
 
         $qsW = Qsession::where('quiz_id', $quiz->id)->orderBy('score', 'desc')->get();
         $qS = Qsession::where('quiz_id', $quiz->id)->get();
