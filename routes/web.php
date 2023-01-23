@@ -31,7 +31,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/preselection', function () {
-    return view('participants.preselection');
+    return view('participants.preselectionf');
 })->name('preselection');
 
 Route::middleware(['auth:sanctum', 'verified'])->post('/dashboard/up', [VideoController::class, 'uploadVideo'])->name('uploadvideo');
