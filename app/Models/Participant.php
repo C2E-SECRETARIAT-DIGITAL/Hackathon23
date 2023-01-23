@@ -13,6 +13,13 @@ class Participant extends Model
 
     public $guarded = [] ;
 
+    protected $fillable = [
+        'etudiant_id',
+        'equipe_id',
+        'hackaton_id',
+        'chef'
+    ];
+
     public function equipe()
     {
     	return $this->belongsTo(Equipe::class);

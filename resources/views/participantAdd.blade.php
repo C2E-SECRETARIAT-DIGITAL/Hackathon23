@@ -1,5 +1,9 @@
-<div>
+<x-app-layout>
 
-    @livewire('participants.part')
+    <div>
 
-</div>
+        @livewire('participants.part')
+
+    </div>
+
+</x-app-layout>

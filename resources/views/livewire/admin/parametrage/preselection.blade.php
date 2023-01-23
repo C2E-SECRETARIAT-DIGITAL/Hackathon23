@@ -6,7 +6,7 @@
         <div>
 
             <div class="text-md font-bold text-center">Score: {{$quiz->score}} pts</div>
-            <div class="text-md font-bold text-center">Questions: {{sizeof($quiz->questions)}}</div>
+            <div class="text-md font-bold text-center">Questions: {{sizeof($questions)}}</div>
 
             <div class="col-span-6" style="margin-bottom: 30px;">
                 <div class="flex flex-col">
@@ -79,7 +79,7 @@
                                             <thead class="bg-gray-50">
                                                 <tr>
                                                     <th scope="col" class="px-6 py-3 text-xs font-bold tracking-wider text-left text-gray-500 uppercase">
-                                                        {{$question->content}}
+                                                        {{$question->id}}) {{$question->content}}
                                                     </th>
                                                     <th lass="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
 
