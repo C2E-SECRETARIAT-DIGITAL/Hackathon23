@@ -69,7 +69,7 @@
             @if(Auth::user()->etudiant)
 
 
-            <div class="px-4 py-6 text-xl bg-white shadow-xl sm:rounded-lg">
+            <!-- <div class="px-4 py-6 text-xl bg-white shadow-xl sm:rounded-lg">
                 @if(Auth::user()->etudiant->getEquipe()->statut == 0)
 
                 @if(Auth::user()->etudiant->getEquipe()->niveau->quiz_available == 1)
@@ -136,7 +136,7 @@
                     </p>
 
                     @endif
-            </div>
+            </div> -->
 
             @else
 
