@@ -6,6 +6,7 @@ use App\Models\Equipe;
 use App\Models\Etudiant;
 use App\Models\Hackaton;
 use App\Models\Participant;
+use App\Models\Qsession;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
@@ -62,5 +63,13 @@ class Part extends Component
         ]);
 
         return redirect()->back();
+    }
+
+    public function openSession(){
+        $qs = Qsession::where('equipe_id', $this->equipe_id)->first();
+
+        $qs->state = 0;
+        $qs->score = 0;
+        $qs->save();
     }
 }

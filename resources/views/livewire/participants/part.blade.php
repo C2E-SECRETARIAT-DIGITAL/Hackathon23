@@ -60,7 +60,23 @@
         <input type="email" placeholder="Email" wire:model="email" />
         <input type="text" placeholder="Classe" wire:model="classe" />
         <button class="px-4 py-2 text-sm font-bold uppercase border rounded-md cursor-pointer bg-orange text-white hover:shadow" wire:click="create()">Click here</button>
-        
+
+    </div>
+
+    <div>
+        <select id="equipe_id" name="equipe_id" wire:model='equipe_id'>
+
+            <option vlaue=0>--Equipe--</option>
+            @foreach ($equipes as $equipe)
+            <option value="{{$equipe->id}}">
+                {{$equipe->nom}}
+            </option>
+            @endforeach
+
+        </select>
+
+        <button class="px-4 py-2 text-sm font-bold uppercase border rounded-md cursor-pointer bg-orange text-white hover:shadow" wire:click="openSession()">Click here</button>
+
     </div>
 
 </div>
