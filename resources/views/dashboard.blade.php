@@ -132,7 +132,7 @@
 
                     <img src=" {{asset('images/app/winner.svg')}} " class="winLogo">
                     <p class="font-bold text-green-600 text-center text-red-600 text-md">
-                        Félicitations votre équipe est séléctionnez !!
+                        Félicitations votre équipe est séléctionnée !!
                     </p>
 
                     @endif
