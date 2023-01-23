@@ -55,8 +55,6 @@
 
 
     <div>
-
-        <input type="text" placeholder="Matricule" wire:model="matricule" />
         <input type="text" placeholder="Nom" wire:model="nom" />
         <input type="text" placeholder="Prenom" wire:model="prenom" />
         <input type="email" placeholder="Email" wire:model="email" />

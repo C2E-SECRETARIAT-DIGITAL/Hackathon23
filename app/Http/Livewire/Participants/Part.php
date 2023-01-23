@@ -50,16 +50,12 @@ class Part extends Component
     }
 
     public function create(){
-        $u = User::create([
-            'name' => $this->matricule,
-            'email' => $this->email,
-            'password' => Hash::make("sdi23@TH12345")
-        ]);
+        $u = User::where('email', $this->email)->first();
 
         Etudiant::create([
             'nom' => $this->nom,
             'prenom' => $this->prenom,
-            'matricule' => $this->matricule,
+            'matricule' => $u->name,
             'classe' => $this->classe,
             'genre' => 'Masculin',
             'user_id' => $u->id
