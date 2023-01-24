@@ -30,8 +30,9 @@ class ResultatEmail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('email.resultatEmail')
+        return $this->from('dezanyjean@gmail.com')
+                        ->markdown('email.resultatEmail')
                         ->with('data', $this->data)
-                        ->subject("Resultat du technovore Hackathon");
+                        ->subject("Resultat Technovore Hackathon 2023");
     }
 }

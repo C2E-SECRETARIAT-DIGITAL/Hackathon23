@@ -189,7 +189,7 @@ class AdminController extends Controller
     public function sendEmail(string $email, string $nom, string $equipe)
     {
         $maildata = [
-            'title' => 'Technovore Hackathon',
+            'title' => 'Technovore Hackathon 2023',
             'nom' => $nom,
             'equipe' => $equipe
         ];
@@ -208,19 +208,15 @@ class AdminController extends Controller
         if ($chef_id) {
             $chef = Etudiant::find($chef_id);
 
-            $equipe = $chef->currentEquipe()->libelle;
+            $equipe = $chef->currentEquipe()->nom;
             $nom = $chef->nom . ' ' . $chef->prenom;
             $email = $chef->user->email;
 
-            $this->sendEmail($email, $nom, $equipe);
+            // $this->sendEmail($email, $nom, $equipe);
 
             try {
-
                 $this->sendEmail($email, $nom, $equipe);
             } catch (Exception $e) {
-
-                // En cas d'erreur en local on ne fait rien sauf un flash
-
                 if (env("APP_ENV") == "local") {
 
                     request()->session()->flash('danger', 'Envoi du mail impossible');
