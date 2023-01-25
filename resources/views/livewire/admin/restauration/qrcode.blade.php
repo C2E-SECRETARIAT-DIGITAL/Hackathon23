@@ -1,6 +1,6 @@
 <div>
     {{-- Stop trying to control. --}}
-    <div class="py-12">
+    <div id="app" class="py-12">
 
         <div class="text-center ">
 
@@ -51,15 +51,16 @@
             @endif
 
         </div>
-        <!-- <span class="font-bold" v-if="!seen"> Scanner le code QR</span>
-        <br> -->
 
+        <span class="font-bold" v-if="!seen"> Scanner le code QR</span>
+        <br>
+        <!-- 
         <div id="app">
 
-        </div>
+        </div> -->
 
-        <!-- <qrcode-stream @decode="onDecode"></qrcode-stream>
-        <qrcode-drop-zone></qrcode-drop-zone>
+        <qrcode-stream @decode="onDecode"></qrcode-stream>
+        <!-- <qrcode-drop-zone></qrcode-drop-zone> -->
 
         <div class="flex items-center justify-center h-32 py-4">
             <form action="{{route('qrcode.Soumission',null,false)}}" method="POST">
@@ -69,7 +70,7 @@
                     Validation
                 </button>
             </form>
-        </div> -->
+        </div>
 
     </div>
 

@@ -135,9 +135,10 @@
 
     <x-slot name="scripts">
 
-        <!-- <script src="{{ asset('js/vue.js') }}"></script>
-        <script src="{{ asset('js/vueQrCode.js') }}"></script>
+        <script src="{{ mix('js/vue.js') }}"></script>
+        <!-- <script src="{{ mix('js/vueQrCode.js') }}"></script> -->
         <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
+        <script src="https://unpkg.com/vue-qrcode-reader/dist/VueQrcodeReader.umd.min.js"></script>
         <script>
             var app = new Vue({
                 el: '#app',
@@ -153,7 +154,7 @@
                     seen: false
                 }
             })
-        </script> -->
+        </script>
 
 
         <script>
