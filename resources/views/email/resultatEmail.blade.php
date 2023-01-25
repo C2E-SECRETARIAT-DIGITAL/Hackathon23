@@ -10,7 +10,7 @@ Nous désirons par ce mail féliciter votre équipe {{ $data['equipe'] }} pour v
 
 Dans la même veine nous desirons vous inviter à rejoindre le groupe WhatsApp d'informations en cliquant sur le button ci-dessous.
 
-@component('mail::button', ['url' => 'https://sdi-hackathon23.c2e.ci/'])
+@component('mail::button', ['url' => 'https://chat.whatsapp.com/HClO6sWPAQZFjzB7bNgivr'])
 Rejoindre
 @endcomponent
 

@@ -180,9 +180,6 @@ class AdminController extends Controller
             $request->session()->flash('error', 'Veillez enregistrer le repas');
         }
 
-
-
-
         return redirect()->back();
     }
 
