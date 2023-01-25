@@ -5,11 +5,11 @@
     "/js/particles.js": "/js/particles.js",
     "/js/vue.js": "/js/vue.js",
     "/js/vueQrCode.js": "/js/vueQrCode.js",
-    "/css/particles.css": "/css/particles.css",
     "/css/inscription.css": "/css/inscription.css",
     "/css/acceuil1.css": "/css/acceuil1.css",
     "/css/acceuil.css": "/css/acceuil.css",
     "/css/app.css": "/css/app.css",
     "/css/terminer.css": "/css/terminer.css",
-    "/css/particles1.css": "/css/particles1.css"
+    "/css/particles1.css": "/css/particles1.css",
+    "/css/particles.css": "/css/particles.css"
 }

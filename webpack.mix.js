@@ -14,6 +14,9 @@ require('laravel-mix-simple-image-processing')
  */
 
 mix.js('resources/js/app.js', 'public/js')
+    .vue({
+        version: 3,
+    })
     .js('resources/js/app-particles.js', 'public/js')
     .js('resources/js/app-particles1.js', 'public/js')
     .js('resources/js/particles.js', 'public/js')
