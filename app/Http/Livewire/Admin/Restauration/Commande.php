@@ -13,7 +13,7 @@ class Commande extends Component
     public function render()
     {
         return view('livewire.admin.restauration.commande',[
-            'salles' => Salle::paginate(6),
+            'salles' => Salle::paginate(10),
             'collations' => Collation::all()
         ]);
     }
