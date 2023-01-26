@@ -18,11 +18,11 @@
 
                     @if (Auth::user()->etudiant)
 
-                    @if(Auth::user()->etudiant->is_chief())
+                    <!-- @if(Auth::user()->etudiant->is_chief())
                     <x-jet-nav-link href="{{ route('preselection', null, false) }}" :active="request()->routeIs('preselection')">
                         {{ __('Présélection') }}
                     </x-jet-nav-link>
-                    @endif
+                    @endif -->
 
                     @if (Auth::user()->etudiant->currentEquipe()->statut)
 
