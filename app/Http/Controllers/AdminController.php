@@ -11,6 +11,7 @@ use App\Models\Etudiant;
 use App\Models\Hackaton;
 use App\Models\Collation;
 use App\Mail\ResultatEmail;
+use App\Models\Participant;
 use App\Models\Restauration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -114,22 +115,13 @@ class AdminController extends Controller
         $equipe = Auth::user()->etudiant->getEquipe();
         $monequipe =  Equipe::find($equipe->id);
 
-        request()->validate([
-            'collation_etu0_id' => 'required',
-            'collation_etu1_id' => 'required',
-            'collation_etu2_id' => 'required'
+        $participant = Participant::find($request->id);
+
+        Commande::create([
+            'etudiant_id' => $participant->etudiant_id,
+            'salle_id' => $monequipe->currentSalle()->id,
+            'collation_id' => $request['collation_etu' . $participant->id . '_id']
         ]);
-
-
-        foreach ($equipe->participants as $key => $participant) {
-            Commande::create([
-                'etudiant_id' => $participant->etudiant_id,
-                'salle_id' => $monequipe->currentSalle()->id,
-                'collation_id' => $request['collation_etu' . $key . '_id']
-            ]);
-        }
-
-
 
         return redirect()->back();
     }
@@ -230,7 +222,8 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    public function participantAddView(){
+    public function participantAddView()
+    {
 
         return view('participantAdd');
     }

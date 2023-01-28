@@ -59,7 +59,7 @@
 
             display: inline-block;
             border-radius: 10px;
-            bo margin: 0px 1%;
+            margin: 0 1%;
         }
 
         .card-div {
