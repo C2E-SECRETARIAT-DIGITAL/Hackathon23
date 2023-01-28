@@ -33,7 +33,6 @@
 
             <form method="POST" action="{{route('get.commande', null, false)}}">
                 @csrf
-
                 <input type="number" name="id" value="{{$participant->id}}" hidden>
 
                 <div class="grid  md:grid-cols-6 gap-4">
