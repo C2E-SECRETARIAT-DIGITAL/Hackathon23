@@ -133,8 +133,7 @@
                     {{$salle->libelle }}
                 </td>
                 <td>
-                    @foreach ($salle->currentEquipes() as  $equipe)
-                          
+                    <!-- @foreach ($salle->currentEquipes() as  $equipe) -->
                         @foreach ($collations as $collation)
                             
                             <p style="margin: 0; text-transform: capitalize">
@@ -145,7 +144,7 @@
                             </p>
                             
                         @endforeach
-                    @endforeach
+                    <!-- @endforeach -->
                 </td>
             </tr>
         @endforeach
