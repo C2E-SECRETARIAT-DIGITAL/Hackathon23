@@ -20,7 +20,6 @@ class VideoController extends Controller
         $team->video_url = $path;
         $team->save();
 
-        return view('dashboard');
     }
 
     public function downloadVideo(Request $request)

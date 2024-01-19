@@ -29,13 +29,11 @@ class AdminController extends Controller
         $hackaton = Hackaton::latest()->first();
         $statut =  $hackaton->inscription;
 
-        return view('acceuil', compact('statut'));
-        // if ($hackaton->inscription) {
-        //     return view('acceuil', compact('statut'));
-        // }
-        // else {
-        //     return view('participants.encours');
-        // }
+        $data = [
+            'statut' => $statut
+        ];
+
+        return response()->json($data);
     }
 
 
@@ -44,23 +42,12 @@ class AdminController extends Controller
         $hackaton = Hackaton::latest()->first();
         $statut =  Hackaton::latest()->first()->CanRecord();
 
-        if ($hackaton->inscription and $statut) {
+        $data = [
+            'hackaton_inscription' => $hackaton->inscription,
+            'statut' => $statut
+        ];
 
-            return view('participants.inscription');
-        } else {
-            return redirect()->route('welcome');
-        }
-    }
-
-    public function finPreselection()
-    {
-        return view('participants.FinInsciption');
-        // if ($hackaton->inscription) {
-
-        //     return view('participants.FinInsciption');
-        // } else {
-        //     return redirect()->route('welcome');
-        // }
+        return response()->json($data);
     }
 
     public function inscriptionterminer()
@@ -68,29 +55,17 @@ class AdminController extends Controller
         $hackaton = Hackaton::latest()->first();
 
         if ($hackaton->inscription) {
-
             return view('terminer');
         } else {
             return redirect()->route('welcome');
         }
+
+        $data = [
+            'hackaton_inscription' => $hackaton->inscription
+        ];
+
+        return response()->json($data);
     }
-
-    public function index()
-    {
-        return view('Admin.parametrage');
-    }
-
-    public function selectionGroupe()
-    {
-        return view('Admin.selection');
-    }
-
-    public function impression()
-    {
-        return view('Admin.impression');
-    }
-
-
 
     public function restauration()
     {
@@ -104,9 +79,12 @@ class AdminController extends Controller
             //$qr = base64_encode(QrCode::format('svg')->size(250)->errorCorrection('H')->generate($m));
 
             $qrcode = QrCode::size(300)->generate($m);
-            return view('participants.restauration', compact('qrcode', 'collations'));
-        } else {
-            return redirect()->route('welcome');
+            $data = [
+                'qrcode' => $qrcode,
+                'collations' => $collations,
+            ];
+    
+            return response()->json($data);
         }
     }
 
@@ -123,7 +101,6 @@ class AdminController extends Controller
             'collation_id' => $request['collation_etu' . $participant->id . '_id']
         ]);
 
-        return redirect()->back();
     }
 
 
@@ -140,7 +117,13 @@ class AdminController extends Controller
             ->get()
             ->count();
 
-        return view('Admin.commande', compact('repas', 'nb_participants'));
+        $data = [
+            'repas' => $repas,
+            'nb_participants' => $nb_participants,
+        ];
+    
+        return response()->json($data);
+
     }
 
 
@@ -172,7 +155,6 @@ class AdminController extends Controller
             $request->session()->flash('error', 'Veillez enregistrer le repas');
         }
 
-        return redirect()->back();
     }
 
     public function sendEmail(string $email, string $nom, string $equipe)
@@ -212,19 +194,11 @@ class AdminController extends Controller
                 }
             }
         }
-
-        return redirect()->back();
     }
 
     public function importMatricule(Request $request)
     {
         Excel::import(new MatriculesImport, $request->file('file')->store('files'));
-        return redirect()->back();
     }
 
-    public function participantAddView()
-    {
-
-        return view('participantAdd');
-    }
 }
