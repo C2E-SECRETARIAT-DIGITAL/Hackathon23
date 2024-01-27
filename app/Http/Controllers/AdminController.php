@@ -33,7 +33,12 @@ class AdminController extends Controller
             'statut' => $statut
         ];
 
-        return response()->json($data);
+        $response = [
+            'data' => $data,
+            'statut' => true
+        ];
+
+        return response()->json($response);
     }
 
 
@@ -47,24 +52,28 @@ class AdminController extends Controller
             'statut' => $statut
         ];
 
-        return response()->json($data);
+        $response = [
+            'data' => $data,
+            'statut' => true
+        ];
+
+        return response()->json($response);
     }
 
     public function inscriptionterminer()
     {
         $hackaton = Hackaton::latest()->first();
 
-        if ($hackaton->inscription) {
-            return view('terminer');
-        } else {
-            return redirect()->route('welcome');
-        }
-
         $data = [
             'hackaton_inscription' => $hackaton->inscription
         ];
 
-        return response()->json($data);
+        $response = [
+            'data' => $data,
+            'statut' => true
+        ];
+
+        return response()->json($response);
     }
 
     public function restauration()
@@ -84,8 +93,19 @@ class AdminController extends Controller
                 'collations' => $collations,
             ];
     
-            return response()->json($data);
+            $response = [
+                'data' => $data,
+                'statut' => true
+            ];
+    
+            return response()->json($response);
         }
+
+        $response = [
+            'message' => 'Valeur du statut de l\'etudiant est "false". Impossible de traiter la requête.',
+            'statut' => false
+        ];
+        return response()->json($response);
     }
 
     public function getCommandes(Request $request)
@@ -101,6 +121,11 @@ class AdminController extends Controller
             'collation_id' => $request['collation_etu' . $participant->id . '_id']
         ]);
 
+        $response = [
+            'message' => 'Commande enregistrée !',
+            'statut' => true
+        ];
+        return response()->json($response);
     }
 
 
@@ -122,8 +147,12 @@ class AdminController extends Controller
             'nb_participants' => $nb_participants,
         ];
     
-        return response()->json($data);
+        $response = [
+            'data' => $data,
+            'statut' => true
+        ];
 
+        return response()->json($response);
     }
 
 
@@ -148,11 +177,29 @@ class AdminController extends Controller
                 ]);
 
                 $request->session()->flash('success', 'Bon appetit');
+
+                $response = [
+                    'message' => 'Bon appetit',
+                    'statut' => true
+                ];
+                return response()->json($response);
             } else {
                 $request->session()->flash('error', 'Déjà restauré');
+
+                $response = [
+                    'message' => 'Déjà restauré',
+                    'statut' => false
+                ];
+                return response()->json($response);
             }
         } else {
             $request->session()->flash('error', 'Veillez enregistrer le repas');
+
+            $response = [
+                'message' => 'Veillez enregistrer le repas',
+                'statut' => false
+            ];
+            return response()->json($response);
         }
 
     }
@@ -166,6 +213,12 @@ class AdminController extends Controller
         ];
 
         Mail::to($email)->send(new ResultatEmail($maildata));
+
+        $response = [
+            'message' => 'Mail envoyé !',
+            'statut' => true
+        ];
+        return response()->json($response);
     }
 
 
@@ -187,18 +240,42 @@ class AdminController extends Controller
 
             try {
                 $this->sendEmail($email, $nom, $equipe);
+
+                $response = [
+                    'message' => 'Mail envoyé !',
+                    'statut' => true
+                ];
+                return response()->json($response);
             } catch (Exception $e) {
                 if (env("APP_ENV") == "local") {
 
                     request()->session()->flash('danger', 'Envoi du mail impossible');
+
+                    $response = [
+                        'message' => 'Impossible d\'envoyer le mail.',
+                        'statut' => true
+                    ];
+                    return response()->json($response);
                 }
             }
         }
+
+        $response = [
+            'message' => 'Impossible de récupérer l\'identifiant du chef.',
+            'statut' => false
+        ];
+        return response()->json($response);
     }
 
     public function importMatricule(Request $request)
     {
         Excel::import(new MatriculesImport, $request->file('file')->store('files'));
+
+        $response = [
+            'message' => 'Document importé !',
+            'statut' => true
+        ];
+        return response()->json($response);
     }
 
 }

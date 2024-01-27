@@ -20,6 +20,12 @@ class VideoController extends Controller
         $team->video_url = $path;
         $team->save();
 
+        $response = [
+            'message' => 'Vidéo enregistrée !',
+            'statut' => true
+        ];
+        return response()->json($response);
+
     }
 
     public function downloadVideo(Request $request)
