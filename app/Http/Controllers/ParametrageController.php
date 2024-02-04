@@ -34,7 +34,7 @@ class ParametrageController extends Controller
             ModelsHackaton::create([
                 'pco_1' => $request->pco_1,
                 'pco_2' => $request->pco_2,
-                'annee' => $request->annee
+                'annee' => $request->annee,
             ]);
 
             $response = [
@@ -44,5 +44,27 @@ class ParametrageController extends Controller
         }
 
         return response()->json($response);
+    }
+
+    public function tooglehackathon(Request $request)
+    {
+        if (!$request->hackathonId) {
+            $response = [
+                'statut' => false,
+                'message' => "Fournissez l'id de l'hackathon",
+            ];
+        } else {
+            $hackaton = ModelsHackaton::find($request->hackathonId);
+            $hackaton->inscription = !$hackaton->inscription;
+            $hackaton->save();
+
+            $response = [
+                'statut' => true,
+                'message' => $hackaton->inscription == 1 ? "Hackathon activé" : "Hackathon desactivé",
+            ];
+        }
+
+        return response()->json($response);
+
     }
 }

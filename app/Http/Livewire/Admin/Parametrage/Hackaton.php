@@ -54,13 +54,10 @@ class Hackaton extends Component
 
     public function activation($id)
     {
-        // dd($id);
         if($id)
         {
             $hackaton = ModelsHackaton::find($id);
-
             $hackaton->inscription = !$hackaton->inscription ;
-
             $hackaton->save();
         }
     }
