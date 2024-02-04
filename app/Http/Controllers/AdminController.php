@@ -29,6 +29,7 @@ class AdminController extends Controller
         $hackaton = Hackaton::latest()->first();
         $statut =  $hackaton->inscription;
 
+        // dd($hackaton);
         return view('acceuil', compact('statut'));
         // if ($hackaton->inscription) {
         //     return view('acceuil', compact('statut'));
@@ -42,10 +43,9 @@ class AdminController extends Controller
     public function inscription()
     {
         $hackaton = Hackaton::latest()->first();
-        $statut =  Hackaton::latest()->first()->CanRecord();
+        $statut =  Hackaton::latest()->first()->canRecord();
 
         if ($hackaton->inscription and $statut) {
-
             return view('participants.inscription');
         } else {
             return redirect()->route('welcome');

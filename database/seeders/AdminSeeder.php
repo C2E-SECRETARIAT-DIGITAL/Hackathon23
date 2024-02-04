@@ -94,6 +94,12 @@ class AdminSeeder extends Seeder
             'password' => Hash::make("@dminH@ck@thon23P@ssword")
         ]);
 
+        $user = User::create([
+            'name' => 'participant',
+            'email' => 'userHackathon@C2E.com',
+            'password' => Hash::make("@dminH@ck@thon23P@ssword")
+        ]);
+
         Hackaton::create([
             'pco_1' => 'N\'DA Regis Richmond',
             'pco_2' => 'DJE BI Mointi Jean Patrice',
