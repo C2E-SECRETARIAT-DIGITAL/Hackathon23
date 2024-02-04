@@ -36,18 +36,21 @@ class InscriptionController extends Controller
     {
         $credentials = request(['email', 'password']);
         if (Auth::attempt($credentials)) {
-            $user = $request->user();
+            $user = Auth::user();
             $token = $user->createToken('Personal Access Token')->plainTextToken;
             $membres = [];
 
-            foreach (Auth::user()->etudiant->getEquipe()->participants as $participant){
-                if ($participant->chef == 1){
-                    $participant->etudiant["chef"] = 1;
-                }else{
-                    $participant->etudiant["chef"] = 0;
+            if ($user->name != "Administrateur") {
+                foreach ($user->etudiant->getEquipe()->participants as $participant) {
+                    if ($participant->chef == 1) {
+                        $participant->etudiant["chef"] = 1;
+                    } else {
+                        $participant->etudiant["chef"] = 0;
+                    }
+                    array_push($membres, $participant->etudiant);
                 }
-                array_push($membres, $participant->etudiant);
             }
+
 
             $data = [
                 'status' => true,
@@ -88,7 +91,7 @@ class InscriptionController extends Controller
     public function inscription()
     {
         $hackaton = Hackaton::latest()->first();
-        $statut =  Hackaton::latest()->first()->CanRecord();
+        $statut = Hackaton::latest()->first()->CanRecord();
 
         $data = [
             'hackaton_inscription' => $hackaton->inscription,
@@ -367,11 +370,15 @@ class InscriptionController extends Controller
     public function enregistrement_render(Request $request)
     {
         $data = [
-            'niveaux' => $request->esatic == 1 ? Niveau::with(['classes' => function ($query) {
-                $query->where('esatic', 1);
-            }])->get() : Niveau::where("id", ">", 3)->with(['classes' => function ($query) {
-                $query->where('esatic', 0);
-            }])->get(),
+            'niveaux' => $request->esatic == 1 ? Niveau::with([
+                'classes' => function ($query) {
+                    $query->where('esatic', 1);
+                }
+            ])->get() : Niveau::where("id", ">", 3)->with([
+                    'classes' => function ($query) {
+                        $query->where('esatic', 0);
+                    }
+                ])->get(),
         ];
 
         $response = [

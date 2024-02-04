@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [InscriptionController::class, 'welcome']);
 
 Route::post('/auth/login', [InscriptionController::class, 'login']);
-Route::post('/auth/logout', [InscriptionController::class, 'logout']);
 
 Route::get('/inscriptions', [InscriptionController::class, 'inscription']);
 Route::get('/inscription-terminer', [InscriptionController::class, 'inscriptionterminer']);
@@ -21,3 +20,7 @@ Route::post('/enregistrement-participants', [InscriptionController::class, 'part
 Route::post('/data-for-enregistrement-participants', [InscriptionController::class, 'enregistrement_render']);
 
 Route::post('parametrage/create-hackathon', [ParametrageController::class, 'createHackathon']);
+
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::get('/auth/logout', [InscriptionController::class, 'logout']);
+});
