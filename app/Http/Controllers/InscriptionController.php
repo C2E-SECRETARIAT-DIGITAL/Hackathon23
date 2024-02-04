@@ -38,11 +38,22 @@ class InscriptionController extends Controller
         if (Auth::attempt($credentials)) {
             $user = $request->user();
             $token = $user->createToken('Personal Access Token')->plainTextToken;
+            $membres = [];
+
+            foreach (Auth::user()->etudiant->getEquipe()->participants as $participant){
+                if ($participant->chef == 1){
+                    $participant->etudiant["chef"] = 1;
+                }else{
+                    $participant->etudiant["chef"] = 0;
+                }
+                array_push($membres, $participant->etudiant);
+            }
 
             $data = [
                 'status' => true,
                 'role' => Auth::user()->etudiant ? "participant" : "admin",
                 'user' => $user,
+                'equipe' => $membres,
                 'accessToken' => $token,
                 'message' => 'Vous êtes connecté(e)'
             ];
