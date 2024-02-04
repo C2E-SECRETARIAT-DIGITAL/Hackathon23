@@ -19,7 +19,11 @@ Route::post('/enregistrement-participants', [InscriptionController::class, 'part
 // get list of classes
 Route::post('/data-for-enregistrement-participants', [InscriptionController::class, 'enregistrement_render']);
 
-Route::post('/create-hackathon', [ParametrageController::class, 'createHackathon']);
+
+// PARAMETRAGES ROUTES
+
+Route::post('/hackathon/create', [ParametrageController::class, 'createhackathon']);
+Route::get('/hackathon/render', [ParametrageController::class, 'renderhackathon']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/auth/logout', [InscriptionController::class, 'logout']);

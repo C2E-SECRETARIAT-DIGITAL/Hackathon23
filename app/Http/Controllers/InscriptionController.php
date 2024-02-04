@@ -45,7 +45,7 @@ class InscriptionController extends Controller
                     } else {
                         $participant->etudiant["chef"] = 0;
                     }
-                    $participant->etudiant["email"] = $participant->email;
+                    $participant->etudiant["email"] = $participant->etudiant->user->email;
                     array_push($membres, $participant->etudiant);
                 }
             }
@@ -87,6 +87,7 @@ class InscriptionController extends Controller
         return response()->json($response);
     }
 
+    
     public function inscription()
     {
         $hackaton = Hackaton::latest()->first();

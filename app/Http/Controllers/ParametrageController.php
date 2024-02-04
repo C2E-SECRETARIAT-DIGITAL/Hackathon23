@@ -8,11 +8,10 @@ use Illuminate\Http\Request;
 
 class ParametrageController extends Controller
 {
-    public function render()
+    public function renderhackathon()
     {
-
         $data = [
-            'hackaton_inscription' => ModelsHackaton::orderBy('created_at', 'DESC')
+            'data' => ModelsHackaton::orderBy('created_at', 'DESC')
                 ->paginate(4),
         ];
 
@@ -24,15 +23,14 @@ class ParametrageController extends Controller
         return response()->json($response);
     }
 
-    public function createHackathon(Request $request)
+    public function createhackathon(Request $request)
     {
-        $validation = $this->validate($request, [
-            'pco_1' => 'required',
-            'annee' => 'required|min:4'
-        ]);
-
-        if ($validation) {
-
+        if (!$request->pco_1 || !$request->pco_2 || !$request->annee) {
+            $response = [
+                'statut' => false,
+                'message' => "Remplissez tout les champs correctement",
+            ];
+        } else {
             ModelsHackaton::create([
                 'pco_1' => $request->pco_1,
                 'pco_2' => $request->pco_2,
@@ -43,15 +41,8 @@ class ParametrageController extends Controller
                 'statut' => true,
                 'message' => "Hackathon crée avec succès",
             ];
-
-        } else {
-            $response = [
-                'statut' => false,
-                'message' => "Remplissez tout les champs correctement",
-            ];
         }
 
         return response()->json($response);
-
     }
 }
