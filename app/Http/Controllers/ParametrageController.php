@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class ParametrageController extends Controller
 {
-    public function index()
+    public function render()
     {
 
         $data = [

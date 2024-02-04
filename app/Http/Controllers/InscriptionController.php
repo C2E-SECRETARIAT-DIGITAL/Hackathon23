@@ -29,8 +29,6 @@ use Illuminate\Support\Facades\Hash;
 class InscriptionController extends Controller
 {
 
-
-
     // Log In
     public function login(Request $request)
     {
@@ -47,7 +45,7 @@ class InscriptionController extends Controller
                     } else {
                         $participant->etudiant["chef"] = 0;
                     }
-                    $participant->etudiant->email = $participant->email;
+                    $participant->etudiant["email"] = $participant->email;
                     array_push($membres, $participant->etudiant);
                 }
             }
