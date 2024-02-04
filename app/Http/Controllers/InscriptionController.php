@@ -64,7 +64,7 @@ class InscriptionController extends Controller
     // Log Out
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
+        Auth::user()->currentAccessToken()->delete();
 
         $response = [
             'message' => 'Successfully logged out',

@@ -24,7 +24,7 @@ class ParametrageController extends Controller
         return response()->json($response);
     }
 
-    public function createHackaton(Request $request)
+    public function createHackathon(Request $request)
     {
         $validation = $this->validate($request, [
             'pco_1' => 'required',
