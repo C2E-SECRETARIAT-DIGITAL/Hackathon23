@@ -36,7 +36,7 @@ class InscriptionController extends Controller
     {
         $credentials = request(['email', 'password']);
         if (Auth::attempt($credentials)) {
-            $user = Auth::user();
+            $user = $request->user();
             $token = $user->createToken('Personal Access Token')->plainTextToken;
             $membres = [];
 
@@ -47,6 +47,7 @@ class InscriptionController extends Controller
                     } else {
                         $participant->etudiant["chef"] = 0;
                     }
+                    $participant->etudiant->email = $participant->email;
                     array_push($membres, $participant->etudiant);
                 }
             }
