@@ -32,10 +32,10 @@ class GroupeController extends Controller
         return response()->json($response);
     }
 
-    public function selection_selection(int $id)
+    public function selection_selection(Request $request)
     {
-        if ($id) {
-            $equipe = Equipe::where('id', $id)->first();
+        if ($request->id) {
+            $equipe = Equipe::where('id', $request->id)->first();
             $equipe->update([
                 'statut' => !$equipe->statut
             ]);

@@ -445,7 +445,7 @@ class ParametrageController extends Controller
 
     }
 
-    public function deleteRepartition(Request $request)
+    public function repartition_deleteRepartition(Request $request)
     {
         if($request->id)
         {

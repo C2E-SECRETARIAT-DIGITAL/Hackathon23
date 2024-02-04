@@ -36,19 +36,18 @@
 
                     @foreach (Auth::user()->etudiant->getEquipe()->participants as $participant)
 
-                <p class="py-3">
+                    <p class="py-3">
 
-                    <span class="font-bold text-orange text-md"> {{$participant->etudiant->matricule}} >> </span>
-                    <br>
-                    {{$participant->etudiant->nom}} {{$participant->etudiant->prenom}}
-                    <span class="txt-md">({{$participant->etudiant->user->email}} )</span>
+                        <span class="font-bold text-orange text-md"> {{$participant->etudiant->matricule}} >> </span>
+                        <br>
+                        {{$participant->etudiant->nom}} {{$participant->etudiant->prenom}}
+                        <span class="txt-md">({{$participant->etudiant->user->email}} )</span>
+
+                    </p>
+                    @endforeach
+
 
                 </p>
-                @endforeach
-
-
-                </p>
-
                 @else
                 <p class="text-xl font-bold text-center ">
                     Bienvenue:

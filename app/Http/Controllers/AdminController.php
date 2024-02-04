@@ -24,22 +24,22 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class AdminController extends Controller
 {
 
-    public function welcome()
-    {
-        $hackaton = Hackaton::latest()->first();
-        $statut =  $hackaton->inscription;
+        public function welcome()
+        {
+            $hackaton = Hackaton::latest()->first();
+            $statut =  $hackaton->inscription;
 
-        $data = [
-            'statut' => $statut
-        ];
+            $data = [
+                'statut' => $statut
+            ];
 
-        $response = [
-            'data' => $data,
-            'statut' => true
-        ];
+            $response = [
+                'data' => $data,
+                'statut' => true
+            ];
 
-        return response()->json($response);
-    }
+            return response()->json($response);
+        }
 
 
     public function inscription()

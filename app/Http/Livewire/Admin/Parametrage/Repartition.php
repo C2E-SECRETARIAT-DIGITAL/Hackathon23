@@ -49,8 +49,7 @@ class Repartition extends Component
                 'salle_id' => $this->salle_id
             ]);
 
-            $this->salle_id ='';
-
+            $this->salle_id ='';  
         }
     }
 

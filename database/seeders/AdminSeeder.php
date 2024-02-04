@@ -29,28 +29,40 @@ class AdminSeeder extends Seeder
         $rls = ['Super@Administrateur', 'Administrateur', 'participant'];
         $pms = ['restaurant', 'comite nuit', 'hackaton'];
 
-        $masters = [
-            'MASTER 1 TELECOM',
-            'MASTER 1 INFO',
-            'MASTER 1 MDSI',
-            'MASTER 1 MBDS',
-            'MASTER 1 BIHAR',
-            'MASTER 1 ERIS',
-            'MASTER 2 TELECOM',
-            'MASTER 2 SIGL',
-            'MASTER 2 SITW',
-            'MASTER 2 MDSI',
-            'MASTER 2 MBDS',
-            'MASTER 2 BIHAR',
-            'MASTER 2 ERIS'
-        ];
+        // $masters = [
+        //     'MASTER 1 TELECOM',
+        //     'MASTER 1 INFO',
+        //     'MASTER 1 MDSI',
+        //     'MASTER 1 MBDS',
+        //     'MASTER 1 BIHAR',
+        //     'MASTER 1 ERIS',
+        //     'MASTER 2 TELECOM',
+        //     'MASTER 2 SIGL',
+        //     'MASTER 2 SITW',
+        //     'MASTER 2 MDSI',
+        //     'MASTER 2 MBDS',
+        //     'MASTER 2 BIHAR',
+        //     'MASTER 2 ERIS'
+        // ];
 
         $classes = [
             ['SRIT 1A', 'SRIT 1B', 'SRIT 1C', 'SRIT 1D', 'SRIT 1E', 'TWIN 1'],
             ['SRIT 2A', 'SRIT 2B', 'SIGL 2', 'RTEL 2', 'TWIN 2', 'SRIT 3A', 'SRIT 3B', 'SIGL 3', 'RTEL 3', 'TWIN 3', 'DASI'],
-            $masters,
-            $masters,
-            $masters
+            [
+                'MASTER 1 TELECOM',
+                'MASTER 1 INFO',
+                'MASTER 1 MDSI',
+                'MASTER 1 MBDS',
+                'MASTER 1 BIHAR',
+                'MASTER 1 ERIS',
+                'MASTER 2 TELECOM',
+                'MASTER 2 SIGL',
+                'MASTER 2 SITW',
+                'MASTER 2 MDSI',
+                'MASTER 2 MBDS',
+                'MASTER 2 BIHAR',
+                'MASTER 2 ERIS'
+            ]
         ];
 
         $classes_externes = [
@@ -115,6 +127,7 @@ class AdminSeeder extends Seeder
         }
 
 
+    //--------------------------------------------------------
 
         $i = 0;
         foreach (Niveau::all() as $niv) {
