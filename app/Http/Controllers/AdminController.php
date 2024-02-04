@@ -29,6 +29,7 @@ class AdminController extends Controller
         $hackaton = Hackaton::latest()->first();
         $statut =  $hackaton->inscription;
 
+        // dd($hackaton);
         return view('acceuil', compact('statut'));
         // if ($hackaton->inscription) {
         //     return view('acceuil', compact('statut'));
@@ -45,7 +46,6 @@ class AdminController extends Controller
         $statut =  Hackaton::latest()->first()->canRecord();
 
         if ($hackaton->inscription and $statut) {
-
             return view('participants.inscription');
         } else {
             return redirect()->route('welcome');
@@ -67,17 +67,30 @@ class AdminController extends Controller
     {
         $hackaton = Hackaton::latest()->first();
 
-        $data = [
-            'hackaton_inscription' => $hackaton->inscription
-        ];
+        if ($hackaton->inscription) {
 
-        $response = [
-            'data' => $data,
-            'statut' => true
-        ];
-
-        return response()->json($response);
+            return view('terminer');
+        } else {
+            return redirect()->route('welcome');
+        }
     }
+
+    public function index()
+    {
+        return view('Admin.parametrage');
+    }
+
+    public function selectionGroupe()
+    {
+        return view('Admin.selection');
+    }
+
+    public function impression()
+    {
+        return view('Admin.impression');
+    }
+
+
 
     public function restauration()
     {
@@ -91,24 +104,10 @@ class AdminController extends Controller
             //$qr = base64_encode(QrCode::format('svg')->size(250)->errorCorrection('H')->generate($m));
 
             $qrcode = QrCode::size(300)->generate($m);
-            $data = [
-                'qrcode' => $qrcode,
-                'collations' => $collations,
-            ];
-    
-            $response = [
-                'data' => $data,
-                'statut' => true
-            ];
-    
-            return response()->json($response);
+            return view('participants.restauration', compact('qrcode', 'collations'));
+        } else {
+            return redirect()->route('welcome');
         }
-
-        $response = [
-            'message' => 'Valeur du statut de l\'etudiant est "false". Impossible de traiter la requête.',
-            'statut' => false
-        ];
-        return response()->json($response);
     }
 
     public function getCommandes(Request $request)
@@ -124,11 +123,7 @@ class AdminController extends Controller
             'collation_id' => $request['collation_etu' . $participant->id . '_id']
         ]);
 
-        $response = [
-            'message' => 'Commande enregistrée !',
-            'statut' => true
-        ];
-        return response()->json($response);
+        return redirect()->back();
     }
 
 
@@ -145,17 +140,7 @@ class AdminController extends Controller
             ->get()
             ->count();
 
-        $data = [
-            'repas' => $repas,
-            'nb_participants' => $nb_participants,
-        ];
-    
-        $response = [
-            'data' => $data,
-            'statut' => true
-        ];
-
-        return response()->json($response);
+        return view('Admin.commande', compact('repas', 'nb_participants'));
     }
 
 
@@ -180,31 +165,14 @@ class AdminController extends Controller
                 ]);
 
                 $request->session()->flash('success', 'Bon appetit');
-
-                $response = [
-                    'message' => 'Bon appetit',
-                    'statut' => true
-                ];
-                return response()->json($response);
             } else {
                 $request->session()->flash('error', 'Déjà restauré');
-
-                $response = [
-                    'message' => 'Déjà restauré',
-                    'statut' => false
-                ];
-                return response()->json($response);
             }
         } else {
             $request->session()->flash('error', 'Veillez enregistrer le repas');
-
-            $response = [
-                'message' => 'Veillez enregistrer le repas',
-                'statut' => false
-            ];
-            return response()->json($response);
         }
 
+        return redirect()->back();
     }
 
     public function sendEmail(string $email, string $nom, string $equipe)
@@ -216,12 +184,6 @@ class AdminController extends Controller
         ];
 
         Mail::to($email)->send(new ResultatEmail($maildata));
-
-        $response = [
-            'message' => 'Mail envoyé !',
-            'statut' => true
-        ];
-        return response()->json($response);
     }
 
 
@@ -243,42 +205,26 @@ class AdminController extends Controller
 
             try {
                 $this->sendEmail($email, $nom, $equipe);
-
-                $response = [
-                    'message' => 'Mail envoyé !',
-                    'statut' => true
-                ];
-                return response()->json($response);
             } catch (Exception $e) {
                 if (env("APP_ENV") == "local") {
 
                     request()->session()->flash('danger', 'Envoi du mail impossible');
-
-                    $response = [
-                        'message' => 'Impossible d\'envoyer le mail.',
-                        'statut' => true
-                    ];
-                    return response()->json($response);
                 }
             }
         }
 
-        $response = [
-            'message' => 'Impossible de récupérer l\'identifiant du chef.',
-            'statut' => false
-        ];
-        return response()->json($response);
+        return redirect()->back();
     }
 
     public function importMatricule(Request $request)
     {
         Excel::import(new MatriculesImport, $request->file('file')->store('files'));
-
-        $response = [
-            'message' => 'Document importé !',
-            'statut' => true
-        ];
-        return response()->json($response);
+        return redirect()->back();
     }
 
+    public function participantAddView()
+    {
+
+        return view('participantAdd');
+    }
 }
