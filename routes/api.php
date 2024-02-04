@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Controllers\Api\InscriptionController;
+
+use App\Http\Controllers\InscriptionController;
+use App\Http\Controllers\ParametrageController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,3 +19,10 @@ Route::post('/enregistrement-participants', [InscriptionController::class, 'part
 
 // get list of classes
 Route::post('/data-for-enregistrement-participants', [InscriptionController::class, 'enregistrement_render']);
+
+
+// Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+
+Route::get('parametrage/hackathon/create', [ParametrageController::class, 'createHackaton']);
+
+// });

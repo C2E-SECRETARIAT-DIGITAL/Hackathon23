@@ -28,12 +28,7 @@ use Illuminate\Support\Facades\Hash;
 
 class InscriptionController extends Controller
 {
-    public $errorEmail = false;
-    public $errorMatricule = false;
 
-    public $matricule_chef;
-    public $matricule_m2;
-    public $matricule_m3;
 
 
     // Log In
@@ -353,7 +348,7 @@ class InscriptionController extends Controller
         } else {
             return response()->json([
                 'status' => false,
-                'message' => 'Complètez tous les champs !'
+                'message' => 'Remplissez tout les chapms correctement'
             ]);
         }
     }
