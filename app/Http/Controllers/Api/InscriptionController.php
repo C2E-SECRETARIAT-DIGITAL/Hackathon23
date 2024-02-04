@@ -26,7 +26,7 @@ use Livewire\Component;
 
 use Illuminate\Support\Facades\Hash;
 
-class InscripController extends Controller
+class InscriptionController extends Controller
 {
     public $errorEmail = false;
     public $errorMatricule = false;

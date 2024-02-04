@@ -1,19 +1,19 @@
 <?php
 
-use App\Http\Controllers\InscripController;
+use App\Http\Controllers\Api\InscriptionController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [InscripController::class, 'welcome']);
+Route::get('/', [InscriptionController::class, 'welcome']);
 
-Route::post('/auth/login', [InscripController::class, 'login']);
-Route::get('/auth/logout', [InscripController::class, 'logout']);
+Route::post('/auth/login', [InscriptionController::class, 'login']);
+Route::get('/auth/logout', [InscriptionController::class, 'logout']);
 
-Route::get('/inscriptions', [InscripController::class, 'inscription']);
-Route::get('/inscription-terminer', [InscripController::class, 'inscriptionterminer']);
+Route::get('/inscriptions', [InscriptionController::class, 'inscription']);
+Route::get('/inscription-terminer', [InscriptionController::class, 'inscriptionterminer']);
 
-Route::post('/enregistrement-participants', [InscripController::class, 'participants_enregistrement_createEquipe']);
+Route::post('/enregistrement-participants', [InscriptionController::class, 'participants_enregistrement_createEquipe']);
 
 // get list of classes
-Route::post('/data-for-enregistrement-participants', [InscripController::class, 'enregistrement_render']);
+Route::post('/data-for-enregistrement-participants', [InscriptionController::class, 'enregistrement_render']);
