@@ -229,7 +229,7 @@ class InscriptionController extends Controller
                     $user1 = User::create([
                         'name' => trim($matricule_chef),
                         'email' => $request->email_chef,
-                        'password' => Hash::make("sdi23@TH12345")
+                        'password' => Hash::make("sdi24@TH12345")
                     ]);
 
                     $etudiant1 = Etudiant::create([
@@ -244,7 +244,7 @@ class InscriptionController extends Controller
                     $user1 = User::create([
                         'name' => trim($request->matricule_chef),
                         'email' => $request->email_chef,
-                        'password' => Hash::make("sdi23@TH12345")
+                        'password' => Hash::make("sdi24@TH12345")
                     ]);
 
                     $etudiant1 = Etudiant::create([
@@ -265,7 +265,7 @@ class InscriptionController extends Controller
                     $user2 = User::create([
                         'name' => trim($matricule_m2),
                         'email' => $request->email_m2,
-                        'password' => Hash::make("sdi23@TH12345")
+                        'password' => Hash::make("sdi24@TH12345")
                     ]);
 
                     $etudiant2 = Etudiant::create([
@@ -280,7 +280,7 @@ class InscriptionController extends Controller
                     $user2 = User::create([
                         'name' => trim($request->matricule_m2),
                         'email' => $request->email_m2,
-                        'password' => Hash::make("sdi23@TH12345")
+                        'password' => Hash::make("sdi24@TH12345")
                     ]);
 
                     $etudiant2 = Etudiant::create([
@@ -301,7 +301,7 @@ class InscriptionController extends Controller
                     $user3 = User::create([
                         'name' => trim($matricule_m3),
                         'email' => $request->email_m3,
-                        'password' => Hash::make("sdi23@TH12345")
+                        'password' => Hash::make("sdi24@TH12345")
                     ]);
 
                     $etudiant3 = Etudiant::create([
@@ -316,7 +316,7 @@ class InscriptionController extends Controller
                     $user3 = User::create([
                         'name' => trim($request->matricule_m3),
                         'email' => $request->email_m3,
-                        'password' => Hash::make("sdi23@TH12345")
+                        'password' => Hash::make("sdi24@TH12345")
                     ]);
 
                     $etudiant3 = Etudiant::create([

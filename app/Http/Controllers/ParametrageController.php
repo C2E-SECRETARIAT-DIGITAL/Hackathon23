@@ -38,16 +38,26 @@ class ParametrageController extends Controller
                 'message' => "Remplissez tout les champs correctement",
             ];
         } else {
-            ModelsHackaton::create([
-                'pco_1' => $request->pco_1,
-                'pco_2' => $request->pco_2,
-                'annee' => $request->annee,
-            ]);
+            if (ModelsHackaton::where('annee', $request->annee)->first()) {
 
-            $response = [
-                'status' => true,
-                'message' => "Hackathon crée avec succès",
-            ];
+                $response = [
+                    'status' => false,
+                    'message' => "Un hackathon est déja crée pour cette année",
+                ];
+                
+            } else {
+
+                ModelsHackaton::create([
+                    'pco_1' => $request->pco_1,
+                    'pco_2' => $request->pco_2,
+                    'annee' => $request->annee,
+                ]);
+
+                $response = [
+                    'status' => true,
+                    'message' => "Hackathon crée avec succès",
+                ];
+            }
         }
 
         return response()->json($response);
