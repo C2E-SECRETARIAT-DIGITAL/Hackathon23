@@ -57,7 +57,6 @@ class Niveau extends Component
         $this->classe_id =  $classe->id ;
         $this->edit_mode = true ;
         
-
     }
 
     public function updateClasse(int $id)

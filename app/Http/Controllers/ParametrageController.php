@@ -3,11 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hackaton as ModelsHackaton;
+use App\Models\Niveau as ModelsNiveau;
+use App\Models\Classe;
+
 
 use Illuminate\Http\Request;
 
 class ParametrageController extends Controller
 {
+
+
+
+    // ----- HACKATHON TAB ---------- HACKATHON TAB ---------- HACKATHON TAB ---------- HACKATHON TAB ----- //
     public function renderhackathon()
     {
         $data = [
@@ -65,6 +72,93 @@ class ParametrageController extends Controller
         }
 
         return response()->json($response);
-
     }
+
+    // ----- HACKATHON TAB ---------- HACKATHON TAB ---------- HACKATHON TAB ---------- HACKATHON TAB ----- //
+
+    // ----- CLASSES TAB ---------- CLASSES TAB ---------- CLASSES TAB ---------- CLASSES TAB ----- //
+    public function renderclasse()
+    {
+        $data = [
+            'niveaux' => ModelsNiveau::all(),
+            'classes' => Classe::orderBy('created_at', 'DESC')->paginate(6)
+        ];
+
+        $response = [
+            'statut' => true,
+            'data' => $data,
+        ];
+
+        return response()->json($response);
+    }
+
+    public function createclasse(Request $request)
+    {
+        if (!$request->libelle || !$request->niveau_id) {
+            $response = [
+                'statut' => false,
+                'message' => "Remplissez tout les champs correctement",
+            ];
+        } else {
+            Classe::create([
+                'libelle' => $request->libelle,
+                'niveau_id' => $request->niveau_id
+            ]);
+
+            $response = [
+                'statut' => true,
+                'message' => "Classe crée avec succès",
+            ];
+        }
+
+        return response()->json($response);
+    }
+
+    public function updateclasse(Request $request)
+    {
+        $classe = Classe::find($request->classeId);
+
+        if (!$classe) {
+            $response = [
+                'statut' => false,
+                'message' => "Classe non trouvée",
+            ];
+        } else {
+
+            if ($request->libelle)
+                $classe->libelle = $request->libelle;
+            if ($request->niveau_id)
+                $classe->niveau_id = $request->niveau_id;
+
+            $classe->save();
+
+            $response = [
+                'statut' => true,
+                'message' => "Classe modifiée avec succès",
+            ];
+        }
+
+        return response()->json($response);
+    }
+
+    public function deleteclasse(Request $request)
+    {
+        $classe = Classe::find($request->classeId);
+
+        if (!$classe) {
+            $response = [
+                'statut' => false,
+                'message' => "Classe non trouvée",
+            ];
+        } else {
+            $classe->delete();
+            $response = [
+                'statut' => true,
+                'message' => "Classe supprimée avec succès",
+            ];
+        }
+
+        return response()->json($response);
+    }
+
 }
