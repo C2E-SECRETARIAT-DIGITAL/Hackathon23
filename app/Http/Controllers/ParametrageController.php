@@ -80,7 +80,7 @@ class ParametrageController extends Controller
     {
         $data = [
             'niveaux' => ModelsNiveau::all(),
-            'classes' => Classe::orderBy('created_at', 'DESC')->paginate(6)
+            'classes' => Classe::orderBy('created_at', 'DESC')->with('niveau')->get()
         ];
 
         $response = [
