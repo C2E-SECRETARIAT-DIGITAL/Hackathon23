@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\InscriptionController;
 use App\Http\Controllers\ParametrageController;
+use App\Http\Controllers\GroupeController;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -33,6 +34,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/salle/update', [ParametrageController::class, 'updatesalle']);
     Route::post('/salle/delete', [ParametrageController::class, 'deletesalle']);
     Route::get('/salle/render', [ParametrageController::class, 'rendersalle']);
+
+    // Groupe
+    Route::post('/groupe/render', [GroupeController::class, 'rendergroupe']);
+
 });
 
 // ------------- ROUTES NOT PROTECTED BY AUTH MIDDLEWWARE ---------- //

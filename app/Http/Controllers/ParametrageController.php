@@ -13,8 +13,6 @@ use Illuminate\Http\Request;
 class ParametrageController extends Controller
 {
 
-
-
     // ----- HACKATHON TAB ---------- HACKATHON TAB ---------- HACKATHON TAB ---------- HACKATHON TAB ----- //
     public function renderhackathon()
     {
