@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Hackaton as ModelsHackaton;
 use App\Models\Niveau as ModelsNiveau;
+use App\Models\Salle as ModelsSalle;
 use App\Models\Classe;
 
 
@@ -73,7 +74,7 @@ class ParametrageController extends Controller
         return response()->json($response);
     }
 
-    // ----- HACKATHON TAB ---------- HACKATHON TAB ---------- HACKATHON TAB ---------- HACKATHON TAB ----- //
+    // --------------------------------------------------------------------------------------------- //
 
     // ----- CLASSES TAB ---------- CLASSES TAB ---------- CLASSES TAB ---------- CLASSES TAB ----- //
     public function renderclasse()
@@ -154,6 +155,93 @@ class ParametrageController extends Controller
             $response = [
                 'status' => true,
                 'message' => "Classe supprimée avec succès",
+            ];
+        }
+
+        return response()->json($response);
+    }
+
+    // --------------------------------------------------------------------------------------------- //
+    // ----- SALLES TAB ---------- SALLES TAB ---------- SALLES TAB ---------- SALLES TAB ----- //
+
+
+    public function rendersalle()
+    {
+        $data = [
+            'salles' => ModelsSalle::orderBy('created_at', 'DESC')->get(),
+        ];
+
+        $response = [
+            'status' => true,
+            'data' => $data,
+        ];
+
+        return response()->json($response);
+    }
+
+    public function createsalle(Request $request)
+    {
+        if (!$request->libelle || !$request->nb_equipe) {
+            $response = [
+                'status' => false,
+                'message' => "Remplissez tout les champs correctement",
+            ];
+        } else {
+            ModelsSalle::create([
+                'libelle' => $request->libelle,
+                'nb_equipe' => $request->nb_equipe
+            ]);
+
+            $response = [
+                'status' => true,
+                'message' => "Salle crée avec succès",
+            ];
+        }
+
+        return response()->json($response);
+    }
+
+    public function updatesalle(Request $request)
+    {
+        $salle = ModelsSalle::find($request->salleId);
+
+        if (!$salle) {
+            $response = [
+                'status' => false,
+                'message' => "Salle non trouvée",
+            ];
+        } else {
+
+            if ($request->libelle)
+                $salle->libelle = $request->libelle;
+            if ($request->nb_equipe)
+                $salle->nb_equipe = $request->nb_equipe;
+
+            $salle->save();
+
+            $response = [
+                'status' => true,
+                'message' => "Salle modifiée avec succès",
+            ];
+        }
+
+        return response()->json($response);
+    }
+
+    public function deletesalle(Request $request)
+    {
+        $salle = ModelsSalle::find($request->salleId);
+
+        if (!$salle) {
+            $response = [
+                'status' => false,
+                'message' => "Salle non trouvée",
+            ];
+        } else {
+            $salle->delete();
+            $response = [
+                'status' => true,
+                'message' => "Salle supprimée avec succès",
             ];
         }
 

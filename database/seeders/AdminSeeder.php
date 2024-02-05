@@ -87,7 +87,6 @@ class AdminSeeder extends Seeder
             ]);
         }
 
-
         $user = User::create([
             'name' => 'Administrateur',
             'email' => 'adminHackathon@C2E.com',

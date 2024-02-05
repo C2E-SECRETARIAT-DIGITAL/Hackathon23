@@ -17,12 +17,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Crypt;
 
-use App\Models\Classe;
 use App\Models\Matricule;
-use App\Models\Niveau;
 use App\Models\Qsession;
-use App\Models\Quiz;
 use Livewire\Component;
+use App\Models\Classe;
+use App\Models\Niveau;
+use App\Models\Quiz;
 
 use Illuminate\Support\Facades\Hash;
 
@@ -88,19 +88,19 @@ class InscriptionController extends Controller
     }
 
     
-    public function inscription()
+    public function inscriptionstate()
     {
         $hackaton = Hackaton::latest()->first();
-        $statut = Hackaton::latest()->first()->CanRecord();
+        $canrecord = Hackaton::latest()->first()->CanRecord();
 
         $data = [
             'hackaton_inscription' => $hackaton->inscription,
-            'statut' => $statut
+            'canrecord' => $canrecord
         ];
 
         $response = [
             'data' => $data,
-            'statut' => true
+            'status' => true
         ];
 
         return response()->json($response);
