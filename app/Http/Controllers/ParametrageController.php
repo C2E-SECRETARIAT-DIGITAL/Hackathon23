@@ -18,12 +18,11 @@ class ParametrageController extends Controller
     public function renderhackathon()
     {
         $data = [
-            'data' => ModelsHackaton::orderBy('created_at', 'DESC')
-                ->paginate(4),
+            'data' => ModelsHackaton::all()->orderBy('created_at', 'DESC'),
         ];
 
         $response = [
-            'statut' => true,
+            'status' => true,
             'data' => $data,
         ];
 
@@ -34,7 +33,7 @@ class ParametrageController extends Controller
     {
         if (!$request->pco_1 || !$request->pco_2 || !$request->annee) {
             $response = [
-                'statut' => false,
+                'status' => false,
                 'message' => "Remplissez tout les champs correctement",
             ];
         } else {
@@ -45,7 +44,7 @@ class ParametrageController extends Controller
             ]);
 
             $response = [
-                'statut' => true,
+                'status' => true,
                 'message' => "Hackathon crée avec succès",
             ];
         }
@@ -57,7 +56,7 @@ class ParametrageController extends Controller
     {
         if (!$request->hackathonId) {
             $response = [
-                'statut' => false,
+                'status' => false,
                 'message' => "Fournissez l'id de l'hackathon",
             ];
         } else {
@@ -66,7 +65,7 @@ class ParametrageController extends Controller
             $hackaton->save();
 
             $response = [
-                'statut' => true,
+                'status' => true,
                 'message' => $hackaton->inscription == 1 ? "Hackathon activé" : "Hackathon desactivé",
             ];
         }
@@ -85,7 +84,7 @@ class ParametrageController extends Controller
         ];
 
         $response = [
-            'statut' => true,
+            'status' => true,
             'data' => $data,
         ];
 
@@ -96,7 +95,7 @@ class ParametrageController extends Controller
     {
         if (!$request->libelle || !$request->niveau_id) {
             $response = [
-                'statut' => false,
+                'status' => false,
                 'message' => "Remplissez tout les champs correctement",
             ];
         } else {
@@ -106,7 +105,7 @@ class ParametrageController extends Controller
             ]);
 
             $response = [
-                'statut' => true,
+                'status' => true,
                 'message' => "Classe crée avec succès",
             ];
         }
@@ -120,7 +119,7 @@ class ParametrageController extends Controller
 
         if (!$classe) {
             $response = [
-                'statut' => false,
+                'status' => false,
                 'message' => "Classe non trouvée",
             ];
         } else {
@@ -133,7 +132,7 @@ class ParametrageController extends Controller
             $classe->save();
 
             $response = [
-                'statut' => true,
+                'status' => true,
                 'message' => "Classe modifiée avec succès",
             ];
         }
@@ -147,13 +146,13 @@ class ParametrageController extends Controller
 
         if (!$classe) {
             $response = [
-                'statut' => false,
+                'status' => false,
                 'message' => "Classe non trouvée",
             ];
         } else {
             $classe->delete();
             $response = [
-                'statut' => true,
+                'status' => true,
                 'message' => "Classe supprimée avec succès",
             ];
         }
