@@ -18,7 +18,7 @@ class ParametrageController extends Controller
     public function renderhackathon()
     {
         $data = [
-            'data' => ModelsHackaton::all()->orderBy('created_at', 'DESC'),
+            'data' => ModelsHackaton::orderBy('created_at', 'DESC')->get(),
         ];
 
         $response = [
