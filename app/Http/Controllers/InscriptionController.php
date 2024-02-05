@@ -87,10 +87,11 @@ class InscriptionController extends Controller
         return response()->json($response);
     }
 
-    
+
     public function inscriptionstate()
     {
-        $hackaton = Hackaton::latest()->first();
+        $hackaton = Hackaton::where('inscription', 1)->first();
+
         $canrecord = Hackaton::latest()->first()->CanRecord();
 
         $data = [
@@ -108,7 +109,8 @@ class InscriptionController extends Controller
 
     public function inscriptionterminer()
     {
-        $hackaton = Hackaton::latest()->first();
+        $hackaton = Hackaton::where('inscription', 1)->first();
+
 
         $data = [
             'hackaton_inscription' => $hackaton->inscription
@@ -205,7 +207,8 @@ class InscriptionController extends Controller
 
                 // recuperation de l'hackaton
 
-                $hackaton = Hackaton::latest()->first();
+                $hackaton = Hackaton::where('inscription', 1)->first();
+
 
                 // creation de l'équipe
                 $equipe = Equipe::create([
