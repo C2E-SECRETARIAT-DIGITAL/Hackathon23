@@ -44,7 +44,7 @@ class ParametrageController extends Controller
                     'status' => false,
                     'message' => "Un hackathon est déja crée pour cette année",
                 ];
-                
+
             } else {
 
                 ModelsHackaton::create([
@@ -71,9 +71,14 @@ class ParametrageController extends Controller
                 'message' => "Fournissez l'id de l'hackathon",
             ];
         } else {
+
             $hackaton = ModelsHackaton::find($request->hackathonId);
             $hackaton->inscription = !$hackaton->inscription;
             $hackaton->save();
+
+            if ($hackaton->inscription == 1) {
+                ModelsHackaton::where('inscription', 1)->where('id', '!=', $hackaton->id)->update(['inscription' => 0]);
+            }
 
             $response = [
                 'status' => true,
