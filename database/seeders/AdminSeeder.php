@@ -105,6 +105,19 @@ class AdminSeeder extends Seeder
             'annee' => '2022'
         ]);
 
+        Hackaton::create([
+            'pco_1' => 'BLE Yatana',
+            'pco_2' => 'PRESIDENT Daniel',
+            'annee' => '2023',
+        ]);
+
+        Hackaton::create([
+            'pco_1' => 'Wilfried Ouattara',
+            'pco_2' => 'Jean-Louis Djè',
+            'annee' => '2024',
+            'inscription' => 1
+        ]);
+
 
         foreach (Niveau::where('quiz_available', 1)->get() as $niv) {
             Quiz::create([
@@ -119,8 +132,6 @@ class AdminSeeder extends Seeder
             ]);
         }
 
-
-
         $i = 0;
         foreach (Niveau::all() as $niv) {
             for ($j = 0; $j < sizeof($classes[$i]); $j++) {
@@ -132,8 +143,8 @@ class AdminSeeder extends Seeder
             $i += 1;
         }
 
-        foreach (Niveau::where('quiz_available', 0)->get() as $niv){
-            foreach($classes_externes as $cla){
+        foreach (Niveau::where('quiz_available', 0)->get() as $niv) {
+            foreach ($classes_externes as $cla) {
                 Classe::create([
                     'libelle' => $cla,
                     'niveau_id' => $niv->id,

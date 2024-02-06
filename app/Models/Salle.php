@@ -14,7 +14,7 @@ class Salle extends Model
 
     public function currentEquipes()
     {
-        $hackaton = Hackaton::latest()->first() ;
+        $hackaton = Hackaton::where('inscription', 1)->first() ;
 
         $equipes =  RepSalle::where('salle_id', $this->id)
                             ->where('hackaton_id','=', $hackaton->id)
@@ -25,7 +25,7 @@ class Salle extends Model
 
     public function canRecieve()
     {
-        $hackaton = Hackaton::latest()->first() ;
+        $hackaton = Hackaton::where('inscription', 1)->first() ;
         $nb_equipes =  RepSalle::where('salle_id', $this->id)
                 ->where('hackaton_id','=', $hackaton->id)
                 ->count();

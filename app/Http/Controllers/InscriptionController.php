@@ -92,7 +92,7 @@ class InscriptionController extends Controller
     {
         $hackaton = Hackaton::where('inscription', 1)->first();
 
-        $canrecord = Hackaton::latest()->first()->CanRecord();
+        $canrecord = Hackaton::where('inscription', 1)->first()->CanRecord();
 
         $data = [
             'hackaton_inscription' => $hackaton->inscription,
@@ -240,7 +240,7 @@ class InscriptionController extends Controller
                         'prenom' => $request->prenom_chef,
                         'matricule' => trim($matricule_chef),
                         'genre' => $request->genre_chef,
-                        'classe' => $request->esatic == 1 ? Classe::find($request->classe_chef)->libelle : $request->classe_chef,
+                        'classe' => Classe::find($request->classe_chef)->libelle,
                         'user_id' => $user1->id
                     ]);
                 } else {
@@ -255,7 +255,7 @@ class InscriptionController extends Controller
                         'prenom' => $request->prenom_chef,
                         'matricule' => trim($request->matricule_chef),
                         'genre' => $request->genre_chef,
-                        'classe' => $request->esatic == 1 ? Classe::find($request->classe_chef)->libelle : $request->classe_chef,
+                        'classe' => Classe::find($request->classe_chef)->libelle,
                         'user_id' => $user1->id
                     ]);
                 }
@@ -276,7 +276,7 @@ class InscriptionController extends Controller
                         'prenom' => $request->prenom_m2,
                         'matricule' => trim($matricule_m2),
                         'genre' => $request->genre_m2,
-                        'classe' => $request->esatic == 1 ? Classe::find($request->classe_m2)->libelle : $request->classe_m2,
+                        'classe' => Classe::find($request->classe_m2)->libelle,
                         'user_id' => $user2->id
                     ]);
                 } else {
@@ -291,7 +291,7 @@ class InscriptionController extends Controller
                         'prenom' => $request->prenom_m2,
                         'matricule' => trim($request->matricule_m2),
                         'genre' => $request->genre_m2,
-                        'classe' => $request->esatic == 1 ? Classe::find($request->classe_m2)->libelle : $request->classe_m2,
+                        'classe' => Classe::find($request->classe_m2)->libelle,
                         'user_id' => $user2->id
                     ]);
                 }
@@ -312,7 +312,7 @@ class InscriptionController extends Controller
                         'prenom' => $request->prenom_m3,
                         'matricule' => trim($matricule_m3),
                         'genre' => $request->genre_m3,
-                        'classe' => $request->esatic == 1 ? Classe::find($request->classe_m3)->libelle : $request->classe_m3,
+                        'classe' => Classe::find($request->classe_m3)->libelle,
                         'user_id' => $user3->id
                     ]);
                 } else {
@@ -327,7 +327,7 @@ class InscriptionController extends Controller
                         'prenom' => $request->prenom_m3,
                         'matricule' => trim($request->matricule_m3),
                         'genre' => $request->genre_m3,
-                        'classe' => $request->esatic == 1 ? Classe::find($request->classe_m3)->libelle : $request->classe_m3,
+                        'classe' => Classe::find($request->classe_m3)->libelle,
                         'user_id' => $user3->id
                     ]);
                 }
@@ -377,7 +377,7 @@ class InscriptionController extends Controller
                 'classes' => function ($query) {
                     $query->where('esatic', 1);
                 }
-            ])->get() : Niveau::where("id", ">", 3)->with([
+            ])->get() : Niveau::where("id", ">", 1)->with([
                     'classes' => function ($query) {
                         $query->where('esatic', 0);
                     }

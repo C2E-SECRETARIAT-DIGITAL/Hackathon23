@@ -24,7 +24,7 @@ class Etudiant extends Model
 
     public function currentEquipe()
     {
-        $hackaton = Hackaton::latest()->first() ;
+        $hackaton = Hackaton::where('inscription', 1)->first() ;
         
         $equipe = DB::table('etudiants as etu')
                     ->leftjoin('participants as part', 'part.etudiant_id', '=' , 'etu.id')
@@ -50,7 +50,7 @@ class Etudiant extends Model
     public function is_chief()
     {
         return Participant::where('etudiant_id', $this->id)
-                            ->where('hackaton_id', $hackaton = Hackaton::latest()->first()->id)
+                            ->where('hackaton_id', $hackaton = Hackaton::where('inscription', 1)->first()->id)
                             ->first()->chef ;
     }
 

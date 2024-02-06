@@ -26,7 +26,7 @@ class AdminController extends Controller
 
     public function welcome()
     {
-        $hackaton = Hackaton::latest()->first();
+        $hackaton = Hackaton::where('inscription', 1)->first();
         $statut =  $hackaton->inscription;
 
         // dd($hackaton);
@@ -42,8 +42,8 @@ class AdminController extends Controller
 
     public function inscription()
     {
-        $hackaton = Hackaton::latest()->first();
-        $statut =  Hackaton::latest()->first()->canRecord();
+        $hackaton = Hackaton::where('inscription', 1)->first();
+        $statut =  Hackaton::where('inscription', 1)->first()->canRecord();
 
         if ($hackaton->inscription and $statut) {
             return view('participants.inscription');
@@ -65,7 +65,7 @@ class AdminController extends Controller
 
     public function inscriptionterminer()
     {
-        $hackaton = Hackaton::latest()->first();
+        $hackaton = Hackaton::where('inscription', 1)->first();
 
         if ($hackaton->inscription) {
 
@@ -131,7 +131,7 @@ class AdminController extends Controller
     {
         $repas = Repa::orderBy('created_at', 'DESC')->paginate(8);
 
-        $hackaton = Hackaton::latest()->first();
+        $hackaton = Hackaton::where('inscription', 1)->first();
 
         $nb_participants = DB::table('participants')
             ->join('equipes', 'equipes.id', '=', 'participants.equipe_id')
@@ -154,14 +154,14 @@ class AdminController extends Controller
 
             $statut = Restauration::where('etudiant_id', $etudiant->id)
                 ->where('repa_id', Repa::latest()->first()->id)
-                ->where('hackaton_id', Hackaton::latest()->first()->id)
+                ->where('hackaton_id', Hackaton::where('inscription', 1)->first()->id)
                 ->first();
 
             if (!$statut) {
                 Restauration::create([
                     'etudiant_id' => $etudiant->id,
                     'repa_id' => Repa::latest()->first()->id,
-                    'hackaton_id' => Hackaton::latest()->first()->id
+                    'hackaton_id' => Hackaton::where('inscription', 1)->first()->id
                 ]);
 
                 $request->session()->flash('success', 'Bon appetit');

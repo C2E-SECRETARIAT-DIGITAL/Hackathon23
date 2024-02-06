@@ -35,7 +35,7 @@ class Part extends Component
         Participant::create([
             'etudiant_id' => $this->etudiant_id,
             'equipe_id' => $this->equipe_id,
-            'hackaton_id' => Hackaton::latest()->first()->id,
+            'hackaton_id' => Hackaton::where('inscription', 1)->first()->id,
             'chef' => $this->chef == 1 ? true : false
         ]);
 

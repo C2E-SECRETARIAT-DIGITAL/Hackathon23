@@ -216,7 +216,7 @@ class Enregistrement extends Component
 
             // recuperation de l'hackaton
 
-            $hackaton = Hackaton::latest()->first();
+            $hackaton = Hackaton::where('inscription', 1)->first();
 
             // creation de l'équipe
             $equipe = Equipe::create([
