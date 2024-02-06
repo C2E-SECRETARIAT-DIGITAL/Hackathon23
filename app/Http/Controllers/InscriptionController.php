@@ -175,9 +175,9 @@ class InscriptionController extends Controller
         ) {
             $errorEmail = false;
             $errorMatricule = false;
-            $matricule_chef = "";
-            $matricule_m2 = "";
-            $matricule_m3 = "";
+            $matricule_chef = $request->matricule_chef;
+            $matricule_m2 = $request->matricule_m2;
+            $matricule_m3 = $request->matricule_m3;
 
             if ($request->esatic == 0) {
                 $matricule_chef = $this->getRandomInt(2) . "-" . $request->classe_chef . $this->getRandomInt(4) . $this->getRandomString(2);
@@ -219,118 +219,64 @@ class InscriptionController extends Controller
                 ]);
 
 
-
                 if (Niveau::find($request->niveau)->quiz_available == 1) {
                     Qsession::create([
                         'quiz_id' => Quiz::where('niveau_id', $request->niveau)->first()->id,
                         'equipe_id' => $equipe->id
                     ]);
                 }
-                // creation du participant 1
+                // creation du chef
 
-                if ($request->esatic == 0) {
-                    $user1 = User::create([
-                        'name' => trim($matricule_chef),
-                        'email' => $request->email_chef,
-                        'password' => Hash::make("sdi24@TH12345")
-                    ]);
+                $user1 = User::create([
+                    'name' => trim($matricule_chef),
+                    'email' => $request->email_chef,
+                    'password' => Hash::make("sdi24@TH12345")
+                ]);
 
-                    $etudiant1 = Etudiant::create([
-                        'nom' => $request->nom_chef,
-                        'prenom' => $request->prenom_chef,
-                        'matricule' => trim($matricule_chef),
-                        'genre' => $request->genre_chef,
-                        'classe' => Classe::find($request->classe_chef)->libelle,
-                        'user_id' => $user1->id
-                    ]);
-                } else {
-                    $user1 = User::create([
-                        'name' => trim($request->matricule_chef),
-                        'email' => $request->email_chef,
-                        'password' => Hash::make("sdi24@TH12345")
-                    ]);
-
-                    $etudiant1 = Etudiant::create([
-                        'nom' => $request->nom_chef,
-                        'prenom' => $request->prenom_chef,
-                        'matricule' => trim($request->matricule_chef),
-                        'genre' => $request->genre_chef,
-                        'classe' => Classe::find($request->classe_chef)->libelle,
-                        'user_id' => $user1->id
-                    ]);
-                }
+                $etudiant1 = Etudiant::create([
+                    'nom' => strtoupper($request->nom_chef),
+                    'prenom' => strtoupper($request->prenom_chef),
+                    'matricule' => trim($matricule_chef),
+                    'genre' => $request->genre_chef,
+                    'classe' => Classe::find($request->classe_chef)->libelle,
+                    'user_id' => $user1->id
+                ]);
 
 
                 // creation du participant 2 
 
+                $user2 = User::create([
+                    'name' => trim($matricule_m2),
+                    'email' => $request->email_m2,
+                    'password' => Hash::make("sdi24@TH12345")
+                ]);
 
-                if ($request->esatic == 0) {
-                    $user2 = User::create([
-                        'name' => trim($matricule_m2),
-                        'email' => $request->email_m2,
-                        'password' => Hash::make("sdi24@TH12345")
-                    ]);
-
-                    $etudiant2 = Etudiant::create([
-                        'nom' => $request->nom_m2,
-                        'prenom' => $request->prenom_m2,
-                        'matricule' => trim($matricule_m2),
-                        'genre' => $request->genre_m2,
-                        'classe' => Classe::find($request->classe_m2)->libelle,
-                        'user_id' => $user2->id
-                    ]);
-                } else {
-                    $user2 = User::create([
-                        'name' => trim($request->matricule_m2),
-                        'email' => $request->email_m2,
-                        'password' => Hash::make("sdi24@TH12345")
-                    ]);
-
-                    $etudiant2 = Etudiant::create([
-                        'nom' => $request->nom_m2,
-                        'prenom' => $request->prenom_m2,
-                        'matricule' => trim($request->matricule_m2),
-                        'genre' => $request->genre_m2,
-                        'classe' => Classe::find($request->classe_m2)->libelle,
-                        'user_id' => $user2->id
-                    ]);
-                }
+                $etudiant2 = Etudiant::create([
+                    'nom' => strtoupper($request->nom_m2),
+                    'prenom' => strtoupper($request->prenom_m2),
+                    'matricule' => trim($matricule_m2),
+                    'genre' => $request->genre_m2,
+                    'classe' => Classe::find($request->classe_m2)->libelle,
+                    'user_id' => $user2->id
+                ]);
 
 
                 // creation du participant 3 
 
+                $user3 = User::create([
+                    'name' => trim($matricule_m3),
+                    'email' => $request->email_m3,
+                    'password' => Hash::make("sdi24@TH12345")
+                ]);
 
-                if ($request->esatic == 0) {
-                    $user3 = User::create([
-                        'name' => trim($matricule_m3),
-                        'email' => $request->email_m3,
-                        'password' => Hash::make("sdi24@TH12345")
-                    ]);
-
-                    $etudiant3 = Etudiant::create([
-                        'nom' => $request->nom_m3,
-                        'prenom' => $request->prenom_m3,
-                        'matricule' => trim($matricule_m3),
-                        'genre' => $request->genre_m3,
-                        'classe' => Classe::find($request->classe_m3)->libelle,
-                        'user_id' => $user3->id
-                    ]);
-                } else {
-                    $user3 = User::create([
-                        'name' => trim($request->matricule_m3),
-                        'email' => $request->email_m3,
-                        'password' => Hash::make("sdi24@TH12345")
-                    ]);
-
-                    $etudiant3 = Etudiant::create([
-                        'nom' => $request->nom_m3,
-                        'prenom' => $request->prenom_m3,
-                        'matricule' => trim($request->matricule_m3),
-                        'genre' => $request->genre_m3,
-                        'classe' => Classe::find($request->classe_m3)->libelle,
-                        'user_id' => $user3->id
-                    ]);
-                }
+                $etudiant3 = Etudiant::create([
+                    'nom' => strtoupper($request->nom_m3),
+                    'prenom' => strtoupper($request->prenom_m3),
+                    'matricule' => trim($matricule_m3),
+                    'genre' => $request->genre_m3,
+                    'classe' => Classe::find($request->classe_m3)->libelle,
+                    'user_id' => $user3->id
+                ]);
 
                 // enregistrement des participants
 
@@ -352,8 +298,6 @@ class InscriptionController extends Controller
                     'equipe_id' => $equipe->id,
                     'hackaton_id' => $hackaton->id
                 ]);
-
-                //  $this->resetInput();
 
                 $response = [
                     "messsage" => "Enregiistrement effectué !",

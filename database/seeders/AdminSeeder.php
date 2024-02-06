@@ -24,14 +24,15 @@ class AdminSeeder extends Seeder
     {
 
         // Creation des differents Niveaux
-        $nvx_q = ['Niveau 1', 'Niveau 2'];
-        $nvx_nq = ['Niveau 3 Télécom', 'Niveau 3 Info', 'Niveau 3 Sécurité'];
-        $rls = ['Super@Administrateur', 'Administrateur', 'participant'];
+        $nvx_q = ['Niveau 1', 'Niveau 2 Développement', 'Niveau 2 Télécom'];
+        $nvx_nq = ['Niveau 3 Télécom', 'Niveau 3 Développement', 'Niveau 3 Sécurité'];
+        $rls = ['Super@Administrateur', 'Administrateur', 'Participant'];
         $pms = ['restaurant', 'comite nuit', 'hackaton'];
 
         $masters = [
             'MASTER 1 TELECOM',
-            'MASTER 1 INFO',
+            'MASTER 1 SIGL',
+            'MASTER 1 SITW',
             'MASTER 1 MDSI',
             'MASTER 1 MBDS',
             'MASTER 1 BIHAR',
@@ -47,6 +48,7 @@ class AdminSeeder extends Seeder
 
         $classes = [
             ['SRIT 1A', 'SRIT 1B', 'SRIT 1C', 'SRIT 1D', 'SRIT 1E', 'TWIN 1'],
+            ['SRIT 2A', 'SRIT 2B', 'SIGL 2', 'RTEL 2', 'TWIN 2', 'SRIT 3A', 'SRIT 3B', 'SIGL 3', 'RTEL 3', 'TWIN 3', 'DASI'],
             ['SRIT 2A', 'SRIT 2B', 'SIGL 2', 'RTEL 2', 'TWIN 2', 'SRIT 3A', 'SRIT 3B', 'SIGL 3', 'RTEL 3', 'TWIN 3', 'DASI'],
             $masters,
             $masters,
@@ -152,7 +154,6 @@ class AdminSeeder extends Seeder
                 ]);
             }
         }
-
 
         $user->assignRole('Super@Administrateur');
     }

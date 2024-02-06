@@ -21,7 +21,7 @@ class GroupeController extends Controller
             ];
         } else {
             $data = [
-                'equipes' => Equipe::where('hackaton_id', $hackaton->id)
+                'equipes' => Equipe::with('participants.etudiant', 'niveau')->where('hackaton_id', $hackaton->id)
                     ->where('niveau_id', $request->niveauId)
                     ->where('statut', $request->statut)
                     ->get(),

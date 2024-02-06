@@ -35,5 +35,4 @@ class Participant extends Model
     	return $this->belongsTo(Etudiant::class);
     }
 
-    
 }
