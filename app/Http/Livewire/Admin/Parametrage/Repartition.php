@@ -15,53 +15,51 @@ class Repartition extends Component
 
     public $salle_id = '';
     public $equipe_id = '';
-    public $edit_mode =false ;
+    public $edit_mode = false;
 
     // protected $listeners = ['refreshComponent' => '$refresh'];
 
     public function render()
     {
-        $hackaton = Hackaton::where('inscription', 1)->first() ;
-        
-        return view('livewire.admin.parametrage.repartition',[
-            'equipes' => Equipe::where('statut',1 )
-                                ->where('hackaton_id', $hackaton->id)
-                                ->paginate(6)   ,
+        $hackaton = Hackaton::where('inscription', 1)->first();
+
+        return view('livewire.admin.parametrage.repartition', [
+            'equipes' => Equipe::where('statut', 1)
+                ->where('hackaton_id', $hackaton->id)
+                ->paginate(6),
 
             'salles' => Salle::all(),
 
             'repartitions' => RepSalle::where('hackaton_id', $hackaton->id)
-                                ->orderBy('created_at', 'DESC')
-                                ->paginate(6)
+                ->orderBy('created_at', 'DESC')
+                ->paginate(6)
         ]);
     }
 
     public function linkRepartition(int $id)
     {
-        $hackaton = Hackaton::where('inscription', 1)->first() ;
+        $hackaton = Hackaton::where('inscription', 1)->first();
 
-        if($this->salle_id != '')
-        {
-          
+        if ($this->salle_id != '') {
+
             RepSalle::create([
                 'equipe_id' => $id,
                 'hackaton_id' => $hackaton->id,
                 'salle_id' => $this->salle_id
             ]);
 
-            $this->salle_id ='';
+            $this->salle_id = '';
 
         }
     }
 
     public function deleteRepartition(int $id)
     {
-        if($id)
-        {
-            $hackaton = Hackaton::where('inscription', 1)->first() ;
+        if ($id) {
+            $hackaton = Hackaton::where('inscription', 1)->first();
             $classe = RepSalle::where('equipe_id', $id)
-                                ->where('hackaton_id', $hackaton->id)
-                                ->first();
+                ->where('hackaton_id', $hackaton->id)
+                ->first();
             $classe->delete();
             //session()->flash('warning', 'Suppression éffectué avec succès.');
         }

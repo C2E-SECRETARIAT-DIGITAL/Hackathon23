@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Hackaton as ModelsHackaton;
 use App\Models\Niveau as ModelsNiveau;
 use App\Models\Salle as ModelsSalle;
+use App\Models\RepSalle;
 use App\Models\Classe;
+use App\Models\Equipe;
+use App\Models\Salle;
 
 
 use Illuminate\Http\Request;
@@ -268,5 +271,114 @@ class ParametrageController extends Controller
 
         return response()->json($response);
     }
+
+
+    // --------------------------------------------------------------------------------------------- //
+    // ----- REPARTITIONS TAB ---------- REPARTITIONS TAB ---------- REPARTITIONS TAB ---------- REPARTITIONS TAB ----- //
+
+    public function renderrepartition(Request $request)
+    {
+
+        $hackaton = ModelsHackaton::where('inscription', 1)->first();
+
+        $data = [
+            'equipes' => Equipe::where('statut', 1)
+                ->where('hackaton_id', $hackaton->id),
+
+            'salles' => ModelsSalle::all(),
+
+            'repartitions' => RepSalle::where('hackaton_id', $hackaton->id)
+                ->orderBy('created_at', 'DESC')
+        ];
+
+        $response = [
+            'status' => true,
+            'data' => $data,
+        ];
+
+        return response()->json($response);
+    }
+
+    /*
+    {
+        'salleId' => id de la salle
+        'equipeId' => id de l'equipe
+    }
+    */
+    public function createrepartition(Request $request)
+    {
+
+        if (!$request->salleId || !$request->equipeId) {
+            $response = [
+                'status' => false,
+                'message' => "Remplissez tout les champs correctement",
+            ];
+        } else {
+            $salle = Salle::find($request->salleId);
+            if ($salle->canRecieve()) {
+                $hackaton = ModelsHackaton::where('inscription', 1)->first();
+
+                RepSalle::create([
+                    'equipe_id' => $request->equipeId,
+                    'salle_id' => $request->salleId,
+                    'hackaton_id' => $hackaton->id
+                ]);
+
+                $response = [
+                    'status' => true,
+                    'message' => "Salle crée avec succès",
+                ];
+
+            } else {
+
+                $response = [
+                    'status' => true,
+                    'message' => "Nombre maximum de salle atteint",
+                ];
+
+            }
+        }
+
+        return response()->json($response);
+
+    }
+
+    /*
+    {
+        'repartitionId' => id de la repartition à supprimer
+    }
+    */
+    public function deleterepartition(Request $request)
+    {
+        if (!$request->repartitionId) {
+
+            $response = [
+                'status' => false,
+                'message' => "Remplissez tout les champs correctement",
+            ];
+
+        } else {
+            $rep = RepSalle::find($request->repartitionId);
+            if (!$rep) {
+
+                $response = [
+                    'status' => false,
+                    'message' => "Repartition non trouvée",
+                ];
+
+            } else {
+
+                $rep->delete();
+                $response = [
+                    'status' => true,
+                    'message' => "Repartition supprimée avec succès",
+                ];
+
+            }
+        }
+
+        return response()->json($response);
+    }
+
 
 }

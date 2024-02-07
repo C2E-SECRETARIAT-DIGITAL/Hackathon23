@@ -35,6 +35,11 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/salle/delete', [ParametrageController::class, 'deletesalle']);
     Route::get('/salle/render', [ParametrageController::class, 'rendersalle']);
 
+    // Répartition
+    Route::post('/repartition/create', [ParametrageController::class, 'createrepartition']);
+    Route::post('/repartition/delete', [ParametrageController::class, 'deleterepartition']);
+    Route::get('/repartition/render', [ParametrageController::class, 'renderrepartition']);
+
     // Groupe
     Route::post('/groupe/render', [GroupeController::class, 'rendergroupe']);
 
