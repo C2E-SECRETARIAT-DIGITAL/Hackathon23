@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Hackaton as ModelsHackaton;
 use App\Models\Niveau as ModelsNiveau;
 use App\Models\Salle as ModelsSalle;
+use App\Models\Collation;
 use App\Models\RepSalle;
 use App\Models\Classe;
 use App\Models\Equipe;
 use App\Models\Salle;
+use App\Models\Repa;
 
 
 use Illuminate\Http\Request;
@@ -110,7 +112,7 @@ class ParametrageController extends Controller
 
     public function createclasse(Request $request)
     {
-        if (!$request->libelle || !$request->niveau_id) {
+        if (!$request->libelle || !$request->niveau_id || $request->isEsatic) {
             $response = [
                 'status' => false,
                 'message' => "Remplissez tout les champs correctement",
@@ -118,7 +120,8 @@ class ParametrageController extends Controller
         } else {
             Classe::create([
                 'libelle' => $request->libelle,
-                'niveau_id' => $request->niveau_id
+                'niveau_id' => $request->niveau_id,
+                'esatic' => $request->isEsatic,
             ]);
 
             $response = [
@@ -145,6 +148,8 @@ class ParametrageController extends Controller
                 $classe->libelle = $request->libelle;
             if ($request->niveau_id)
                 $classe->niveau_id = $request->niveau_id;
+            if ($request->isEsatic)
+                $classe->isEsatic = $request->isEsatic;
 
             $classe->save();
 
@@ -205,7 +210,7 @@ class ParametrageController extends Controller
         } else {
             ModelsSalle::create([
                 'libelle' => $request->libelle,
-                'nb_equipe' => $request->nb_equipe
+                'nb_equipe' => $request->nb_equipe,
             ]);
 
             $response = [
@@ -276,7 +281,7 @@ class ParametrageController extends Controller
     // --------------------------------------------------------------------------------------------- //
     // ----- REPARTITIONS TAB ---------- REPARTITIONS TAB ---------- REPARTITIONS TAB ---------- REPARTITIONS TAB ----- //
 
-    public function renderrepartition(Request $request)
+    public function renderrepartition()
     {
 
         $hackaton = ModelsHackaton::where('inscription', 1)->first();
@@ -380,5 +385,84 @@ class ParametrageController extends Controller
         return response()->json($response);
     }
 
+
+    // --------------------------------------------------------------------------------------------- //
+    // ----- RESTAURATIONS TAB ---------- RESTAURATIONS TAB ---------- RESTAURATIONS TAB ---------- RESTAURATIONS TAB ----- //
+
+
+    public function renderrestauration()
+    {
+        $data = [
+            'repas' => Repa::orderBy('created_at', 'DESC'),
+            'collations' => Collation::orderBy('created_at', 'DESC')
+        ];
+
+        $response = [
+            'data' => $data,
+            'status' => true,
+        ];
+
+        return response()->json($response);
+    }
+
+    /*
+    {
+        'libelle' => libellé du repas
+    }
+    */
+    public function createrepas(Request $request)
+    {
+
+        if (!$request->libelle) {
+            $response = [
+                'status' => false,
+                'message' => "Remplissez tout les champs correctement",
+            ];
+        } else {
+
+            Repa::create([
+                'libelle' => $request->libelle,
+            ]);
+
+            $response = [
+                'status' => true,
+                'message' => "Repas crée avec succès",
+            ];
+
+        }
+
+        return response()->json($response);
+
+    }
+
+    /*
+    {
+        'libelle' => libellé de la collation
+    }
+    */
+    public function createcollation(Request $request)
+    {
+
+        if (!$request->libelle) {
+            $response = [
+                'status' => false,
+                'message' => "Remplissez tout les champs correctement",
+            ];
+        } else {
+
+            Collation::create([
+                'libelle' => $request->libelle,
+            ]);
+
+            $response = [
+                'status' => true,
+                'message' => "Collation créee avec succès",
+            ];
+
+        }
+
+        return response()->json($response);
+
+    }
 
 }

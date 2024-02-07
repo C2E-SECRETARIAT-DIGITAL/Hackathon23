@@ -145,7 +145,7 @@ class AdminSeeder extends Seeder
             $i += 1;
         }
 
-        foreach (Niveau::where('quiz_available', 0)->get() as $niv) {
+        foreach (Niveau::where('id', '>', 1)->get() as $niv) {
             foreach ($classes_externes as $cla) {
                 Classe::create([
                     'libelle' => $cla,
