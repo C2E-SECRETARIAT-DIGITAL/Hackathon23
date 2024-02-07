@@ -214,6 +214,14 @@ class ParametrageController extends Controller
         return response()->json($response);
     }
 
+
+    /*
+    {
+        'salleId' => id de la salle
+        'libelle' => nouveau libellé
+        'nb_equipe' => nouveau nombre max d'équipe dans la salle
+    }
+    */
     public function updatesalle(Request $request)
     {
         $salle = ModelsSalle::find($request->salleId);
