@@ -399,8 +399,8 @@ class ParametrageController extends Controller
     public function renderrestauration()
     {
         $data = [
-            'repas' => Repa::orderBy('created_at', 'DESC'),
-            'collations' => Collation::orderBy('created_at', 'DESC')
+            'repas' => Repa::orderBy('created_at', 'DESC')->get(),
+            'collations' => Collation::orderBy('created_at', 'DESC')->get()
         ];
 
         $response = [
@@ -547,7 +547,5 @@ class ParametrageController extends Controller
 
     // --------------------------------------------------------------------------------------------- //
     // ----- PRESELECTIONS TAB ---------- PRESELECTIONS TAB ---------- PRESELECTIONS TAB ---------- PRESELECTIONS TAB ----- //
-
-
 
 }
