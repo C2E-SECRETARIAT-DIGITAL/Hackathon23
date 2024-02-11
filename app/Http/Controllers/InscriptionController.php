@@ -37,7 +37,6 @@ class InscriptionController extends Controller
             $user = $request->user();
             $token = $user->createToken('Personal Access Token')->plainTextToken;
             $membres = [];
-
             if ($user->name != "Administrateur") {
                 foreach ($user->etudiant->getEquipe()->participants as $participant) {
                     if ($participant->chef == 1) {
@@ -211,6 +210,23 @@ class InscriptionController extends Controller
 
 
                 // creation de l'équipe
+                if (Equipe::where('nom', $request->nom_groupe)->first()) {
+                    return response()->json([
+                        'status' => false,
+                        'message' => 'Cette équipe existe déjà'
+                    ]);
+                }
+                if (
+                    User::where('email', $request->email_chef)
+                        ->orWhere('email', $request->email_m2)
+                        ->orWhere('email', $request->email_m3)
+                        ->first()
+                ) {
+                    return response()->json([
+                        'status' => false,
+                        'message' => "L'un des utilisateurs existe déjà"
+                    ]);
+                }
                 $equipe = Equipe::create([
                     'nom' => $request->nom_groupe,
                     'logo' => $request->photo_groupe,
@@ -218,15 +234,14 @@ class InscriptionController extends Controller
                     'hackaton_id' => $hackaton->id
                 ]);
 
-
                 if (Niveau::find($request->niveau)->quiz_available == 1) {
                     Qsession::create([
                         'quiz_id' => Quiz::where('niveau_id', $request->niveau)->first()->id,
                         'equipe_id' => $equipe->id
                     ]);
                 }
-                // creation du chef
 
+                // creation du chef
                 $user1 = User::create([
                     'name' => trim($matricule_chef),
                     'email' => $request->email_chef,
@@ -244,7 +259,6 @@ class InscriptionController extends Controller
 
 
                 // creation du participant 2 
-
                 $user2 = User::create([
                     'name' => trim($matricule_m2),
                     'email' => $request->email_m2,
@@ -262,7 +276,6 @@ class InscriptionController extends Controller
 
 
                 // creation du participant 3 
-
                 $user3 = User::create([
                     'name' => trim($matricule_m3),
                     'email' => $request->email_m3,
