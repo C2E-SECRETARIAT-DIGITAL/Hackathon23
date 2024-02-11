@@ -40,6 +40,13 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/repartition/delete', [ParametrageController::class, 'deleterepartition']);
     Route::get('/repartition/render', [ParametrageController::class, 'renderrepartition']);
 
+    // Restauration
+    Route::get('/restauration/render', [ParametrageController::class, 'renderrestauration']);
+    Route::post('/collation/create', [ParametrageController::class, 'createcollation']);
+    Route::post('/collation/delete', [ParametrageController::class, 'deletecollation']);
+    Route::post('/repas/create', [ParametrageController::class, 'createrepas']);
+    Route::post('/repas/delete', [ParametrageController::class, 'deleterepas']);
+
     // Groupe
     Route::post('/groupe/render', [GroupeController::class, 'rendergroupe']);
 

@@ -288,12 +288,12 @@ class ParametrageController extends Controller
 
         $data = [
             'equipes' => Equipe::where('statut', 1)
-                ->where('hackaton_id', $hackaton->id),
+                ->where('hackaton_id', $hackaton->id)->get(),
 
             'salles' => ModelsSalle::all(),
 
             'repartitions' => RepSalle::where('hackaton_id', $hackaton->id)
-                ->orderBy('created_at', 'DESC')
+                ->orderBy('created_at', 'DESC')->get()
         ];
 
         $response = [
@@ -464,5 +464,84 @@ class ParametrageController extends Controller
         return response()->json($response);
 
     }
+
+    /*
+    {
+        'repasId' => id du repas à supprimer
+    }
+    */
+    public function deleterepas(Request $request)
+    {
+        if (!$request->repasId) {
+
+            $response = [
+                'status' => false,
+                'message' => "Remplissez tout les champs correctement",
+            ];
+
+        } else {
+            $rep = Repa::find($request->repasId);
+            if (!$rep) {
+
+                $response = [
+                    'status' => false,
+                    'message' => "Repas non trouvé",
+                ];
+
+            } else {
+
+                $rep->delete();
+                $response = [
+                    'status' => true,
+                    'message' => "Repas supprimé avec succès",
+                ];
+
+            }
+        }
+
+        return response()->json($response);
+    }
+
+    /*
+    {
+        'collationId' => id de la collation à supprimer
+    }
+    */
+    public function deletecollation(Request $request)
+    {
+        if (!$request->collationId) {
+
+            $response = [
+                'status' => false,
+                'message' => "Remplissez tout les champs correctement",
+            ];
+
+        } else {
+            $rep = Collation::find($request->collationId);
+            if (!$rep) {
+
+                $response = [
+                    'status' => false,
+                    'message' => "Collation non trouvée",
+                ];
+
+            } else {
+
+                $rep->delete();
+                $response = [
+                    'status' => true,
+                    'message' => "Collation supprimée avec succès",
+                ];
+
+            }
+        }
+
+        return response()->json($response);
+    }
+
+    // --------------------------------------------------------------------------------------------- //
+    // ----- PRESELECTIONS TAB ---------- PRESELECTIONS TAB ---------- PRESELECTIONS TAB ---------- PRESELECTIONS TAB ----- //
+
+
 
 }
