@@ -285,7 +285,7 @@ class ParametrageController extends Controller
     {
 
         $hackaton = ModelsHackaton::where('inscription', 1)->first();
-        $reps = RepSalle::with("equipe")->where('hackaton_id', $hackaton->id)
+        $reps = RepSalle::where('hackaton_id', $hackaton->id)
             ->orderBy('created_at', 'DESC')->get();
 
         foreach ($reps as $rep) {
