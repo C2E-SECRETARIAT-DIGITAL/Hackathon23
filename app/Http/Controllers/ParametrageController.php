@@ -5,12 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Hackaton as ModelsHackaton;
 use App\Models\Niveau as ModelsNiveau;
 use App\Models\Salle as ModelsSalle;
+use App\Models\QsessionResponse;
 use App\Models\Collation;
 use App\Models\RepSalle;
+use App\Models\Question;
+use App\Models\Response;
+use App\Models\Niveau;
 use App\Models\Classe;
 use App\Models\Equipe;
 use App\Models\Salle;
 use App\Models\Repa;
+use App\Models\Quiz;
 
 
 use Illuminate\Http\Request;
@@ -548,4 +553,116 @@ class ParametrageController extends Controller
     // --------------------------------------------------------------------------------------------- //
     // ----- PRESELECTIONS TAB ---------- PRESELECTIONS TAB ---------- PRESELECTIONS TAB ---------- PRESELECTIONS TAB ----- //
 
+    /*
+    {
+        'niveauId' => id du niveau
+    }
+    */
+    public function renderpreselection(Request $request)
+    {
+        $niveau = Niveau::where('id', $request->niveauId)->where('quiz_available', 1)->first();
+        if (!$niveau) {
+
+            $response = [
+                'message' => "Quiz non permis pour ce niveau",
+                'status' => false,
+            ];
+
+        } else {
+
+            $quiz = Quiz::where('niveau_id', $request->niveauId)->first();
+            $data = [
+                'questions' => Question::with('responses')->where('quiz_id', $quiz->id)->orderBy('created_at', 'desc')->get(),
+            ];
+
+            $response = [
+                'data' => $data,
+                'status' => true,
+            ];
+
+        }
+
+        return response()->json($response);
+    }
+
+    /*
+    {
+        'niveauId' => id du niveau,
+        'question' => la question à enregistrer
+    }
+    */
+    public function createquestion(Request $request)
+    {
+
+        if (!$request->niveauId || !$request->question) {
+
+            $response = [
+                'message' => "Remplissez tout les champs correctement",
+                'status' => false,
+            ];
+
+        } else {
+
+            Question::create([
+                'quiz_id' => Quiz::where('niveau_id', $request->niveauId)->first()->id,
+                'content' => $request->question,
+            ]);
+
+            $response = [
+                'message' => "",
+                'status' => true,
+            ];
+
+        }
+
+        return response()->json($response);
+
+    }
+
+    /*
+    {
+        'niveauId' => id du niveau,
+        'questionId' => id de la question,
+        'response' => la reponse à enregister,
+        'score' => le score associé à la reponse
+    }
+    */
+    public function createresponse(Request $request)
+    {
+        if (!$request->niveauId || !$request->questionId || !$request->response || !$request->score) {
+
+            $response = [
+                'message' => "Remplissez tout les champs correctement",
+                'status' => false,
+            ];
+
+        } else {
+
+            $quiz = Quiz::where('niveau_id', $request->niveauId)->first();
+
+            $response = Response::create([
+                'question_id' => $request->questionId,
+                'content' => $request->response,
+                'score' => $request->score,
+            ]);
+
+            foreach ($quiz->qsessions as $qsession) {
+                QsessionResponse::create([
+                    'score' => $response->score,
+                    'state' => 0,
+                    'qsession_id' => $qsession->id,
+                    'response_id' => $response->id,
+                    'question_id' => $response->question_id
+                ]);
+            }
+
+            $response = [
+                'message' => "",
+                'status' => true,
+            ];
+
+        }
+
+        return response()->json($response);
+    }
 }

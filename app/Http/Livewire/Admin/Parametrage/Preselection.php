@@ -27,7 +27,6 @@ class Preselection extends Component
     public $que_id;
     public $quiz_score;
 
-
     public function render()
     {
 
@@ -39,6 +38,7 @@ class Preselection extends Component
             'questions' => Quiz::where('niveau_id', $this->niveau)->first() != null ? Question::where('quiz_id', Quiz::where('niveau_id', $this->niveau)->first()->id)->orderBy('created_at', 'desc')->get() :  [],
             'niveaux' => Niveau::all()
         ]);
+    
     }
 
     public function updateQuiz($qid)
