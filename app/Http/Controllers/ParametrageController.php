@@ -665,4 +665,46 @@ class ParametrageController extends Controller
 
         return response()->json($response);
     }
+
+    /*
+    {
+        'responseId' => id de la reponse
+    }
+    */
+    public function deleteresponse(Request $request)
+    {
+        if (!$request->responseId) {
+
+            $response = [
+                'status' => false,
+                'message' => "Remplissez tout les champs correctement",
+            ];
+
+        } else {
+            $rep = Response::find($request->responseId);
+            if (!$rep) {
+
+                $response = [
+                    'status' => false,
+                    'message' => "Réponse non trouvée",
+                ];
+
+            } else {
+
+                $sessions = QsessionResponse::where('response_id', $rep->id)->get();
+                foreach ($sessions as $session) {
+                    $session->delete();
+                }
+
+                $rep->delete();
+                $response = [
+                    'status' => true,
+                    'message' => "Réponse supprimée avec succès",
+                ];
+
+            }
+        }
+
+        return response()->json($response);
+    }
 }

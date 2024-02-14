@@ -51,6 +51,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/preselection/render', [ParametrageController::class, 'renderpreselection']);
     Route::post('/question/create', [ParametrageController::class, 'createquestion']);
     Route::post('/response/create', [ParametrageController::class, 'createresponse']);
+    Route::post('/response/delete', [ParametrageController::class, 'deleteresponse']);
 
 
     // Groupe
