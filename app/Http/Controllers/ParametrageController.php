@@ -629,7 +629,7 @@ class ParametrageController extends Controller
     */
     public function createresponse(Request $request)
     {
-        if (!$request->niveauId || !$request->questionId || !$request->response || !$request->score) {
+        if (!$request->niveauId || !$request->questionId || !$request->response) {
 
             $response = [
                 'message' => "Remplissez tout les champs correctement",
