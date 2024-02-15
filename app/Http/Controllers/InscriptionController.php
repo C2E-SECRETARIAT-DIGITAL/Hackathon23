@@ -37,7 +37,10 @@ class InscriptionController extends Controller
             $user = $request->user();
             $token = $user->createToken('Personal Access Token')->plainTextToken;
             $membres = [];
-            if ($user->name != "Administrateur") {
+
+            $isparticipant = Auth::user()->etudiant ? true : false;
+            if ($isparticipant) {
+                $user->niveau = $user->etudiant->getEquipe()->niveau;
                 foreach ($user->etudiant->getEquipe()->participants as $participant) {
                     if ($participant->chef == 1) {
                         $participant->etudiant["chef"] = 1;
@@ -52,8 +55,7 @@ class InscriptionController extends Controller
 
 
             $data = [
-                'niveau' => Auth::user()->etudiant ? Auth::user()->etudiant->getEquipe()->niveau : null,
-                'role' => Auth::user()->etudiant ? "participant" : "admin",
+                'role' => $isparticipant ? "participant" : "admin",
                 'message' => 'Vous êtes connecté(e)',
                 'accessToken' => $token,
                 'equipe' => $membres,
