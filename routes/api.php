@@ -53,7 +53,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/response/create', [ParametrageController::class, 'createresponse']);
     Route::post('/response/delete', [ParametrageController::class, 'deleteresponse']);
 
-
     // Groupe
     Route::post('/groupe/render', [GroupeController::class, 'rendergroupe']);
 

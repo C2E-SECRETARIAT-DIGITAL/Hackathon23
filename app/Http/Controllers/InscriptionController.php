@@ -47,12 +47,14 @@ class InscriptionController extends Controller
                     $participant->etudiant["email"] = $participant->etudiant->user->email;
                     array_push($membres, $participant->etudiant);
                 }
+
             }
 
 
             $data = [
                 'status' => true,
                 'role' => Auth::user()->etudiant ? "participant" : "admin",
+                'niveau' => Auth::user()->etudiant ? Auth::user()->etudiant->equipe->niveau : null,
                 'user' => $user,
                 'equipe' => $membres,
                 'accessToken' => $token,
