@@ -18,33 +18,33 @@ class QuizController extends Controller
     */
     public function renderquiz(Request $request)
     {
-        $quiz = Quiz::with('questions.responses')->where('id', $request->user()->etudiant->getEquipe()->qsession->quiz_id)->first();
+        $quiz = Quiz::with('questions.responses')->where('id', Auth::user()->etudiant->getEquipe()->qsession->quiz_id)->first();
 
-        // $data = [];
-        // foreach ($quiz->questions as $question) {
+        $data = [];
+        foreach ($quiz->questions as $question) {
 
-        //     $choices = [];
-        //     $correctanswer = '';
+            $choices = [];
+            $correctanswer = '';
 
-        //     foreach ($question->responses as $res) {
-        //         array_push($choices, $res->content);
-        //         if ($res->score > 0)
-        //             $correctanswer = $res->content;
-        //     }
+            foreach ($question->responses as $res) {
+                array_push($choices, $res->content);
+                if ($res->score > 0)
+                    $correctanswer = $res->content;
+            }
 
-        //     array_push(
-        //         $data,
-        //         [
-        //             'correctAnswer' => $correctanswer,
-        //             'question' => $question->content,
-        //             'choices' => $choices,
-        //         ]
-        //     );
-        // }
+            array_push(
+                $data,
+                [
+                    'correctAnswer' => $correctanswer,
+                    'question' => $question->content,
+                    'choices' => $choices,
+                ]
+            );
+        }
 
         $response = [
             'status' => true,
-            'questions' => $quiz,
+            'questions' => $data,
         ];
 
         return response()->json($response);
