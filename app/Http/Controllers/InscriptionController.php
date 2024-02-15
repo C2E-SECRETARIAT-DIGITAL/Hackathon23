@@ -50,7 +50,6 @@ class InscriptionController extends Controller
                     $participant->etudiant["email"] = $participant->etudiant->user->email;
                     array_push($membres, $participant->etudiant);
                 }
-
             }
 
 

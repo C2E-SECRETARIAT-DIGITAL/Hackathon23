@@ -4,6 +4,7 @@
 use App\Http\Controllers\InscriptionController;
 use App\Http\Controllers\ParametrageController;
 use App\Http\Controllers\GroupeController;
+use App\Http\Controllers\QuizController;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -52,6 +53,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/question/create', [ParametrageController::class, 'createquestion']);
     Route::post('/response/create', [ParametrageController::class, 'createresponse']);
     Route::post('/response/delete', [ParametrageController::class, 'deleteresponse']);
+
+    // Quiz
+    Route::post('/quiz/render', [QuizController::class, 'renderquiz']);
 
     // Groupe
     Route::post('/groupe/render', [GroupeController::class, 'rendergroupe']);
