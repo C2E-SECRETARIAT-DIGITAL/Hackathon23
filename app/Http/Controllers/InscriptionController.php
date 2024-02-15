@@ -52,13 +52,13 @@ class InscriptionController extends Controller
 
 
             $data = [
-                'status' => true,
+                'niveau' => Auth::user()->etudiant ? Auth::user()->etudiant->getEquipe()->niveau : null,
                 'role' => Auth::user()->etudiant ? "participant" : "admin",
-                'niveau' => Auth::user()->etudiant ? Auth::user()->etudiant->equipe->niveau : null,
-                'user' => $user,
-                'equipe' => $membres,
+                'message' => 'Vous êtes connecté(e)',
                 'accessToken' => $token,
-                'message' => 'Vous êtes connecté(e)'
+                'equipe' => $membres,
+                'status' => true,
+                'user' => $user,
             ];
 
             $response = [
