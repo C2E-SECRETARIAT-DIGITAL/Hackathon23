@@ -44,7 +44,7 @@ class QuizController extends Controller
 
         $response = [
             'status' => true,
-            'questions' => $quiz,
+            'questions' => Quiz::with('questions.responses')->where('id', Auth::user()->etudiant->getEquipe()->qsession->quiz),
         ];
 
         return response()->json($response);
