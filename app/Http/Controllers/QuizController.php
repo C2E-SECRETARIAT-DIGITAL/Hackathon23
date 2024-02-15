@@ -18,7 +18,7 @@ class QuizController extends Controller
     */
     public function renderquiz(Request $request)
     {
-        $quiz = Quiz::with('questions.responses')->where('id', $request->user()->etudiant->getEquipe()->qsession->quiz_id);
+        $quiz = Quiz::with('questions.responses')->where('id', $request->user()->etudiant->getEquipe()->qsession->quiz_id)->first();
 
         // $data = [];
         // foreach ($quiz->questions as $question) {
