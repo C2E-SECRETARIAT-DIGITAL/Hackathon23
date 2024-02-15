@@ -44,7 +44,7 @@ class QuizController extends Controller
 
         $response = [
             'status' => true,
-            'questions' => $request->user(),
+            'questions' => $request->user()->etudiant->getEquipe()->qsession,
         ];
 
         return response()->json($response);
