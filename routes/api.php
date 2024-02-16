@@ -55,6 +55,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/response/delete', [ParametrageController::class, 'deleteresponse']);
 
     // Quiz
+    Route::post('/quiz/toogle', [ParametrageController::class, 'tooglequiz']);
     Route::post('/quiz/render', [QuizController::class, 'renderquiz']);
     Route::post('/quiz/state', [QuizController::class, 'statequiz']);
 
