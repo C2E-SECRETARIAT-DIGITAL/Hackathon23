@@ -573,6 +573,7 @@ class ParametrageController extends Controller
             $quiz = Quiz::where('niveau_id', $request->niveauId)->first();
             $data = [
                 'questions' => Question::with('responses')->where('quiz_id', $quiz->id)->orderBy('created_at', 'desc')->get(),
+                'score' => $quiz->score,
             ];
 
             $response = [
@@ -638,7 +639,6 @@ class ParametrageController extends Controller
 
         } else {
 
-            $quiz = Quiz::where('niveau_id', $request->niveauId)->first();
 
             $response = Response::create([
                 'question_id' => $request->questionId,
@@ -646,18 +646,12 @@ class ParametrageController extends Controller
                 'score' => $request->score,
             ]);
 
-            foreach ($quiz->qsessions as $qsession) {
-                QsessionResponse::create([
-                    'score' => $response->score,
-                    'state' => 0,
-                    'qsession_id' => $qsession->id,
-                    'response_id' => $response->id,
-                    'question_id' => $response->question_id
-                ]);
-            }
+            $quiz = Quiz::where('niveau_id', $request->niveauId)->first();
+            $quiz->score += $request->score;
+            $quiz->save();
 
             $response = [
-                'message' => "",
+                'message' => "ok",
                 'status' => true,
             ];
 
@@ -691,10 +685,9 @@ class ParametrageController extends Controller
 
             } else {
 
-                $sessions = QsessionResponse::where('response_id', $rep->id)->get();
-                foreach ($sessions as $session) {
-                    $session->delete();
-                }
+                $quiz = Quiz::where('niveau_id', $request->niveauId)->first();
+                $quiz->score -= $rep->score;
+                $quiz->save();
 
                 $rep->delete();
                 $response = [

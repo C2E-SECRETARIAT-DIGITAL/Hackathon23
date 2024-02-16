@@ -56,6 +56,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     // Quiz
     Route::post('/quiz/render', [QuizController::class, 'renderquiz']);
+    Route::post('/quiz/state', [QuizController::class, 'statequiz']);
 
     // Groupe
     Route::post('/groupe/render', [GroupeController::class, 'rendergroupe']);
