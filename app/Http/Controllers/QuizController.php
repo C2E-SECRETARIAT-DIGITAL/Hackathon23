@@ -59,20 +59,28 @@ class QuizController extends Controller
         return response()->json($response);
     }
 
+    /**
+     * canpasstest
+     * 0 => peut faire le quiz
+     * 1 => quiz non disponible pour le niveau
+     * 2 => quiz fermé
+     * 3 => a déjà fait le quiz
+     */
+
     public function statequiz(Request $request)
     {
         $user = Auth::user();
-        $canpasstest = true;
+        $canpasstest = 0;
 
         if (!$user->etudiant->getEquipe()->niveau->quiz_available) {
-            $canpasstest = false;
+            $canpasstest = 1;
         } else {
 
             if ($user->etudiant->getEquipe()->qsession->quiz->state == 0) {
-                $canpasstest = false;
+                $canpasstest = 2;
             } else {
                 if ($user->etudiant->getEquipe()->qsession->state == 1) {
-                    $canpasstest = false;
+                    $canpasstest = 3;
                 }
             }
         }
