@@ -9,6 +9,7 @@ use App\Models\QsessionResponse;
 use App\Models\Collation;
 use App\Models\RepSalle;
 use App\Models\Question;
+use App\Models\Qsession;
 use App\Models\Response;
 use App\Models\Niveau;
 use App\Models\Classe;
@@ -813,6 +814,85 @@ class ParametrageController extends Controller
 
                 $quiz->state = !$quiz->state;
                 $quiz->save();
+                $response = [
+                    'status' => true,
+                    'message' => "ok",
+                ];
+
+            }
+        }
+
+        return response()->json($response);
+    }
+
+    /*
+    {
+        'equipeId' => id de l'equipe dont on veut réinitialiser le quiz
+    }
+    */
+    public function resetquiz(Request $request)
+    {
+        if (!$request->equipeId) {
+
+            $response = [
+                'status' => false,
+                'message' => "Remplissez tout les champs correctement",
+            ];
+
+        } else {
+            $session = Qsession::where('equipe_id', $request->equipeId)->first();
+
+            if (!$session) {
+
+                $response = [
+                    'status' => false,
+                    'message' => "Session non trouvé",
+                ];
+
+            } else {
+
+                $session->score = 0;
+                $session->state = 0;
+                $session->save();
+
+                $response = [
+                    'status' => true,
+                    'message' => "ok",
+                ];
+            }
+        }
+        return response()->json($response);
+
+    }
+
+    /*
+    {
+        'equipeId' => id de l'équipe
+    }
+    */
+    public function toogleequipe(Request $request)
+    {
+
+        if (!$request->equipeId) {
+
+            $response = [
+                'status' => false,
+                'message' => "Remplissez tout les champs correctement",
+            ];
+
+        } else {
+            $equipe = Equipe::find($request->equipeId);
+            if (!$equipe) {
+
+                $response = [
+                    'status' => false,
+                    'message' => "Equipe non trouvée",
+                ];
+
+            } else {
+
+                $equipe->statut = !$equipe->statut;
+                $equipe->save();
                 $response = [
                     'status' => true,
                     'message' => "ok",
