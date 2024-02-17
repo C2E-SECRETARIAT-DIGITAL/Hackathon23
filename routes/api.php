@@ -51,11 +51,14 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     // Préselections
     Route::post('/preselection/render', [ParametrageController::class, 'renderpreselection']);
     Route::post('/question/create', [ParametrageController::class, 'createquestion']);
+    Route::post('/question/update', [ParametrageController::class, 'updatequestion']);
+    Route::post('/question/delete', [ParametrageController::class, 'deletequestion']);
     Route::post('/response/create', [ParametrageController::class, 'createresponse']);
     Route::post('/response/delete', [ParametrageController::class, 'deleteresponse']);
 
     // Quiz
     Route::post('/quiz/toogle', [ParametrageController::class, 'tooglequiz']);
+    Route::post('/quiz/submit', [QuizController::class, 'submitquiz']);
     Route::post('/quiz/render', [QuizController::class, 'renderquiz']);
     Route::post('/quiz/state', [QuizController::class, 'statequiz']);
 

@@ -40,7 +40,7 @@ class QuizController extends Controller
                 );
             }
 
-            $qsession =  Auth::user()->etudiant->getEquipe()->qsession;
+            $qsession = Auth::user()->etudiant->getEquipe()->qsession;
             $qsession->state = 1;
             $qsession->save();
 
@@ -93,6 +93,36 @@ class QuizController extends Controller
             'status' => true,
             'data' => $data
         ];
+
+        return response()->json($response);
+
+    }
+
+    /*
+    {
+        'score' => score obtenue après le quiz
+    }
+    */
+    public function submitquiz(Request $request)
+    {
+        if ($request->score == null) {
+
+            $response = [
+                'status' => false,
+                'message' => "Remplissez tout les champs correctement",
+            ];
+
+        } else {
+
+            $quiz = Quiz::find(Auth::user()->etudiant->getEquipe()->qsession->quiz_id);
+            $quiz->score = $request->score;
+            $quiz->save();
+
+            $response = [
+                'status' => true,
+                'message' => "ok",
+            ];
+        }
 
         return response()->json($response);
 

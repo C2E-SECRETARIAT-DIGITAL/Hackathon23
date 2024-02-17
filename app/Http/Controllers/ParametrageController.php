@@ -623,6 +623,89 @@ class ParametrageController extends Controller
 
     /*
     {
+        'questionId' => id de la question,
+        'question' => nouvau contenu
+    }
+    */
+    public function updatequestion(Request $request)
+    {
+        if (!$request->questionId || !$request->question) {
+
+            $response = [
+                'status' => false,
+                'message' => "Remplissez tout les champs correctement",
+            ];
+
+        } else {
+            $question = Question::find($request->questionId);
+            if (!$question) {
+
+                $response = [
+                    'status' => false,
+                    'message' => "Question non trouvée",
+                ];
+
+            } else {
+
+                $question->content = $request->question;
+                $question->save();
+
+                $response = [
+                    'status' => true,
+                    'message' => "ok",
+                ];
+
+            }
+        }
+
+        return response()->json($response);
+    }
+
+    /*
+    {
+        'questionId' => id de la question
+    }
+    */
+    public function deletequestion(Request $request)
+    {
+        if (!$request->questionId) {
+
+            $response = [
+                'status' => false,
+                'message' => "Remplissez tout les champs correctement",
+            ];
+
+        } else {
+            $question = Question::find($request->questionId);
+            if (!$question) {
+
+                $response = [
+                    'status' => false,
+                    'message' => "Question non trouvée",
+                ];
+
+            } else {
+
+                $quiz = Quiz::find($question->quiz_id);
+                foreach ($question->responses as $res) {
+                    $quiz->score -= $res->score;
+                    $quiz->save();
+                }
+                $question->delete();
+
+                $response = [
+                    'status' => true,
+                    'message' => "ok",
+                ];
+
+            }
+        }
+
+        return response()->json($response);
+    }
+
+    /*
+    {
         'niveauId' => id du niveau,
         'questionId' => id de la question,
         'response' => la reponse à enregister,
@@ -686,7 +769,7 @@ class ParametrageController extends Controller
 
             } else {
 
-                $quiz = Quiz::where('niveau_id', $request->niveauId)->first();
+                $quiz = Quiz::find($rep->question->quiz_id);
                 $quiz->score -= $rep->score;
                 $quiz->save();
 
@@ -707,7 +790,8 @@ class ParametrageController extends Controller
         'quizId' => id du quiz
     }
     */
-    public function tooglequiz(Request $request){
+    public function tooglequiz(Request $request)
+    {
 
         if (!$request->quizId) {
 
