@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Qsession;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -114,9 +115,9 @@ class QuizController extends Controller
 
         } else {
 
-            $quiz = Quiz::find(Auth::user()->etudiant->getEquipe()->qsession->quiz_id);
-            $quiz->score = $request->score;
-            $quiz->save();
+            $session = Qsession::find(Auth::user()->etudiant->getEquipe()->qsession->id);
+            $session->score = $request->score;
+            $session->save();
 
             $response = [
                 'status' => true,
