@@ -891,8 +891,13 @@ class ParametrageController extends Controller
 
             } else {
 
-                $equipe->statut = !$equipe->statut;
+                if ($equipe->statut == 0)
+                    $equipe->statut = 1;
+                else
+                    $equipe->statut = 0;
+
                 $equipe->save();
+                
                 $response = [
                     'status' => true,
                     'message' => "ok",
