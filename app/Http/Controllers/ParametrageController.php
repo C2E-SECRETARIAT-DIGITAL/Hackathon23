@@ -785,4 +785,42 @@ class ParametrageController extends Controller
         return response()->json($response);
     }
 
+    /*
+    {
+        'quizId' => id du quiz
+    }
+    */
+    public function tooglequiz(Request $request)
+    {
+
+        if (!$request->quizId) {
+
+            $response = [
+                'status' => false,
+                'message' => "Remplissez tout les champs correctement",
+            ];
+
+        } else {
+            $quiz = Quiz::find($request->quizId);
+            if (!$quiz) {
+
+                $response = [
+                    'status' => false,
+                    'message' => "Quiz non trouvé",
+                ];
+
+            } else {
+
+                $quiz->state = !$quiz->state;
+                $quiz->save();
+                $response = [
+                    'status' => true,
+                    'message' => "ok",
+                ];
+
+            }
+        }
+
+        return response()->json($response);
+    }
 }
