@@ -19,36 +19,49 @@ class QuizController extends Controller
 
         if ($quiz) {
 
-            $data = [];
-            foreach ($quiz->questions as $question) {
+            $qsession = Auth::user()->etudiant->getEquipe()->qsession;
 
-                $choices = [];
-                $correctanswer = '';
+            if ($qsession->state == 1) {
 
-                foreach ($question->responses as $res) {
-                    array_push($choices, $res->content);
-                    if ($res->score > 0)
-                        $correctanswer = $res->content;
+                $response = [
+                    'status' => true,
+                    'questions' => [],
+                ];
+
+            } else {
+
+                $data = [];
+                foreach ($quiz->questions as $question) {
+
+                    $choices = [];
+                    $correctanswer = '';
+
+                    foreach ($question->responses as $res) {
+                        array_push($choices, $res->content);
+                        if ($res->score > 0)
+                            $correctanswer = $res->content;
+                    }
+
+                    array_push(
+                        $data,
+                        [
+                            'correctAnswer' => $correctanswer,
+                            'question' => $question->content,
+                            'choices' => $choices,
+                        ]
+                    );
                 }
 
-                array_push(
-                    $data,
-                    [
-                        'correctAnswer' => $correctanswer,
-                        'question' => $question->content,
-                        'choices' => $choices,
-                    ]
-                );
+                $qsession->state = 1;
+                $qsession->save();
+
+                $response = [
+                    'status' => true,
+                    'questions' => $data,
+                ];
+
             }
 
-            $qsession = Auth::user()->etudiant->getEquipe()->qsession;
-            $qsession->state = 1;
-            $qsession->save();
-
-            $response = [
-                'status' => true,
-                'questions' => $data,
-            ];
 
         } else {
             $response = [
