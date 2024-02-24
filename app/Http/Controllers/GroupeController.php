@@ -129,4 +129,55 @@ class GroupeController extends Controller
         return response()->json($response);
 
     }
+
+    /*
+    {
+        'niveauId' => id du niveau dont on veut faire la sélection automatique,
+        'nbreEquipe' => nombre d'equipe à sélectionner
+    }
+    */
+    public function autoselectgroupe(Request $request)
+    {
+        if (!$request->niveauId) {
+
+            $response = [
+                'status' => false,
+                'message' => "Remplissez tout les champs correctement",
+            ];
+
+        } else {
+            $quiz = Quiz::where('niveau_id', $request->niveauId)->first();
+
+            if (!$quiz) {
+
+                $response = [
+                    'status' => false,
+                    'message' => "Quiz non trouvé",
+                ];
+
+            } else {
+                $sessions = Qsession::where('quiz_id', $quiz->id)->orderBy('score', 'desc')->get();
+
+                if ($request->nbreEquipe >= sizeof($sessions)) {
+                    foreach ($sessions as $session) {
+                        $e = $session->equipe;
+                        $e->statut = 1;
+                        $e->save();
+                    }
+                } else {
+                    for ($i = 0; $i < $request->nbreEquipe; $i++) {
+                        $e = $sessions[$i]->equipe;
+                        $e->statut = 1;
+                        $e->save();
+                    }
+                }
+
+                $response = [
+                    'status' => true,
+                    'message' => "ok",
+                ];
+            }
+        }
+        return response()->json($response);
+    }
 }

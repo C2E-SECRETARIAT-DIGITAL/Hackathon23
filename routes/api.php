@@ -63,6 +63,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/quiz/state', [QuizController::class, 'statequiz']);
 
     // Groupe
+    Route::post('/groupe/autoselect', [GroupeController::class, 'autoselectgroupe']);
     Route::post('/groupe/render', [GroupeController::class, 'rendergroupe']);
     Route::post('/equipe/toogle', [GroupeController::class, 'toogleequipe']);
     Route::post('/quiz/reset', [GroupeController::class, 'resetquiz']);
