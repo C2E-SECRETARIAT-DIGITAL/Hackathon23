@@ -59,7 +59,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     // Quiz
     Route::post('/quiz/toogle', [ParametrageController::class, 'tooglequiz']);
-    Route::post('/quiz/selected', [QuizController::class, 'selectedquiz']); // new
+    Route::post('/quiz/selected', [QuizController::class, 'selectedquiz']);
     Route::post('/quiz/submit', [QuizController::class, 'submitquiz']);
     Route::post('/quiz/render', [QuizController::class, 'renderquiz']);
     Route::post('/quiz/state', [QuizController::class, 'statequiz']);
@@ -71,8 +71,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/quiz/reset', [GroupeController::class, 'resetquiz']);
 
     // Restauration
-    Route::post('/commandes/render', [ParametrageController::class, 'rendercommandes']);
-    Route::post('/commandes/reset', [ParametrageController::class, 'resetcommandes']);
+    Route::post('/commandes/render', [ParametrageController::class, 'rendercommandes']); // new
+    Route::post('/commandes/reset', [ParametrageController::class, 'resetcommandes']); // neww
 
 
 });
