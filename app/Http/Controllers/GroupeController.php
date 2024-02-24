@@ -158,22 +158,34 @@ class GroupeController extends Controller
             } else {
                 $sessions = Qsession::where('quiz_id', $quiz->id)->orderBy('score', 'desc')->get();
 
-                if ($request->nbreEquipe >= sizeof($sessions)) {
+                if ($request->nbreEquipe == 0) {
+                    $sessions = Qsession::where('quiz_id', $quiz->id)->get();
+
                     foreach ($sessions as $session) {
-                        $session->state = 1;
-                        $session->save();
-                        
                         $e = $session->equipe;
-                        $e->statut = 1;
+                        $e->statut = 0;
                         $e->save();
                     }
+
                 } else {
-                    for ($i = 0; $i < $request->nbreEquipe; $i++) {
-                        $e = $sessions[$i]->equipe;
-                        $e->statut = 1;
-                        $e->save();
+                    if ($request->nbreEquipe >= sizeof($sessions)) {
+                        foreach ($sessions as $session) {
+                            $session->state = 1;
+                            $session->save();
+
+                            $e = $session->equipe;
+                            $e->statut = 1;
+                            $e->save();
+                        }
+                    } else {
+                        for ($i = 0; $i < $request->nbreEquipe; $i++) {
+                            $e = $sessions[$i]->equipe;
+                            $e->statut = 1;
+                            $e->save();
+                        }
                     }
                 }
+
 
                 $response = [
                     'status' => true,

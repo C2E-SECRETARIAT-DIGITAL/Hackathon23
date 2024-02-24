@@ -8,8 +8,8 @@ use App\Models\Equipe;
 use App\Models\Hackaton;
 use App\Models\Niveau;
 use App\Models\Salle;
-use Illuminate\Http\Request;
 use PDF;
+use Illuminate\Http\Request;
 
 class pdfController extends Controller
 {
@@ -135,7 +135,8 @@ class pdfController extends Controller
     public function listeselectEquipeN1(){
 
         $hackaton = Hackaton::all()->last();
-        $niveau1 = Niveau::where('libelle', 'Niveau 1')->first() ;
+        $libelle = "Niveau 1";
+        $niveau1 = Niveau::where('libelle', $libelle)->first() ;
         $equipes = Equipe::where('hackaton_id', $hackaton->id)
                             ->where('statut', 1)
                             ->where('niveau_id', $niveau1->id)->get();
@@ -143,16 +144,16 @@ class pdfController extends Controller
         $data = [
             'title' => 'Hackathon',
             'date' => date('d-m-Y à h:i:s A'),
-            'niveau' => ' Niveau 1',
+            'niveau' => $libelle,
             'equipes' => $equipes
             
         ];
           
         $pdf = PDF::loadView('pdf.listeEquipes', $data);
     
-        // return $pdf->download('listeEquipes.pdf');
+        return $pdf->download('listeEquipes.pdf');
 
-        return $pdf->stream('listeEquipes.pdf');
+        // return $pdf->stream('listeEquipes.pdf');
 
     }
 

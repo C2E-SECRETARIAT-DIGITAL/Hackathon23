@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Liste des Equipes Inscrites</title>
+    <title>Liste des Equipes Sélectionnées</title>
 
     <style>
         .styled-table {
@@ -123,7 +123,7 @@
             <tr>
                 <th>Nom de l'equipe</th>
                 
-                <th >participants</th>
+                <th>Membres</th>
             </tr>
         </thead>
        
