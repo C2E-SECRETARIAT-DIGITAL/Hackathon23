@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Hackaton as ModelsHackaton;
 use App\Models\Qsession;
+use App\Models\Classe;
 use App\Models\Equipe;
 use App\Models\Niveau;
 use App\Models\Quiz;
@@ -24,12 +25,19 @@ class GroupeController extends Controller
                 'niveaux' => Niveau::all()
             ];
         } else {
-            $data = [
-                'equipes' => Equipe::with('participants.etudiant', 'niveau', 'qsession.quiz')->where('hackaton_id', $hackaton->id)
-                    ->where('niveau_id', $request->niveauId)
-                    ->where('statut', $request->statut)
-                    ->get(),
+            $equipes = Equipe::with('participants.etudiant', 'niveau', 'qsession.quiz')->where('hackaton_id', $hackaton->id)
+                ->where('niveau_id', $request->niveauId)
+                ->where('statut', $request->statut)
+                ->get();
 
+            foreach ($equipes as $eq) {
+                if (Classe::where('libelle', $eq->participants[0]->etudiant->classe)->first()->esatic == 0)
+                    $eq->is_extern = true;
+                else
+                    $eq->is_extern = false;
+            }
+            $data = [
+                'equipes' => $equipes,
                 'niveaux' => Niveau::all()
             ];
         }

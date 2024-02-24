@@ -47,7 +47,7 @@ class Etudiant extends Model
         return $equipe ;
     }
 
-    public function is_chief()
+    public function is_chief() 
     {
         return Participant::where('etudiant_id', $this->id)
                             ->where('hackaton_id', $hackaton = Hackaton::where('inscription', 1)->first()->id)
