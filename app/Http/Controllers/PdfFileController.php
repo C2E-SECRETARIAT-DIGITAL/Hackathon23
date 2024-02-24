@@ -10,8 +10,7 @@ use App\Models\Equipe;
 use App\Models\Hackaton;
 use App\Models\Niveau;
 use App\Models\Salle;
-use PDF;
-
+use Illuminate\Support\Facades\File;
 class PdfFileController extends Controller
 {
     /*
@@ -35,7 +34,7 @@ class PdfFileController extends Controller
             
         ];
 
-        $pdf = PDF::loadView('pdf.listeEquipes', $data);
+        $pdf = \PDF::loadView('pdf.listeEquipes', $data);
     
         return $pdf->download('listeEquipes.pdf');
 
