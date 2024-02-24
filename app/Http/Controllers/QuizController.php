@@ -78,7 +78,8 @@ class QuizController extends Controller
      * 0 => peut faire le quiz
      * 1 => quiz non disponible pour le niveau
      * 2 => quiz fermé
-     * 3 => a déjà fait le quiz
+     * 3 => quiz fermé
+     * 4 => a déjà fait le quiz
      */
 
     public function statequiz(Request $request)
@@ -91,16 +92,52 @@ class QuizController extends Controller
         } else {
 
             if ($user->etudiant->getEquipe()->qsession->quiz->state == 0) {
-                $canpasstest = 2;
+                // $canpasstest = 2;
+                if ($user->etudiant->getEquipe()->qsession->state == 0) {
+                    $canpasstest = 3;
+                }
             } else {
                 if ($user->etudiant->getEquipe()->qsession->state == 1) {
-                    $canpasstest = 3;
+                    $canpasstest = 4;
                 }
             }
         }
 
         $data = [
             'canpasstest' => $canpasstest
+        ];
+
+        $response = [
+            'status' => true,
+            'data' => $data
+        ];
+
+        return response()->json($response);
+
+    }
+
+    /**
+     * isselected
+     * 0 => est selectionnée
+     * 1 => est du niveau 3
+     * 2 => n'est pas selectionnée
+     */
+
+    public function selectedquiz(Request $request)
+    {
+        $user = Auth::user();
+        $isselected = 0;
+
+        if (!$user->etudiant->getEquipe()->niveau->quiz_available) {
+            $isselected = 1;
+        } else {
+            if ($user->etudiant->getEquipe()->state == 0) {
+                $isselected = 2;
+            }
+        }
+
+        $data = [
+            'isselected' => $isselected
         ];
 
         $response = [

@@ -37,8 +37,8 @@ class GroupeController extends Controller
                     $eq->is_extern = false;
             }
             $data = [
+                'niveaux' => Niveau::all(),
                 'equipes' => $equipes,
-                'niveaux' => Niveau::all()
             ];
         }
 
