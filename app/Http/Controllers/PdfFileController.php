@@ -10,7 +10,7 @@ use App\Models\Equipe;
 use App\Models\Hackaton;
 use App\Models\Niveau;
 use App\Models\Salle;
-use Barryvdh\DomPDF\PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PdfFileController extends Controller
 {
@@ -19,27 +19,26 @@ class PdfFileController extends Controller
         'niveauId' => id du niveau dont on veut le fichier pdf
     }
     */
-    public function selectedteam(Request $request){
+    public function selectedteam($niveauId)
+    {
 
         $hackaton = Hackaton::all()->last();
-        $niveau = Niveau::find($request->niveauId) ;
+        $niveau = Niveau::find($niveauId);
         $equipes = Equipe::where('hackaton_id', $hackaton->id)
-                            ->where('statut', 1)
-                            ->where('niveau_id', $niveau->id)->get();
-        
+            ->where('niveau_id', $niveau->id)
+            ->where('statut', 1)
+            ->get();
+
         $data = [
             'date' => date('d-m-Y à h:i:s A'),
             'niveau' => $niveau->libelle,
             'title' => 'Hackathon',
             'equipes' => $equipes,
-            
+
         ];
 
-        $pdf = \PDF::loadView('pdf.listeEquipes', $data);
-    
-        return $pdf->download('listeEquipes.pdf');
-
-        // return $pdf->stream('listeEquipes.pdf');
+        $pdf = Pdf::loadView('pdf.listeEquipes', $data);
+        return $pdf->stream('listeEquipes.pdf');
 
     }
 }

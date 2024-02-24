@@ -71,7 +71,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/quiz/reset', [GroupeController::class, 'resetquiz']);
 
     // Pdf
-    Route::post('/pdf/selectedteam', [PdfFileController::class, 'selectedteam']); // new
+    // Route::get('/pdf/selectedteam/:niveauId', [PdfFileController::class, 'selectedteam']); // new
 
 
 });
@@ -85,3 +85,6 @@ Route::post('/auth/login', [InscriptionController::class, 'login']);
 Route::post('/enregistrement-participants', [InscriptionController::class, 'participants_enregistrement_createEquipe']);
 Route::post('/data-for-enregistrement-participants', [InscriptionController::class, 'enregistrement_render']);
 Route::get('/inscription/state', [InscriptionController::class, 'inscriptionstate']);
+
+
+Route::get('/pdf/selectedteam/{niveauId}', [PdfFileController::class, 'selectedteam']);
