@@ -70,6 +70,11 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/equipe/toogle', [GroupeController::class, 'toogleequipe']);
     Route::post('/quiz/reset', [GroupeController::class, 'resetquiz']);
 
+    // Restauration
+    Route::post('/commandes/render', [ParametrageController::class, 'rendercommandes']);
+    Route::post('/commandes/reset', [ParametrageController::class, 'resetcommandes']);
+
+
 });
 
 // ------------- ROUTES NOT PROTECTED BY AUTH MIDDLEWWARE ---------- //

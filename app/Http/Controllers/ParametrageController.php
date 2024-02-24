@@ -8,8 +8,8 @@ use App\Models\Salle as ModelsSalle;
 use App\Models\Collation;
 use App\Models\RepSalle;
 use App\Models\Question;
-use App\Models\Qsession;
 use App\Models\Response;
+use App\Models\Commande;
 use App\Models\Niveau;
 use App\Models\Classe;
 use App\Models\Equipe;
@@ -822,5 +822,33 @@ class ParametrageController extends Controller
         }
 
         return response()->json($response);
+    }
+
+    public function rendercommandes()
+    {
+        $data = [
+            "commandes" => Commande::all()
+        ];
+
+        $response = [
+            'status' => true,
+            'data' => $data,
+        ];
+
+        return response()->json($response);
+
+    }
+
+    public function resetcommandes()
+    {
+        Commande::truncate();
+
+        $response = [
+            'status' => true,
+            'message' => "ok",
+        ];
+
+        return response()->json($response);
+
     }
 }
