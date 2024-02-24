@@ -38,7 +38,7 @@ class PdfFileController extends Controller
         ];
 
         $pdf = Pdf::loadView('pdf.listeEquipes', $data);
-        return $pdf->stream('listeEquipes.pdf');
+        return $pdf->download('listeEquipes.pdf');
 
     }
 }
