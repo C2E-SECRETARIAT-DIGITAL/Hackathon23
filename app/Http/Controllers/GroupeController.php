@@ -160,6 +160,9 @@ class GroupeController extends Controller
 
                 if ($request->nbreEquipe >= sizeof($sessions)) {
                     foreach ($sessions as $session) {
+                        $session->state = 1;
+                        $session->save();
+                        
                         $e = $session->equipe;
                         $e->statut = 1;
                         $e->save();
