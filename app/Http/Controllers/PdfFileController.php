@@ -41,4 +41,39 @@ class PdfFileController extends Controller
         return $pdf->stream('listeEquipes.pdf');
 
     }
+
+    public function repartition()
+    {
+        $hackaton = Hackaton::all()->last();
+        $salles = Salle::all() ;
+        $data = [
+            'title' => 'Hackathon',
+            'date' => date('d-m-Y à h:i:s A'),
+            'salles' => $salles
+            
+        ];
+          
+        $pdf = Pdf::loadView('pdf.repartition', $data);
+        return $pdf->stream('repartition.pdf');
+    }
+
+
+    public function commandes()
+    {
+        $hackaton = Hackaton::all()->last();
+        $salles = Salle::all() ;
+        $collations = Collation::all() ;
+
+
+        $data = [
+            'title' => 'Hackathon',
+            'date' => date('d-m-Y à h:i:s A'),
+            'salles' => $salles,
+            'collations' =>  $collations
+            
+        ];
+          
+        $pdf = Pdf::loadView('pdf.commandes', $data);
+        return $pdf->stream('collations.pdf');
+    }
 }

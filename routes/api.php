@@ -70,10 +70,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/equipe/toogle', [GroupeController::class, 'toogleequipe']);
     Route::post('/quiz/reset', [GroupeController::class, 'resetquiz']);
 
-    // Pdf
-    // Route::get('/pdf/selectedteam/:niveauId', [PdfFileController::class, 'selectedteam']); // new
-
-
 });
 
 // ------------- ROUTES NOT PROTECTED BY AUTH MIDDLEWWARE ---------- //
@@ -86,5 +82,7 @@ Route::post('/enregistrement-participants', [InscriptionController::class, 'part
 Route::post('/data-for-enregistrement-participants', [InscriptionController::class, 'enregistrement_render']);
 Route::get('/inscription/state', [InscriptionController::class, 'inscriptionstate']);
 
-
+// Pdf
 Route::get('/pdf/selectedteam/{niveauId}', [PdfFileController::class, 'selectedteam']);
+Route::get('/pdf/repartition', [PdfFileController::class, 'repartition']);
+Route::get('/pdf/commandes', [PdfFileController::class, 'commandes']);
