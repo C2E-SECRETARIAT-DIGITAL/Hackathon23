@@ -37,7 +37,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/salle/delete', [ParametrageController::class, 'deletesalle']);
     Route::get('/salle/render', [ParametrageController::class, 'rendersalle']);
 
-    // Répartition
+    // Parametrage - Répartition
     Route::post('/repartition/create', [ParametrageController::class, 'createrepartition']);
     Route::post('/repartition/delete', [ParametrageController::class, 'deleterepartition']);
     Route::get('/repartition/render', [ParametrageController::class, 'renderrepartition']);
@@ -64,15 +64,15 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/quiz/render', [QuizController::class, 'renderquiz']);
     Route::post('/quiz/state', [QuizController::class, 'statequiz']);
 
-    // Groupe
+    // Groupes
     Route::post('/groupe/autoselect', [GroupeController::class, 'autoselectgroupe']);
     Route::post('/groupe/render', [GroupeController::class, 'rendergroupe']);
     Route::post('/equipe/toogle', [GroupeController::class, 'toogleequipe']);
     Route::post('/quiz/reset', [GroupeController::class, 'resetquiz']);
 
     // Restauration
-    Route::post('/commandes/render', [ParametrageController::class, 'rendercommandes']); // new
-    Route::post('/commandes/reset', [ParametrageController::class, 'resetcommandes']); // neww
+    Route::get('/commandes/render', [ParametrageController::class, 'rendercommandes']); // new
+    Route::get('/commandes/reset', [ParametrageController::class, 'resetcommandes']); // neww
 
 
 });
@@ -87,7 +87,7 @@ Route::post('/enregistrement-participants', [InscriptionController::class, 'part
 Route::post('/data-for-enregistrement-participants', [InscriptionController::class, 'enregistrement_render']);
 Route::get('/inscription/state', [InscriptionController::class, 'inscriptionstate']);
 
-// Pdf
+// Impression
 Route::get('/pdf/selectedteam/{niveauId}', [PdfFileController::class, 'selectedteam']);
 Route::get('/pdf/repartition', [PdfFileController::class, 'repartition']);
 Route::get('/pdf/commandes', [PdfFileController::class, 'commandes']);
