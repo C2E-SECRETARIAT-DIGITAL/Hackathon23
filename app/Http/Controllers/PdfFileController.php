@@ -44,13 +44,11 @@ class PdfFileController extends Controller
 
     public function repartition()
     {
-        $hackaton = Hackaton::all()->last();
         $salles = Salle::all() ;
         $data = [
             'title' => 'Hackathon',
             'date' => date('d-m-Y à h:i:s A'),
             'salles' => $salles
-            
         ];
           
         $pdf = Pdf::loadView('pdf.repartition', $data);
@@ -60,7 +58,6 @@ class PdfFileController extends Controller
 
     public function commandes()
     {
-        $hackaton = Hackaton::all()->last();
         $salles = Salle::all() ;
         $collations = Collation::all() ;
 
@@ -70,7 +67,6 @@ class PdfFileController extends Controller
             'date' => date('d-m-Y à h:i:s A'),
             'salles' => $salles,
             'collations' =>  $collations
-            
         ];
           
         $pdf = Pdf::loadView('pdf.commandes', $data);
