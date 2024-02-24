@@ -10,7 +10,8 @@ use App\Models\Equipe;
 use App\Models\Hackaton;
 use App\Models\Niveau;
 use App\Models\Salle;
-use Illuminate\Support\Facades\File;
+use Barryvdh\DomPDF\PDF;
+
 class PdfFileController extends Controller
 {
     /*
