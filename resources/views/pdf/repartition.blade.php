@@ -93,27 +93,6 @@
 </head>
 <body>
 
-    <div style="
-            display:flex;
- 
-            width:100%;
-            ">
-        
-        <div style=" width:48%; display:inline-block;" >
-           
-            <img alt="Logo de l'entreprise" src="{{asset('images/app/logoC2E-PhotoRoom.png')}}" style="height: 80px; width:130px" />
-        
-        </div>
-
-        <div style=" width:48%;text-align:right; display:inline-block;" >
-           
-            <img alt="Logo de l'entreprise" src="{{asset('images/app/logoHackathon-PhotoRoom.png')}}" style="height: 100px; width:130px" />
-        
-        </div>
-
-
-    </div>
-
     <div style="margin:30px 0px; text-align:center; width:100% ;">
        <span style="font-size:20px; font-weight:bold"> Repartition des Equipes par salle  </span> 
     </div>
