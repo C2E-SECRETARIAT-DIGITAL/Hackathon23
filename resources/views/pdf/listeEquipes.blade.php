@@ -109,7 +109,7 @@
         @foreach ($equipes as $equipe)
             <tr>
                 <td>
-                    {{$equipe->nom }}
+                    {{$equipe->nom}} 
                 </td>
                 <td>
                     @foreach ($equipe->participants as $participant )

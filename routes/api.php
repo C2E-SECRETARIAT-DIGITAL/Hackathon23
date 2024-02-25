@@ -77,7 +77,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     // Restauration - Participant
     Route::get('/prestauration/render', [ParticipantController::class, 'renderprestauration']); // new
-    Route::get('/commande/make', [ParticipantController::class, 'makecommande']); // new
+    Route::post('/commande/make', [ParticipantController::class, 'makecommande']); // new
 
 
 });
