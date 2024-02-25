@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Http\Controllers\InscriptionController;
 use App\Http\Controllers\ParametrageController;
 use App\Http\Controllers\ParticipantController;
@@ -10,8 +9,6 @@ use App\Http\Controllers\QuizController;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
-
-
 
 
 // ------------- ROUTES PROTECTED BY AUTH MIDDLEWWARE ---------- //
