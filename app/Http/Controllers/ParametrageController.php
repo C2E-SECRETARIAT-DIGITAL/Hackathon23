@@ -827,7 +827,7 @@ class ParametrageController extends Controller
     public function rendercommandes()
     {
         $data = [
-            "commandes" => Commande::all()
+            "commandes" => Commande::with('collation')->get()
         ];
 
         $response = [

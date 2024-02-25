@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\InscriptionController;
 use App\Http\Controllers\ParametrageController;
+use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\PdfFileController;
 use App\Http\Controllers\GroupeController;
 use App\Http\Controllers\QuizController;
@@ -71,8 +72,12 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/quiz/reset', [GroupeController::class, 'resetquiz']);
 
     // Restauration
-    Route::get('/commandes/render', [ParametrageController::class, 'rendercommandes']); // new
-    Route::get('/commandes/reset', [ParametrageController::class, 'resetcommandes']); // neww
+    Route::get('/commandes/render', [ParametrageController::class, 'rendercommandes']);
+    Route::get('/commandes/reset', [ParametrageController::class, 'resetcommandes']);
+
+    // Restauration - Participant
+    Route::get('/prestauration/render', [ParticipantController::class, 'renderprestauration']); // new
+    Route::get('/commande/make', [ParticipantController::class, 'makecommande']); // new
 
 
 });

@@ -24,7 +24,7 @@ class Etudiant extends Model
 
     public function currentEquipe()
     {
-        $hackaton = Hackaton::where('inscription', 1)->first() ;
+        $hackaton = Hackaton::where('inscription', 1)->first();
         
         $equipe = DB::table('etudiants as etu')
                     ->leftjoin('participants as part', 'part.etudiant_id', '=' , 'etu.id')

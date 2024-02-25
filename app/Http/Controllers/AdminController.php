@@ -129,7 +129,7 @@ class AdminController extends Controller
 
     public function gestionRestaurant()
     {
-        $repas = Repa::orderBy('created_at', 'DESC')->paginate(8);
+        $repas = Repa::orderBy('created_at', 'DESC')->get();
 
         $hackaton = Hackaton::where('inscription', 1)->first();
 

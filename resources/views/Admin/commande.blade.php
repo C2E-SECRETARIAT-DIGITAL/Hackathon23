@@ -81,6 +81,7 @@
                                                                         <div class="flex items-center">
 
                                                                             <div class="ml-4">
+                                                                                
                                                                                 <div class="text-sm font-extrabold text-gray-900">
                                                                                     {{$repa->libelle }}
                                                                                 </div>

@@ -41,6 +41,7 @@ class InscriptionController extends Controller
             $isparticipant = Auth::user()->etudiant ? true : false;
             if ($isparticipant) {
                 $user->niveau = $user->etudiant->getEquipe()->niveau;
+                $user->salle = $user->etudiant->getEquipe()->currentSalle();
                 foreach ($user->etudiant->getEquipe()->participants as $participant) {
                     if ($participant->chef == 1) {
                         $participant->etudiant["chef"] = 1;

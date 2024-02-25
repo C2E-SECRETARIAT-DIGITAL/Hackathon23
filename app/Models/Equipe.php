@@ -29,7 +29,7 @@ class Equipe extends Model
     public function currentSalle()
     {
 
-        $hackaton = Hackaton::where('inscription', 1)->first() ;
+        $hackaton = Hackaton::where('inscription', 1)->first();
 
         $salle = DB::table('rep_salles')
                     ->join('salles', 'salles.id', '=', 'rep_salles.salle_id')
