@@ -64,7 +64,7 @@ class ParticipantController extends Controller
             $salle = $user->etudiant->getEquipe()->currentSalle();
 
             Commande::create([
-                'etudiant_id' => $user->etudiant_id,
+                'etudiant_id' => $user->etudiant->id,
                 'salle_id' => $salle->id,
                 'collation_id' => $request->collationId
             ]);

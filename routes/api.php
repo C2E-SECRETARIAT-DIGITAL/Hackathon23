@@ -73,7 +73,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/commandes/reset', [ParametrageController::class, 'resetcommandes']);
 
     // Restauration - Participant
-    Route::get('/prestauration/render', [ParticipantController::class, 'renderprestauration']); // new
+    Route::get('/prestauration/render', [ParticipantController::class, 'renderprestauration']);
     Route::post('/commande/make', [ParticipantController::class, 'makecommande']); // new
 
 
