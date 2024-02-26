@@ -69,7 +69,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/quiz/reset', [GroupeController::class, 'resetquiz']);
 
     // Restauration
-    Route::get('/restauration/soumission', [ParametrageController::class, 'restaurationsoumission']); // new
+    Route::post('/restauration/soumission', [ParametrageController::class, 'restaurationsoumission']); // new
     Route::get('/commandes/render', [ParametrageController::class, 'rendercommandes']);
     Route::get('/allrepas/render', [ParametrageController::class, 'renderallrepas']); // new
     Route::get('/commandes/reset', [ParametrageController::class, 'resetcommandes']);
