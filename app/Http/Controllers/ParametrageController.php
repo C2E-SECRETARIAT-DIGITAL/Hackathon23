@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Hackaton as ModelsHackaton;
 use App\Models\Niveau as ModelsNiveau;
 use App\Models\Salle as ModelsSalle;
+use App\Models\Restauration;
 use App\Models\Collation;
+use App\Models\Etudiant;
 use App\Models\RepSalle;
 use App\Models\Question;
 use App\Models\Response;
@@ -16,6 +18,9 @@ use App\Models\Equipe;
 use App\Models\Salle;
 use App\Models\Repa;
 use App\Models\Quiz;
+
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 
 
 use Illuminate\Http\Request;
@@ -824,6 +829,10 @@ class ParametrageController extends Controller
         return response()->json($response);
     }
 
+    // --------------------------------------------------------------------------------------------- //
+    // ----- RESTAURATIONS TAB ---------- RESTAURATIONS TAB ---------- RESTAURATIONS TAB ---------- RESTAURATIONS TAB ----- //
+
+
     public function rendercommandes()
     {
         $data = [
@@ -846,6 +855,86 @@ class ParametrageController extends Controller
         $response = [
             'status' => true,
             'message' => "ok",
+        ];
+
+        return response()->json($response);
+
+    }
+
+    /*
+    {
+        'qrcodeValue' => valeur du qrcode
+    }
+    */
+    public function restaurationsoumission(Request $request)
+    {
+        $codeDecrypte = Crypt::decryptString($request->qrcodeValue);
+
+        $etudiant = Etudiant::where('matricule', $codeDecrypte)->first();
+
+        if (Repa::latest()->first()) {
+
+            $statut = Restauration::where('etudiant_id', $etudiant->id)
+                ->where('repa_id', Repa::latest()->first()->id)
+                ->where('hackaton_id', ModelsHackaton::where('inscription', 1)->first()->id)
+                ->first();
+
+            if (!$statut) {
+                Restauration::create([
+                    'etudiant_id' => $etudiant->id,
+                    'repa_id' => Repa::latest()->first()->id,
+                    'hackaton_id' => ModelsHackaton::where('inscription', 1)->first()->id
+                ]);
+
+                $response = [
+                    'status' => true,
+                    'message' => "Bon appetit",
+                ];
+
+            } else {
+
+                $response = [
+                    'status' => false,
+                    'message' => "Déjà restauré",
+                ];
+            }
+        } else {
+
+            $response = [
+                'status' => false,
+                'message' => "Enregistrer un repas",
+            ];
+
+        }
+
+        return response()->json($response);
+
+    }
+
+    public function renderallrepas()
+    {
+        $repas = Repa::orderBy('created_at', 'DESC')->get();
+        $hackaton = ModelsHackaton::where('inscription', 1)->first();
+
+        $nb_participants = DB::table('participants')
+            ->join('equipes', 'equipes.id', '=', 'participants.equipe_id')
+            ->where('equipes.hackaton_id', $hackaton->id)
+            ->where('equipes.statut', 1)
+            ->get()
+            ->count();
+
+        foreach ($repas as $repa) {
+            $repa->nbEaten = $repa->restauration()->count();
+        }
+
+        $data = [
+            'repas' => $repas,
+            'nbEaters' => $nb_participants
+        ];
+
+        $response = [
+            'status' => false,
+            'data' => $data,
         ];
 
         return response()->json($response);
