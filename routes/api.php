@@ -69,14 +69,14 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/quiz/reset', [GroupeController::class, 'resetquiz']);
 
     // Restauration
-    Route::post('/restauration/soumission', [ParametrageController::class, 'restaurationsoumission']); // new
+    Route::post('/restauration/soumission', [ParametrageController::class, 'restaurationsoumission']);
     Route::get('/commandes/render', [ParametrageController::class, 'rendercommandes']);
-    Route::get('/allrepas/render', [ParametrageController::class, 'renderallrepas']); // new
+    Route::get('/allrepas/render', [ParametrageController::class, 'renderallrepas']);
     Route::get('/commandes/reset', [ParametrageController::class, 'resetcommandes']);
 
     // Restauration - Participant
     Route::get('/prestauration/render', [ParticipantController::class, 'renderprestauration']);
-    Route::post('/commande/make', [ParticipantController::class, 'makecommande']); // new
+    Route::post('/commande/make', [ParticipantController::class, 'makecommande']);
 
 
 });

@@ -933,7 +933,7 @@ class ParametrageController extends Controller
         ];
 
         $response = [
-            'status' => false,
+            'status' => true,
             'data' => $data,
         ];
 
