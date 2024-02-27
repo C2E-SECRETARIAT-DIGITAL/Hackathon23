@@ -34,47 +34,61 @@ class InscriptionController extends Controller
     {
         $credentials = request(['email', 'password']);
         if (Auth::attempt($credentials)) {
+            
             $user = $request->user();
-            $token = $user->createToken('Personal Access Token')->plainTextToken;
-            $membres = [];
 
-            $isparticipant = Auth::user()->etudiant ? true : false;
-            if ($isparticipant) {
-                $user->niveau = $user->etudiant->getEquipe()->niveau;
-                $user->team_qualified = $user->etudiant->getEquipe()->statut;
-                foreach ($user->etudiant->getEquipe()->participants as $participant) {
-                    if ($participant->chef == 1) {
-                        $participant->etudiant["chef"] = 1;
-                    } else {
-                        $participant->etudiant["chef"] = 0;
+            if ($user->getEquipe()->statut == 1) {
+
+                $token = $user->createToken('Personal Access Token')->plainTextToken;
+                $membres = [];
+
+                $isparticipant = Auth::user()->etudiant ? true : false;
+                if ($isparticipant) {
+                    $user->niveau = $user->etudiant->getEquipe()->niveau;
+                    $user->team_qualified = $user->etudiant->getEquipe()->statut;
+                    foreach ($user->etudiant->getEquipe()->participants as $participant) {
+                        if ($participant->chef == 1) {
+                            $participant->etudiant["chef"] = 1;
+                        } else {
+                            $participant->etudiant["chef"] = 0;
+                        }
+                        $participant->etudiant["email"] = $participant->etudiant->user->email;
+                        array_push($membres, $participant->etudiant);
                     }
-                    $participant->etudiant["email"] = $participant->etudiant->user->email;
-                    array_push($membres, $participant->etudiant);
                 }
+
+                $data = [
+                    'role' => $isparticipant ? "participant" : "admin",
+                    'message' => 'Vous êtes connecté(e)',
+                    'accessToken' => $token,
+                    'equipe' => $membres,
+                    'status' => true,
+                    'user' => $user,
+                ];
+
+                $response = [
+                    'data' => $data,
+                    'status' => true
+                ];
+
+            } else {
+
+                $response = [
+                    'status' => false,
+                    'message' => 'Désolé, votre équipe n\'est pas sélectionnée'
+                ];
+
             }
 
-
-            $data = [
-                'role' => $isparticipant ? "participant" : "admin",
-                'message' => 'Vous êtes connecté(e)',
-                'accessToken' => $token,
-                'equipe' => $membres,
-                'status' => true,
-                'user' => $user,
-            ];
-
-            $response = [
-                'data' => $data,
-                'status' => true
-            ];
-
-            return response()->json($response);
         } else {
-            return response()->json([
+            $response = [
                 'status' => false,
                 'message' => 'Email ou mot de pass incorrect'
-            ]);
+            ];
         }
+
+        return response()->json($response);
+
     }
 
     // Log Out
