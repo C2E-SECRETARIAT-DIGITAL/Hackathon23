@@ -34,10 +34,10 @@ class InscriptionController extends Controller
     {
         $credentials = request(['email', 'password']);
         if (Auth::attempt($credentials)) {
-            
+
             $user = $request->user();
 
-            if ($user->getEquipe()->statut == 1) {
+            if ($user->etudiant->getEquipe()->statut == 1) {
 
                 $token = $user->createToken('Personal Access Token')->plainTextToken;
                 $membres = [];
