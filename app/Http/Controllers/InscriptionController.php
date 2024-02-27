@@ -73,7 +73,7 @@ class InscriptionController extends Controller
             if ($isparticipant && $user->etudiant->getEquipe()->statut == 0) {
                 $response = [
                     'status' => false,
-                    'message' => 'Désolé, votre équipe n\est pas sélectionnée'
+                    'message' => 'Désolé, votre équipe n\'est pas sélectionnée'
                 ];
             }
 
