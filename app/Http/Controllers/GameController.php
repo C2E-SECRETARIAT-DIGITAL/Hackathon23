@@ -69,21 +69,25 @@ class GameController extends Controller
         }
     }
 
+    /*
+    {
+        'joueurId' => id du joueur,
+        'joueurNom' => nom du joueur au cas où il est là pour la première fois,
+        'score' => score du joueur,
+    }
+    */
     public function validate_response(Request $request)
     {
-        $joueur = Joueur::where('id_joueur', $request->id_joueur)->first();
+        $joueur = Joueur::where('id_joueur', $request->joueurId)->first();
 
         if (!$joueur) {
             $joueur = Joueur::create([
-                'id_joueur' => $request->id_joueur,
-                'nom' => $request->nom_joueur,
+                'id_joueur' => $request->joueurId,
+                'nom' => $request->joueurNom,
             ]);
         }
 
-        $question = Question::where('id', $request->id_question)->first();
-        $answer = Response::where('id', $request->id_response)->first();
-
-        $joueur->score += $answer->score;
+        $joueur->score += $request->score;
         $joueur->save();
 
         $response = [
