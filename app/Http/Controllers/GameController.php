@@ -33,7 +33,7 @@ class GameController extends Controller
             $data,
             [
                 'correctAnswer' => $correctanswer,
-                'question' => $question->content,
+                'question' => $question['content'],
                 'choices' => $choices,
             ]
         );
