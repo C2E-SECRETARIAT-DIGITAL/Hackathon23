@@ -13,7 +13,7 @@ class GameController extends Controller
 {
     public function question_aleatoire()
     {
-        $questions = Question::all();
+        $questions = Question::all()->toArray();
 
         $cle = array_rand($questions);
 
