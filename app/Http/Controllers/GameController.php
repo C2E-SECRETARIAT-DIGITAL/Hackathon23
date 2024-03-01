@@ -18,12 +18,12 @@ class GameController extends Controller
         $cle = array_rand($questions);
 
         $question = $questions[$cle];
-        // $responses = $responses = Question::find($question['id'])->responses;
+        $responses = $responses = Question::find($question['id'])->responses;
         $data = [];
         $choices = [];
         $correctanswer = '';
 
-        foreach ($question->responses as $res) {
+        foreach ($responses as $res) {
             array_push($choices, $res->content);
             if ($res->score > 0)
                 $correctanswer = $res->content;
