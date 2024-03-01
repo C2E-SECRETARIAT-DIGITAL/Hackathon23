@@ -6,6 +6,7 @@ use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\PdfFileController;
 use App\Http\Controllers\GroupeController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\GameController;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -95,3 +96,8 @@ Route::get('/inscription/state', [InscriptionController::class, 'inscriptionstat
 Route::get('/pdf/selectedteam/{niveauId}', [PdfFileController::class, 'selectedteam']);
 Route::get('/pdf/repartition', [PdfFileController::class, 'repartition']);
 Route::get('/pdf/commandes', [PdfFileController::class, 'commandes']);
+
+
+Route::get('/game', [GameController::class, 'question_aleatoire']);
+Route::post('/game/user-infos', [GameController::class, 'infos_user']);
+Route::post('/game/validate', [GameController::class, 'validate_response']);
