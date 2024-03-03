@@ -11,7 +11,8 @@ class Joueur extends Model
 
     protected $fillable = [
         'id_joueur',
+        'score',
+        'time',
         'nom',
-        'score'
     ];
 }

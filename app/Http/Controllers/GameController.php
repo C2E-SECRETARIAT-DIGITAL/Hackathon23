@@ -69,6 +69,19 @@ class GameController extends Controller
         }
     }
 
+    public function renderjoueurs()
+    {
+        $joueurs = Joueur::all();
+
+        $response = [
+            "status" => true,
+            "data" => $joueurs
+        ];
+
+        return response()->json($response);
+
+    }
+
     /*
     {
         'joueurId' => id du joueur,
@@ -88,12 +101,43 @@ class GameController extends Controller
         }
 
         $joueur->score += $request->score;
+        $joueur->time = 15;
         $joueur->save();
 
         $response = [
             "messsage" => "Enregistrement effectué !",
             "status" => true
         ];
+
+        return response()->json($response);
+    }
+
+    /*
+    {
+        'joueurId' => id du joueur,
+    }
+    */
+
+    public function resettime(Request $request)
+    {
+        $joueur = Joueur::where('id_joueur', $request->joueurId)->first();
+
+        if (!$joueur) {
+            $response = [
+                "messsage" => "Joueur introuvable",
+                "status" => false
+            ];
+        } else {
+
+            $joueur->time = 0;
+            $joueur->save();
+
+            $response = [
+                "messsage" => "Ok",
+                "status" => true
+            ];
+        }
+
 
         return response()->json($response);
     }

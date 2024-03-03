@@ -79,6 +79,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/prestauration/render', [ParticipantController::class, 'renderprestauration']);
     Route::post('/commande/make', [ParticipantController::class, 'makecommande']);
 
+    // Game
+    Route::get('/game/joueurs/render', [GameController::class, 'renderjoueurs']);
 
 });
 
@@ -97,7 +99,9 @@ Route::get('/pdf/selectedteam/{niveauId}', [PdfFileController::class, 'selectedt
 Route::get('/pdf/repartition', [PdfFileController::class, 'repartition']);
 Route::get('/pdf/commandes', [PdfFileController::class, 'commandes']);
 
-
+// Game
 Route::get('/game', [GameController::class, 'question_aleatoire']);
 Route::post('/game/user-infos', [GameController::class, 'infos_user']);
 Route::post('/game/validate', [GameController::class, 'validate_response']);
+//
+Route::post('/game/time/reset', [GameController::class, 'resettime']);

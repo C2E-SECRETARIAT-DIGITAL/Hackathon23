@@ -16,7 +16,7 @@ class CreateJoueursTable extends Migration
         Schema::create('joueurs', function (Blueprint $table) {
             $table->id();
 
-            $table->string("id_joueurs")->nullable(false);
+            $table->string("id_joueur")->nullable(false);
             $table->mediumInteger("score")->default(0);
             $table->string("nom")->nullable(false);
 
