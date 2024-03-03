@@ -71,7 +71,7 @@ class GameController extends Controller
 
     public function renderjoueurs()
     {
-        $joueurs = Joueur::all();
+        $joueurs = Joueur::orderBy('score', 'DESC')->get();
 
         $response = [
             "status" => true,
