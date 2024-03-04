@@ -119,7 +119,7 @@ class GameController extends Controller
             ]);
         }
 
-        $joueur->score += $request->score;
+        $joueur->score = $request->score;
         // $joueur->time = 15;
         $joueur->save();
 
