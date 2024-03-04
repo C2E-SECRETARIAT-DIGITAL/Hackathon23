@@ -13,49 +13,47 @@ class GameController extends Controller
 {
     public function question_aleatoire(Request $request)
     {
-        $joueur = Joueur::where('id_joueur', $request->joueurId)->first();
+        $questions = Question::all()->toArray();
 
-        if (!$joueur) {
-            $response = [
-                "message" => "Joueur introuveable",
-                "status" => false
-            ];
-        } else {
+        $cle = array_rand($questions);
 
-            $questions = Question::all()->toArray();
+        $question = $questions[$cle];
+        $responses = $responses = Question::find($question['id'])->responses;
+        $data = [];
+        $choices = [];
+        $correctanswer = '';
 
-            $cle = array_rand($questions);
-
-            $question = $questions[$cle];
-            $responses = $responses = Question::find($question['id'])->responses;
-            $data = [];
-            $choices = [];
-            $correctanswer = '';
-
-            foreach ($responses as $res) {
-                array_push($choices, $res->content);
-                if ($res->score > 0)
-                    $correctanswer = $res->content;
-            }
-
-            array_push(
-                $data,
-                [
-                    'correctAnswer' => $correctanswer,
-                    'question' => $question['content'],
-                    'choices' => $choices,
-                ]
-            );
-
-            $response = [
-                "data" => [
-                    'question' => $data,
-                    'date' => $joueur->updated_at
-                ],
-                "status" => true
-            ];
-
+        foreach ($responses as $res) {
+            array_push($choices, $res->content);
+            if ($res->score > 0)
+                $correctanswer = $res->content;
         }
+
+        array_push(
+            $data,
+            [
+                'correctAnswer' => $correctanswer,
+                'question' => $question['content'],
+                'choices' => $choices,
+            ]
+        );
+
+        $joueur = Joueur::where('id_joueur', $request->joueurId)->first();
+        
+        $response = $joueur ? [
+            "data" => [
+                'question' => $data,
+                'date' => $joueur->updated_at
+            ],
+            "status" => true
+        ] : [
+            "data" => [
+                'question' => $data,
+                'date' => null
+            ],
+            "status" => true
+        ];
+
 
         return response()->json($response);
     }
