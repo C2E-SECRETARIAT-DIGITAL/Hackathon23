@@ -50,7 +50,7 @@ class GameController extends Controller
             $response = [
                 "data" => [
                     'question' => $data,
-                    'date' => $joueur->updatedAt
+                    'date' => $joueur->updated_at
                 ],
                 "status" => true
             ];
