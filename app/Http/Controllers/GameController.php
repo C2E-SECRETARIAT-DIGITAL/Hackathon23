@@ -11,45 +11,64 @@ use App\Models\Response;
 
 class GameController extends Controller
 {
-    public function question_aleatoire()
+    public function question_aleatoire(Request $request)
     {
-        $questions = Question::all()->toArray();
+        $joueur = Joueur::where('id_joueur', $request->joueurId)->first();
 
-        $cle = array_rand($questions);
+        if (!$joueur) {
+            $response = [
+                "message" => "Joueur introuveable",
+                "status" => false
+            ];
+        } else {
 
-        $question = $questions[$cle];
-        $responses = $responses = Question::find($question['id'])->responses;
-        $data = [];
-        $choices = [];
-        $correctanswer = '';
+            $questions = Question::all()->toArray();
 
-        foreach ($responses as $res) {
-            array_push($choices, $res->content);
-            if ($res->score > 0)
-                $correctanswer = $res->content;
+            $cle = array_rand($questions);
+
+            $question = $questions[$cle];
+            $responses = $responses = Question::find($question['id'])->responses;
+            $data = [];
+            $choices = [];
+            $correctanswer = '';
+
+            foreach ($responses as $res) {
+                array_push($choices, $res->content);
+                if ($res->score > 0)
+                    $correctanswer = $res->content;
+            }
+
+            array_push(
+                $data,
+                [
+                    'correctAnswer' => $correctanswer,
+                    'question' => $question['content'],
+                    'choices' => $choices,
+                ]
+            );
+
+            $response = [
+                "data" => [
+                    'question' => $data,
+                    'date' => $joueur->updatedAt
+                ],
+                "status" => true
+            ];
+
         }
-
-        array_push(
-            $data,
-            [
-                'correctAnswer' => $correctanswer,
-                'question' => $question['content'],
-                'choices' => $choices,
-            ]
-        );
-
-        $response = [
-            "data" => $data,
-            "status" => true
-        ];
 
         return response()->json($response);
     }
 
+    /*
+{
+    'joueurId' => id du joueur,
+}
+*/
     public function infos_user(Request $request)
     {
         if ($request->is_connected === true) {
-            $joueur = Joueur::where('id_joueur', $request->id_joueur)->first();
+            $joueur = Joueur::where('id_joueur', $request->joueurId)->first();
 
             $response = [
                 "data" => [
@@ -59,14 +78,14 @@ class GameController extends Controller
                 "status" => true
             ];
 
-            return response()->json($response);
         } else {
+
             $response = [
                 "status" => false
             ];
 
-            return response()->json($response);
         }
+        return response()->json($response);
     }
 
     public function renderjoueurs()
@@ -101,7 +120,7 @@ class GameController extends Controller
         }
 
         $joueur->score += $request->score;
-        $joueur->time = 15;
+        // $joueur->time = 15;
         $joueur->save();
 
         $response = [
@@ -117,7 +136,6 @@ class GameController extends Controller
         'joueurId' => id du joueur,
     }
     */
-
     public function resettime(Request $request)
     {
         $joueur = Joueur::where('id_joueur', $request->joueurId)->first();
